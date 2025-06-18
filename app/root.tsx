@@ -34,13 +34,13 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = 'Oops!'
-  let details = 'An unexpected error occurred.'
+  let message = '故障'
+  let details = '发生意外错误'
   let stack: string | undefined
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? '404' : 'Error'
-    details = error.status === 404 ? 'The requested page could not be found.' : error.statusText || details
+    message = error.status === 404 ? '404' : '错误'
+    details = error.status === 404 ? '页面出游在外，不知所踪...' : error.statusText || details
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message
     stack = error.stack
@@ -48,8 +48,8 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <main className='h-screen flex items-center justify-center'>
-      <div className='max-w-[500px] w-full space-y-6 px-4'>
-        <nav className='rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4'>
+      <div className='max-w-[500px] w-full'>
+        <div className='rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4'>
           <h2 className='text-6xl font-bold text-gray-600 dark:text-gray-200 text-center'>{message}</h2>
           <p className='text-center'>{details}</p>
           {stack && (
@@ -57,7 +57,8 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
               <code>{stack}</code>
             </pre>
           )}
-        </nav>
+        </div>
+        <div className='h-[20vh]'></div>
       </div>
     </main>
   )
