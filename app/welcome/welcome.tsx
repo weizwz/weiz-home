@@ -1,3 +1,5 @@
+import { Button } from 'antd';
+
 export function Welcome() {
   return (
     <main className="flex items-center justify-center pt-16 pb-4">
@@ -26,6 +28,7 @@ export function Welcome() {
               ))}
             </ul>
           </nav>
+          <Button type="primary">Button</Button>
         </div>
       </div>
     </main>

@@ -1,4 +1,5 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import { ConfigProvider } from 'antd'
 
 import type { Route } from './+types/root'
 import './app.css'
@@ -21,7 +22,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: '#409eff',
+              colorInfo: '#409eff',
+              colorSuccess: '#67c23a',
+              colorWarning: '#e6a23c',
+              colorError: '#f05659',
+              wireframe: false
+            }
+          }}>
+          {children}
+        </ConfigProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -47,19 +60,31 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className='h-screen flex items-center justify-center'>
-      <div className='max-w-[500px] w-full'>
-        <div className='rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4'>
-          <h2 className='text-6xl font-bold text-gray-600 dark:text-gray-200 text-center'>{message}</h2>
-          <p className='text-center'>{details}</p>
-          {stack && (
-            <pre className='w-full p-4 overflow-x-auto'>
-              <code>{stack}</code>
-            </pre>
-          )}
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#409eff',
+          colorInfo: '#409eff',
+          colorSuccess: '#67c23a',
+          colorWarning: '#e6a23c',
+          colorError: '#f05659',
+          wireframe: false
+        }
+      }}>
+      <main className='h-screen flex items-center justify-center'>
+        <div className='max-w-[500px] w-full'>
+          <div className='rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4'>
+            <h2 className='text-6xl font-bold text-gray-600 dark:text-gray-200 text-center'>{message}</h2>
+            <p className='text-center'>{details}</p>
+            {stack && (
+              <pre className='w-full p-4 overflow-x-auto'>
+                <code>{stack}</code>
+              </pre>
+            )}
+          </div>
+          <div className='h-[20vh]'></div>
         </div>
-        <div className='h-[20vh]'></div>
-      </div>
-    </main>
+      </main>
+    </ConfigProvider>
   )
 }
