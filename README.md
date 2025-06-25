@@ -4,7 +4,7 @@
 
 ## 技术
 
-使用 `create-react-router` 初始化，react19 + react-router7 + vite6 + tailwindcss4 + ts
+使用 `create-react-router` 初始化，react19 + react-router7 + vite6 + tailwindcss4 + ts + antd5
 
 ## 执行
 
