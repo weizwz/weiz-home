@@ -1,0 +1,241 @@
+import { Button } from "antd";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { useState, useEffect } from "react";
+
+interface Product {
+  id: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  link: string;
+}
+
+interface RecommendedProductsProps {
+  title?: string;
+  subtitle?: string;
+}
+
+export function RecommendedProducts({
+  title = "推荐尝鲜",
+  subtitle = "推荐你去试试的好产品",
+}: RecommendedProductsProps) {
+  const products: Product[] = [
+    {
+      id: 1,
+      title: "构建具有AI优势的，",
+      subtitle: "先进网站。",
+      description: "进一步了解 HeoBlog →",
+      image: "https://p.weizwz.com/siteshot_note.webp",
+      imageAlt: "网站设计展示",
+      link: "https://note.weizwz.com/",
+    },
+    {
+      id: 2,
+      title: "烦恼来了，",
+      subtitle: "通通解决。",
+      description: "进一步了解 敲木鱼 →",
+      image: "https://p.weizwz.com/siteshot_note.webp",
+      imageAlt: "手机和手表应用展示",
+      link: "https://note.weizwz.com/",
+    },
+    {
+      id: 3,
+      title: "分享设计，",
+      subtitle: "与我的科技生活。",
+      description: "进一步了解 HeoBlog →",
+      image: "https://p.weizwz.com/siteshot_note.webp",
+      imageAlt: "博客网站展示",
+      link: "https://note.weizwz.com/",
+    },
+    {
+      id: 4,
+      title: "分享设计，",
+      subtitle: "与我的科技生活。",
+      description: "进一步了解 HeoBlog →",
+      image: "https://p.weizwz.com/siteshot_note.webp",
+      imageAlt: "博客网站展示",
+      link: "https://note.weizwz.com/",
+    },
+    {
+      id: 5,
+      title: "分享设计，",
+      subtitle: "与我的科技生活。",
+      description: "进一步了解 HeoBlog →",
+      image: "https://p.weizwz.com/siteshot_note.webp",
+      imageAlt: "博客网站展示",
+      link: "https://note.weizwz.com/",
+    },
+  ];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 检测是否为移动设备
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkIsMobile);
+    };
+  }, []);
+
+  // 计算PC端的最大滑动位置
+  const maxSlidePC = Math.max(0, products.length - 3);
+
+  const nextSlide = () => {
+    if (isMobile) {
+      // 移动端：一次滚动一个模块
+      setCurrentSlide((prev) => (prev === products.length - 1 ? 0 : prev + 1));
+    } else {
+      // PC端：一次滚动三个模块，但不超过最大位置
+      setCurrentSlide((prev) => {
+        const next = prev + 3;
+        // 如果下一个位置超过了最大位置，就直接跳到最大位置
+        // 如果已经在最大位置，就回到起点
+        return prev >= maxSlidePC ? 0 : Math.min(next, maxSlidePC);
+      });
+    }
+  };
+
+  const prevSlide = () => {
+    if (isMobile) {
+      // 移动端：一次滚动一个模块
+      setCurrentSlide((prev) => (prev === 0 ? products.length - 1 : prev - 1));
+    } else {
+      // PC端：一次滚动三个模块
+      setCurrentSlide((prev) => {
+        // 如果当前是第一页，就跳到最后一页
+        if (prev === 0) {
+          return maxSlidePC;
+        }
+        // 否则向前滚动三个位置，但不小于0
+        return Math.max(0, prev - 3);
+      });
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 100) {
+      // 向左滑动
+      nextSlide();
+    }
+
+    if (touchStart - touchEnd < -100) {
+      // 向右滑动
+      prevSlide();
+    }
+  };
+
+  // 自动轮播
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [currentSlide, products.length]);
+
+  return (
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-4">{title}</h2>
+        <p className="text-gray-500 text-center mb-12">{subtitle}</p>
+
+        <div className="relative">
+          <div
+            className="overflow-hidden pb-10"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: isMobile
+                  ? `translateX(-${currentSlide * 100}%)`
+                  : `translateX(-${currentSlide * 33.33}%)`,
+              }}
+            >
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  className={`${
+                    isMobile ? "w-full" : "w-1/3"
+                  } flex-shrink-0 px-3`}
+                >
+                  <div className="bg-white rounded-3xl p-6 md:p-8 shadow-md h-full hover:shadow-xl transition-shadow duration-300">
+                    <div>
+                      <h3 className="text-xl text-center font-bold mb-1">
+                        {product.title}
+                      </h3>
+                      <h3 className="text-xl text-center font-bold mb-4">
+                        {product.subtitle}
+                      </h3>
+                      <a
+                        href={product.link}
+                        className="text-blue-500 hover:text-blue-700 transition-colors flex items-center justify-center"
+                      >
+                        <span>{product.description}</span>
+                      </a>
+                    </div>
+                    <div className="mt-8 bg-gray-800 overflow-hidden rounded-2xl border-6 border-gray-800">
+                      {/* Mac-style window header */}
+                      <div className="pb-1.5 px-2 flex items-center">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                          <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                        </div>
+                      </div>
+                      {/* Image container */}
+                      <div className="overflow-hidden rounded-lg">
+                        <img
+                          src={product.image}
+                          alt={product.imageAlt}
+                          className="w-full h-auto"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex justify-center mt-8">
+            <div className="flex space-x-4">
+              <Button
+                icon={<LeftOutlined />}
+                shape="circle"
+                onClick={prevSlide}
+                className="flex items-center justify-center hover:bg-gray-100 transition-colors"
+              />
+              <Button
+                icon={<RightOutlined />}
+                shape="circle"
+                onClick={nextSlide}
+                className="flex items-center justify-center hover:bg-gray-100 transition-colors"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

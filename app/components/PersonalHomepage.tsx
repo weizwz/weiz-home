@@ -3,86 +3,123 @@ import {
   GithubOutlined,
   MailOutlined,
   WechatOutlined,
-  CodeOutlined,
   RocketOutlined,
   HeartOutlined,
 } from "@ant-design/icons";
+import { RecommendedProducts } from "./RecommendedProducts";
 
 export function PersonalHomepage() {
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center">
+        <div
+          className="bg-white rounded-full shadow-lg py-3 px-6 flex items-center justify-between"
+          style={{ width: "800px" }}
+        >
+          <div className="flex items-center">
+            <Avatar
+              size={40}
+              src="/avatar.svg"
+              className="mr-2"
+              style={{ backgroundColor: "#FFC107" }}
+            >
+              WZ
+            </Avatar>
+          </div>
+          <div className="flex items-center space-x-8">
+            <a
+              href="#"
+              className="text-gray-700 hover:text-gray-900 relative group"
+            >
+              <span className="relative z-10">应用</span>
+              <span
+                className={`absolute inset-0 bg-blue-100 rounded-full -z-0 opacity-0 group-hover:opacity-100 transition-opacity`}
+              ></span>
+            </a>
+            <a href="#" className="text-gray-700 hover:text-gray-900">
+              媒体
+            </a>
+            <a href="#" className="text-gray-700 hover:text-gray-900">
+              服务
+            </a>
+            <a href="#" className="text-gray-700 hover:text-gray-900">
+              主题
+            </a>
+            <a href="#" className="text-gray-700 hover:text-gray-900">
+              表情
+            </a>
+            <a href="#" className="text-gray-700 hover:text-gray-900">
+              项目
+            </a>
+          </div>
+          <div className="flex items-center space-x-3">
+            <Button
+              type="primary"
+              shape="circle"
+              icon={<WechatOutlined />}
+              className="flex items-center justify-center"
+              style={{ backgroundColor: "#36CFC9", borderColor: "#36CFC9" }}
+            />
+            <Button
+              type="primary"
+              className="rounded-full px-6"
+              style={{ backgroundColor: "#1677ff", borderColor: "#1677ff" }}
+            >
+              博客
+            </Button>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-screen flex items-center">
-        <div className="absolute inset-0 gradient-bg opacity-5"></div>
+      <section className="relative overflow-hidden min-h-screen flex items-center pt-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(156,146,172,0.05)_2px,_transparent_2px)] bg-[length:60px_60px] opacity-30"></div>
         <div className="relative max-w-6xl mx-auto px-4 py-20 w-full">
-          <div className="text-center">
-            <div className="float-animation mb-8">
-              <Avatar
-                size={140}
-                src="/avatar.svg"
-                className="shadow-2xl border-4 border-white/20"
-                style={{ backgroundColor: "#667eea" }}
-              >
-                WZ
-              </Avatar>
+          <div className="text-left">
+            <h1 className="text-7xl font-bold mb-2 tracking-tight">
+              <span className="text-black">ZHANG HONE </span>
+              <span className="text-gray-400">HEO</span>
+            </h1>
+            <h1 className="text-7xl font-bold mb-6 tracking-tight">
+              <span className="text-black">DIGITAL </span>
+              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">
+                DESIGNER
+              </span>
+            </h1>
+            <div className="max-w-2xl">
+              <p className="text-2xl text-gray-600 mb-4">让设计师主导产品，</p>
+              <p className="text-2xl text-gray-400 mb-12">
+                来构建令人幸福的使用体验。
+              </p>
             </div>
-            <h1 className="text-6xl font-bold gradient-text mb-6">Wei Z</h1>
-            <p className="text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-              全栈开发者 · 技术爱好者 · 开源贡献者
-            </p>
-            <div className="flex justify-center flex-wrap gap-3 mb-10">
-              <Tag
-                color="blue"
-                className="px-4 py-2 text-base rounded-full border-0 shadow-md"
-              >
-                React
-              </Tag>
-              <Tag
-                color="green"
-                className="px-4 py-2 text-base rounded-full border-0 shadow-md"
-              >
-                Node.js
-              </Tag>
-              <Tag
-                color="purple"
-                className="px-4 py-2 text-base rounded-full border-0 shadow-md"
-              >
-                TypeScript
-              </Tag>
-              <Tag
-                color="orange"
-                className="px-4 py-2 text-base rounded-full border-0 shadow-md"
-              >
-                Python
-              </Tag>
-            </div>
-            <div className="flex justify-center gap-6">
+            <div className="flex gap-4">
               <Button
                 type="primary"
                 size="large"
-                icon={<CodeOutlined />}
-                className="shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-6 h-auto text-lg rounded-full"
+                className="bg-black border-black hover:bg-gray-800 px-8 py-3 h-auto text-base rounded-full"
                 onClick={() =>
                   document
-                    .getElementById("projects")
+                    .getElementById("about")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
               >
-                查看作品
+                了解我
               </Button>
               <Button
                 size="large"
+                icon={<GithubOutlined />}
+                className="border-gray-300 px-4 py-3 h-auto text-base rounded-full"
+                href="https://github.com"
+                target="_blank"
+              />
+              <Button
+                size="large"
                 icon={<MailOutlined />}
-                className="shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-6 h-auto text-lg rounded-full glass-effect"
-                onClick={() =>
-                  document
-                    .getElementById("contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-              >
-                联系我
-              </Button>
+                className="border-gray-300 px-4 py-3 h-auto text-base rounded-full"
+                href="mailto:your-email@example.com"
+              />
             </div>
           </div>
         </div>
@@ -154,6 +191,9 @@ export function PersonalHomepage() {
           </div>
         </div>
       </section>
+
+      {/* Recommended Products Section */}
+      <RecommendedProducts />
 
       {/* Projects Section */}
       <section id="projects" className="py-20 bg-white dark:bg-gray-800">
