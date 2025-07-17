@@ -218,7 +218,7 @@ export function RecommendedProducts({
             </div>
           </div>
 
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center">
             <div className="flex space-x-4">
               <Button
                 icon={<LeftOutlined />}

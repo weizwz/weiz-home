@@ -1,23 +1,90 @@
-import { Avatar, Card, Tag, Button } from "antd";
+import { Avatar, Card, Tag, Button, Drawer } from "antd";
 import {
   GithubOutlined,
   MailOutlined,
   WechatOutlined,
   RocketOutlined,
   HeartOutlined,
+  MenuOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import { RecommendedProducts } from "./RecommendedProducts";
+import { useState, useRef, useEffect } from "react";
 
 export function PersonalHomepage() {
+  // 导航项数据
+  const navItems = [
+    { title: "应用", href: "#" },
+    { title: "媒体", href: "#" },
+    { title: "服务", href: "#" },
+    { title: "主题", href: "#" },
+    { title: "表情", href: "#" },
+    { title: "项目", href: "#" },
+  ];
 
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({
+    width: 0,
+    left: 0,
+    opacity: 0,
+  });
+
+  // 移动端菜单状态
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 检测是否为移动设备
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkIsMobile);
+    };
+  }, []);
+
+  // 处理鼠标进入导航项
+  const handleMouseEnter = (index: number) => {
+    setActiveIndex(index);
+  };
+
+  // 处理鼠标离开导航区域
+  const handleMouseLeave = () => {
+    setActiveIndex(null);
+  };
+
+  // 更新指示器样式
+  useEffect(() => {
+    if (activeIndex !== null && navRef.current) {
+      const elements = navRef.current.querySelectorAll(".nav-item");
+      if (elements[activeIndex]) {
+        const item = elements[activeIndex];
+        const rect = item.getBoundingClientRect();
+        const navRect = navRef.current.getBoundingClientRect();
+
+        setIndicatorStyle({
+          width: rect.width,
+          left: rect.left - navRect.left,
+          opacity: 1,
+        });
+      }
+    } else {
+      setIndicatorStyle({
+        ...indicatorStyle,
+        opacity: 0,
+      });
+    }
+  }, [activeIndex]);
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center">
-        <div
-          className="bg-white rounded-full shadow-lg py-3 px-6 flex items-center justify-between"
-          style={{ width: "800px" }}
-        >
+      <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center hover:">
+        <div className="bg-white/30 backdrop-blur-md rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
           <div className="flex items-center">
             <Avatar
               size={40}
@@ -28,33 +95,53 @@ export function PersonalHomepage() {
               WZ
             </Avatar>
           </div>
-          <div className="flex items-center space-x-8">
-            <a
-              href="#"
-              className="text-gray-700 hover:text-gray-900 relative group"
+
+          {/* 桌面导航 */}
+          {!isMobile && (
+            <div
+              className="flex items-center relative"
+              ref={navRef}
+              onMouseLeave={handleMouseLeave}
             >
-              <span className="relative z-10">应用</span>
-              <span
-                className={`absolute inset-0 bg-blue-100 rounded-full -z-0 opacity-0 group-hover:opacity-100 transition-opacity`}
-              ></span>
-            </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-              媒体
-            </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-              服务
-            </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-              主题
-            </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-              表情
-            </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-              项目
-            </a>
-          </div>
+              {/* 滑动背景指示器 */}
+              <div
+                className="absolute bg-blue-100 border border-blue-500 rounded-full transition-all duration-500"
+                style={{
+                  width: `${indicatorStyle.width}px`,
+                  left: `${indicatorStyle.left}px`,
+                  height: "32px",
+                  opacity: indicatorStyle.opacity,
+                  zIndex: 0,
+                  transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)", // 添加回弹效果
+                }}
+              ></div>
+
+              {/* 导航项 */}
+              {navItems.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  className="px-3 py-1.5 text-gray-700 hover:text-blue-500 relative nav-item"
+                  onMouseEnter={() => handleMouseEnter(index)}
+                >
+                  <span className="relative z-10">{item.title}</span>
+                </a>
+              ))}
+            </div>
+          )}
+
           <div className="flex items-center space-x-3">
+            {/* 移动端汉堡菜单按钮 */}
+            {isMobile && (
+              <Button
+                type="text"
+                icon={<MenuOutlined />}
+                onClick={() => setMobileMenuOpen(true)}
+                className="flex items-center justify-center"
+              />
+            )}
+
+            {/* 聊天和博客按钮 */}
             <Button
               type="primary"
               shape="circle"
@@ -62,43 +149,98 @@ export function PersonalHomepage() {
               className="flex items-center justify-center"
               style={{ backgroundColor: "#36CFC9", borderColor: "#36CFC9" }}
             />
-            <Button
-              type="primary"
-              className="rounded-full px-6"
-              style={{ backgroundColor: "#1677ff", borderColor: "#1677ff" }}
-            >
+            <Button type="primary" className="" shape="round">
               博客
             </Button>
           </div>
         </div>
+
+        {/* 移动端抽屉菜单 */}
+        <Drawer
+          placement="right"
+          onClose={() => setMobileMenuOpen(false)}
+          open={mobileMenuOpen}
+          closable={false}
+          width={300}
+        >
+          <div className="p-4">
+            <div className="flex justify-between items-center mb-8">
+              <div className="flex items-center">
+                <Avatar
+                  size={40}
+                  src="/avatar.svg"
+                  className="mr-2"
+                  style={{ backgroundColor: "#FFC107" }}
+                >
+                  WZ
+                </Avatar>
+                <span className="text-lg font-bold">Wei Z</span>
+              </div>
+              <Button
+                type="text"
+                icon={<CloseOutlined />}
+                onClick={() => setMobileMenuOpen(false)}
+              />
+            </div>
+
+            <div className="flex flex-col space-y-4">
+              {navItems.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  className="px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-blue-50 rounded-lg transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.title}
+                </a>
+              ))}
+
+              <div className="border-t border-gray-200 my-4 pt-4">
+                <Button
+                  type="primary"
+                  block
+                  className="mb-3"
+                  style={{ backgroundColor: "#36CFC9", borderColor: "#36CFC9" }}
+                  icon={<WechatOutlined />}
+                >
+                  联系我
+                </Button>
+                <Button type="primary" block className="" shape="round">
+                  博客
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Drawer>
       </nav>
 
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-screen flex items-center pt-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(156,146,172,0.05)_2px,_transparent_2px)] bg-[length:60px_60px] opacity-30"></div>
         <div className="relative max-w-6xl mx-auto px-4 py-20 w-full">
-          <div className="text-left">
-            <h1 className="text-7xl font-bold mb-2 tracking-tight">
+          <div className="text-center">
+            <h1 className="text-8xl font-bold mb-2 tracking-tight">
               <span className="text-black">ZHANG HONE </span>
               <span className="text-gray-400">HEO</span>
             </h1>
-            <h1 className="text-7xl font-bold mb-6 tracking-tight">
+            <h1 className="text-8xl font-bold mb-6 tracking-tight">
               <span className="text-black">DIGITAL </span>
               <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">
                 DESIGNER
               </span>
             </h1>
-            <div className="max-w-2xl">
-              <p className="text-2xl text-gray-600 mb-4">让设计师主导产品，</p>
-              <p className="text-2xl text-gray-400 mb-12">
-                来构建令人幸福的使用体验。
+            <div className="text-center">
+              <p className="text-3xl font-bold text-gray-600 mb-2">让设计师主导产品，</p>
+              <p className="text-3xl font-bold text-gray-400 mb-8">
+                来构建令人幸福的使用体验
               </p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex justify-center gap-4">
               <Button
                 type="primary"
                 size="large"
-                className="bg-black border-black hover:bg-gray-800 px-8 py-3 h-auto text-base rounded-full"
+                className="bg-black border-black hover:bg-gray-800 px-8 py-3 h-auto text-base"
+                shape="round"
                 onClick={() =>
                   document
                     .getElementById("about")
@@ -111,6 +253,7 @@ export function PersonalHomepage() {
                 size="large"
                 icon={<GithubOutlined />}
                 className="border-gray-300 px-4 py-3 h-auto text-base rounded-full"
+                shape="round"
                 href="https://github.com"
                 target="_blank"
               />
@@ -118,6 +261,7 @@ export function PersonalHomepage() {
                 size="large"
                 icon={<MailOutlined />}
                 className="border-gray-300 px-4 py-3 h-auto text-base rounded-full"
+                shape="round"
                 href="mailto:your-email@example.com"
               />
             </div>

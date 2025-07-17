@@ -25,11 +25,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ConfigProvider
           theme={{
             token: {
-              colorPrimary: '#409eff',
-              colorInfo: '#409eff',
-              colorSuccess: '#67c23a',
-              colorWarning: '#e6a23c',
-              colorError: '#f05659',
+              colorPrimary: '#2B7FFF',
+              colorInfo: '#2B7FFF',
+              // colorSuccess: '#67c23a',
+              // colorWarning: '#e6a23c',
+              // colorError: '#f05659',
               wireframe: false
             }
           }}>
