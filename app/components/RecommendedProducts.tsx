@@ -152,7 +152,7 @@ export function RecommendedProducts({
   }, [currentSlide, products.length]);
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section id="recommend" className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-4">{title}</h2>
         <p className="text-gray-500 text-center mb-12">{subtitle}</p>

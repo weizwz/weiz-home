@@ -14,12 +14,12 @@ import { useState, useRef, useEffect } from "react";
 export function PersonalHomepage() {
   // 导航项数据
   const navItems = [
-    { title: "应用", href: "#" },
-    { title: "媒体", href: "#" },
-    { title: "服务", href: "#" },
-    { title: "主题", href: "#" },
-    { title: "表情", href: "#" },
-    { title: "项目", href: "#" },
+    { title: "推荐", id: "recommend" },
+    { title: "媒体", id: "#" },
+    { title: "服务", id: "#" },
+    { title: "主题", id: "#" },
+    { title: "表情", id: "#" },
+    { title: "项目", id: "#" },
   ];
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -120,9 +120,13 @@ export function PersonalHomepage() {
               {navItems.map((item, index) => (
                 <a
                   key={index}
-                  href={item.href}
-                  className="px-3 py-1.5 text-gray-700 hover:text-blue-500 relative nav-item"
+                  className="px-3 py-1.5 text-gray-700 hover:text-blue-500 relative nav-item cursor-pointer"
                   onMouseEnter={() => handleMouseEnter(index)}
+                  onClick={() =>
+                    document
+                      .getElementById(item.id)
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
                 >
                   <span className="relative z-10">{item.title}</span>
                 </a>
@@ -141,14 +145,7 @@ export function PersonalHomepage() {
               />
             )}
 
-            {/* 聊天和博客按钮 */}
-            <Button
-              type="primary"
-              shape="circle"
-              icon={<WechatOutlined />}
-              className="flex items-center justify-center"
-              style={{ backgroundColor: "#36CFC9", borderColor: "#36CFC9" }}
-            />
+            {/* 博客按钮 */}
             <Button type="primary" className="" shape="round">
               博客
             </Button>
@@ -187,8 +184,7 @@ export function PersonalHomepage() {
               {navItems.map((item, index) => (
                 <a
                   key={index}
-                  href={item.href}
-                  className="px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.title}
@@ -215,31 +211,27 @@ export function PersonalHomepage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-screen flex items-center pt-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(156,146,172,0.05)_2px,_transparent_2px)] bg-[length:60px_60px] opacity-30"></div>
+      <section className="relative overflow-hidden flex items-center pt-20">
         <div className="relative max-w-6xl mx-auto px-4 py-20 w-full">
           <div className="text-center">
             <h1 className="text-8xl font-bold mb-2 tracking-tight">
-              <span className="text-black">ZHANG HONE </span>
-              <span className="text-gray-400">HEO</span>
+              <span className="text-black">WEIZWZ </span>
+              <span className="text-gray-400">唯知为之</span>
             </h1>
             <h1 className="text-8xl font-bold mb-6 tracking-tight">
-              <span className="text-black">DIGITAL </span>
-              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">
-                DESIGNER
-              </span>
+              <span className="text-black">DIGITAL &nbsp; </span>
+              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">CODING</span>
             </h1>
             <div className="text-center">
-              <p className="text-3xl font-bold text-gray-600 mb-2">让设计师主导产品，</p>
+              <p className="text-3xl font-bold text-gray-600 mb-2">展示编码世界</p>
               <p className="text-3xl font-bold text-gray-400 mb-8">
-                来构建令人幸福的使用体验
+                分享现代科技生活
               </p>
             </div>
             <div className="flex justify-center gap-4">
               <Button
                 type="primary"
                 size="large"
-                className="bg-black border-black hover:bg-gray-800 px-8 py-3 h-auto text-base"
                 shape="round"
                 onClick={() =>
                   document
@@ -268,6 +260,9 @@ export function PersonalHomepage() {
           </div>
         </div>
       </section>
+
+      {/* Recommended Products Section */}
+      <RecommendedProducts />
 
       {/* About Section */}
       <section id="about" className="py-20 bg-white dark:bg-gray-800">
@@ -335,9 +330,6 @@ export function PersonalHomepage() {
           </div>
         </div>
       </section>
-
-      {/* Recommended Products Section */}
-      <RecommendedProducts />
 
       {/* Projects Section */}
       <section id="projects" className="py-20 bg-white dark:bg-gray-800">
