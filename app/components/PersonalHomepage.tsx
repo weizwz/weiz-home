@@ -82,19 +82,16 @@ export function PersonalHomepage() {
     }
   }, [activeIndex]);
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center hover:">
         <div className="bg-white/30 backdrop-blur-sm rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
           <div className="flex items-center">
             <Avatar
               size={40}
-              src="/avatar.svg"
-              className="mr-2"
-              style={{ backgroundColor: "#FFC107" }}
-            >
-              WZ
-            </Avatar>
+              src="https://p.weizwz.com/chenxuyuan-alone_0a7cc2c87b232b1f.webp"
+              className="bg-gray-100!"
+            />
           </div>
 
           {/* 桌面导航 */}
@@ -171,12 +168,10 @@ export function PersonalHomepage() {
               <div className="flex items-center">
                 <Avatar
                   size={40}
-                  src="/avatar.svg"
+                  src="https://p.weizwz.com/chenxuyuan-alone_0a7cc2c87b232b1f.webp"
                   className="mr-2"
                   style={{ backgroundColor: "#FFC107" }}
-                >
-                  W
-                </Avatar>
+                />
                 <span className="ml-2 text-lg font-bold">weizwz</span>
               </div>
               <Button
