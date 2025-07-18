@@ -7,8 +7,9 @@ interface Product {
   title: string;
   subtitle: string;
   description: string;
-  image: string;
-  imageAlt: string;
+  iframe: string;
+  image?: string;
+  imageAlt?: string;
   link: string;
 }
 
@@ -24,54 +25,60 @@ export function Recommended({
   const products: Product[] = [
     {
       id: 1,
-      title: "构建具有AI优势的，",
-      subtitle: "先进网站。",
-      description: "进一步了解 HeoBlog →",
-      image: "https://p.weizwz.com/siteshot_note.webp",
-      imageAlt: "网站设计展示",
+      title: "唯知笔记",
+      subtitle: "探索知识的无限可能",
+      description: "进一步了解 我的博客 →",
+      iframe: "https://note.weizwz.com/",
       link: "https://note.weizwz.com/",
     },
     {
       id: 2,
-      title: "烦恼来了，",
-      subtitle: "通通解决。",
-      description: "进一步了解 敲木鱼 →",
-      image: "https://p.weizwz.com/siteshot_note.webp",
-      imageAlt: "手机和手表应用展示",
-      link: "https://note.weizwz.com/",
+      title: "ThisCover",
+      subtitle: "漂亮的封面生成器",
+      description: "进一步了解 封面工具 →",
+      iframe: "https://cover.weizwz.com/",
+      link: "https://cover.weizwz.com/",
     },
     {
       id: 3,
-      title: "分享设计，",
-      subtitle: "与我的科技生活。",
-      description: "进一步了解 HeoBlog →",
-      image: "https://p.weizwz.com/siteshot_note.webp",
-      imageAlt: "博客网站展示",
-      link: "https://note.weizwz.com/",
+      title: "趣味动画",
+      subtitle: "简约而不简单",
+      description: "进一步了解 前端动画 →",
+      iframe: "https://weizwz.com/fun-animation/",
+      link: "https://weizwz.com/fun-animation/",
     },
     {
       id: 4,
-      title: "分享设计，",
-      subtitle: "与我的科技生活。",
-      description: "进一步了解 HeoBlog →",
-      image: "https://p.weizwz.com/siteshot_note.webp",
-      imageAlt: "博客网站展示",
-      link: "https://note.weizwz.com/",
+      title: "大屏设计",
+      subtitle: "可视化你的世界",
+      description: "进一步了解 大屏可视化 →",
+      iframe: "https://weizwz.com/vite-vue3-charts/#/",
+      link: "https://weizwz.com/vite-vue3-charts/",
     },
     {
       id: 5,
-      title: "分享设计，",
-      subtitle: "与我的科技生活。",
-      description: "进一步了解 HeoBlog →",
-      image: "https://p.weizwz.com/siteshot_note.webp",
-      imageAlt: "博客网站展示",
-      link: "https://note.weizwz.com/",
+      title: "Vue3 模板",
+      subtitle: "前端编码如此简单",
+      description: "进一步了解 Vue3 常用模板 →",
+      iframe: "https://weizwz.com/weiz-vue3-ts",
+      link: "https://weizwz.com/weiz-vue3-ts",
+    },
+    {
+      id: 6,
+      title: "味值商城",
+      subtitle: "UniAPP 三端商城开发",
+      description: "进一步了解 移动端开发 →",
+      iframe: "",
+      image: "https://p.weizwz.com/weizshop_4951d4ae88031f5b.webp",
+      imageAlt: "味值商城截图展示",
+      link: "https://github.com/weizwz/weiz-shop",
     },
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   // 检测是否为移动设备
   useEffect(() => {
@@ -144,12 +151,15 @@ export function Recommended({
 
   // 自动轮播
   useEffect(() => {
+    // 如果轮播被暂停，则不启动定时器
+    if (isPaused) return;
+
     const interval = setInterval(() => {
       nextSlide();
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [currentSlide, products.length]);
+  }, [currentSlide, products.length, isPaused]);
 
   return (
     <section id="recommend" className="py-20 bg-gray-100">
@@ -178,25 +188,28 @@ export function Recommended({
                   className={`${
                     isMobile ? "w-full" : "w-1/3"
                   } flex-shrink-0 px-3`}
+                  onMouseEnter={() => setIsPaused(true)}
+                  onMouseLeave={() => setIsPaused(false)}
                 >
                   <div className="bg-white rounded-3xl p-6 md:p-8 shadow-md h-full hover:shadow-xl transition-shadow duration-300">
                     <div>
-                      <h3 className="text-xl text-center font-bold mb-1">
-                        {product.title}
+                      <h3 className="text-xl text-gray-500 text-center font-bold mb-1">
+                        {product.subtitle}
                       </h3>
                       <h3 className="text-xl text-center font-bold mb-4">
-                        {product.subtitle}
+                        {product.title}
                       </h3>
                       <a
                         href={product.link}
+                        target="_blank"
                         className="text-blue-500 hover:text-blue-700 transition-colors flex items-center justify-center"
                       >
                         <span>{product.description}</span>
                       </a>
                     </div>
-                    <div className="mt-8 bg-gray-800 overflow-hidden rounded-xl border-1 border-gray-100">
+                    <div className="mt-8 bg-gray-800 rounded-xl border-6 border-gray-800">
                       {/* Mac-style window header */}
-                      <div className="p-1 px-2.5 flex items-center">
+                      <div className="-mt-0.5 pb-1 px-1.5 flex items-center">
                         <div className="flex space-x-1">
                           <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
                           <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
@@ -205,14 +218,16 @@ export function Recommended({
                       </div>
                       {/* Image container */}
                       <div className="overflow-hidden rounded-lg rounded-t-none">
-                        {product.link ? (
-                          <ScaledIframe src={product.link} />
+                        {product.iframe ? (
+                          <ScaledIframe src={product.iframe} />
                         ) : (
-                          <img
-                            src={product.image}
-                            alt={product.imageAlt}
-                            className="w-full aspect-video object-cover"
-                          />
+                          <div className="w-full aspect-8/5 rounded-md overflow-hidden">
+                            <img
+                              src={product.image}
+                              alt={product.imageAlt}
+                              className="w-full"
+                            />
+                          </div>
                         )}
                       </div>
                     </div>
@@ -256,7 +271,7 @@ function ScaledIframe({ src }: ScaledIframeProps) {
 
   // 标准桌面尺寸
   const DESKTOP_WIDTH = 1024;
-  const DESKTOP_HEIGHT = 768;
+  const DESKTOP_HEIGHT = 640;
 
   // 计算缩放比例
   const calculateScale = () => {
@@ -303,7 +318,7 @@ function ScaledIframe({ src }: ScaledIframeProps) {
   return (
     <div
       ref={containerRef}
-      className="w-full aspect-4/3 border-0 rounded-md overflow-hidden relative bg-white"
+      className="w-full aspect-8/5 border-0 rounded-md overflow-hidden relative bg-white"
     >
       <iframe
         className="absolute top-0 left-0 border-0 pointer-events-none"
