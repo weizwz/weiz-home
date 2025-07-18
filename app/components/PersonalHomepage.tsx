@@ -8,7 +8,7 @@ import {
   MenuOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
-import { RecommendedProducts } from "./RecommendedProducts";
+import { Recommended } from "./Recommended";
 import { useState, useRef, useEffect } from "react";
 
 export function PersonalHomepage() {
@@ -81,7 +81,7 @@ export function PersonalHomepage() {
     }
   }, [activeIndex]);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center hover:">
         <div className="bg-white/30 backdrop-blur-md rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
@@ -211,21 +211,21 @@ export function PersonalHomepage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden flex items-center pt-20">
+      <section className="relative overflow-hidden flex items-center pt-20 bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10">
         <div className="relative max-w-6xl mx-auto px-4 py-20 w-full">
           <div className="text-center">
             <h1 className="text-8xl font-bold mb-2 tracking-tight">
               <span className="text-black">WEIZWZ </span>
-              <span className="text-gray-400">唯知为之</span>
+              <span className="text-gray-400">CODING</span>
             </h1>
             <h1 className="text-8xl font-bold mb-6 tracking-tight">
-              <span className="text-black">DIGITAL &nbsp; </span>
-              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">CODING</span>
+              <span className="text-black">ENGAGE </span>
+              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">FUTURE</span>
             </h1>
             <div className="text-center">
-              <p className="text-3xl font-bold text-gray-600 mb-2">展示编码世界</p>
+              <p className="text-3xl font-bold text-gray-600 mb-2">分享编码世界</p>
               <p className="text-3xl font-bold text-gray-400 mb-8">
-                分享现代科技生活
+                拥抱现代科技生活
               </p>
             </div>
             <div className="flex justify-center gap-4">
@@ -262,7 +262,7 @@ export function PersonalHomepage() {
       </section>
 
       {/* Recommended Products Section */}
-      <RecommendedProducts />
+      <Recommended />
 
       {/* About Section */}
       <section id="about" className="py-20 bg-white dark:bg-gray-800">
@@ -301,61 +301,6 @@ export function PersonalHomepage() {
                 </p>
               </div>
             </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">
-            技能栈
-          </h2>
-          <div className="grid md:grid-cols-3 gap-10">
-            <SkillCard
-              title="前端开发"
-              skills={["React", "Vue.js", "TypeScript", "Tailwind CSS", "Vite"]}
-              color="blue"
-            />
-            <SkillCard
-              title="后端开发"
-              skills={["Node.js", "Python", "Express", "FastAPI", "PostgreSQL"]}
-              color="green"
-            />
-            <SkillCard
-              title="工具链"
-              skills={["Git", "Docker", "AWS", "Vercel", "GitHub Actions"]}
-              color="purple"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20 bg-white dark:bg-gray-800">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">
-            精选项目
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <ProjectCard
-              title="个人博客系统"
-              description="基于 React + Node.js 的现代化博客平台，支持 Markdown 编辑和主题切换。"
-              tags={["React", "Node.js", "MongoDB"]}
-              link="#"
-            />
-            <ProjectCard
-              title="任务管理工具"
-              description="团队协作的任务管理应用，具有实时同步和权限管理功能。"
-              tags={["Vue.js", "Express", "Socket.io"]}
-              link="#"
-            />
-            <ProjectCard
-              title="数据可视化平台"
-              description="企业级数据分析和可视化平台，支持多种图表类型和实时数据。"
-              tags={["React", "D3.js", "Python"]}
-              link="#"
-            />
           </div>
         </div>
       </section>
@@ -403,80 +348,9 @@ export function PersonalHomepage() {
       {/* Footer */}
       <footer className="py-8 bg-gray-900 text-center">
         <p className="text-gray-400">
-          © 2025 Wei Z. Made with ❤️ using React & Ant Design
+          © 2025 weizwz. Made with ❤️ using React & Ant Design
         </p>
       </footer>
     </div>
-  );
-}
-
-interface SkillCardProps {
-  title: string;
-  skills: string[];
-  color: "blue" | "green" | "purple";
-}
-
-function SkillCard({ title, skills, color }: SkillCardProps) {
-  return (
-    <Card className="card-hover shadow-xl border-0 rounded-2xl overflow-hidden h-full">
-      <div className="p-6 text-center">
-        <h3 className="text-2xl font-bold mb-6 text-gray-800">{title}</h3>
-        <div className="flex flex-wrap gap-3 justify-center">
-          {skills.map((skill) => (
-            <Tag
-              key={skill}
-              color={color}
-              className="mb-2 px-3 py-1 text-sm rounded-full border-0 shadow-sm"
-            >
-              {skill}
-            </Tag>
-          ))}
-        </div>
-      </div>
-    </Card>
-  );
-}
-
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  tags: string[];
-  link: string;
-}
-
-function ProjectCard({ title, description, tags, link }: ProjectCardProps) {
-  return (
-    <Card
-      className="card-hover shadow-xl border-0 rounded-2xl overflow-hidden h-full"
-      actions={[
-        <Button
-          key="view"
-          type="primary"
-          href={link}
-          className="rounded-full px-6"
-          target="_blank"
-        >
-          查看项目
-        </Button>,
-      ]}
-    >
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-3 text-gray-800">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-          {description}
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <Tag
-              key={tag}
-              color="blue"
-              className="px-2 py-1 text-xs rounded-full border-0 shadow-sm"
-            >
-              {tag}
-            </Tag>
-          ))}
-        </div>
-      </div>
-    </Card>
   );
 }

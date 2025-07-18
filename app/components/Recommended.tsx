@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface Product {
   id: number;
@@ -12,15 +12,15 @@ interface Product {
   link: string;
 }
 
-interface RecommendedProductsProps {
+interface RecommendedProps {
   title?: string;
   subtitle?: string;
 }
 
-export function RecommendedProducts({
-  title = "推荐尝鲜",
-  subtitle = "推荐你去试试的好产品",
-}: RecommendedProductsProps) {
+export function Recommended({
+  title = "推荐项目",
+  subtitle = "看看我做了哪些有趣的项目",
+}: RecommendedProps) {
   const products: Product[] = [
     {
       id: 1,
@@ -152,7 +152,7 @@ export function RecommendedProducts({
   }, [currentSlide, products.length]);
 
   return (
-    <section id="recommend" className="py-20 bg-gray-50">
+    <section id="recommend" className="py-20 bg-gray-100">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-4">{title}</h2>
         <p className="text-gray-500 text-center mb-12">{subtitle}</p>
@@ -194,22 +194,26 @@ export function RecommendedProducts({
                         <span>{product.description}</span>
                       </a>
                     </div>
-                    <div className="mt-8 bg-gray-800 overflow-hidden rounded-2xl border-6 border-gray-800">
+                    <div className="mt-8 bg-gray-800 overflow-hidden rounded-xl border-1 border-gray-100">
                       {/* Mac-style window header */}
-                      <div className="pb-1.5 px-2 flex items-center">
+                      <div className="p-1 px-2.5 flex items-center">
                         <div className="flex space-x-1">
-                          <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                          <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
+                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
+                          <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
                         </div>
                       </div>
                       {/* Image container */}
-                      <div className="overflow-hidden rounded-lg">
-                        <img
-                          src={product.image}
-                          alt={product.imageAlt}
-                          className="w-full h-auto"
-                        />
+                      <div className="overflow-hidden rounded-lg rounded-t-none">
+                        {product.link ? (
+                          <ScaledIframe src={product.link} />
+                        ) : (
+                          <img
+                            src={product.image}
+                            alt={product.imageAlt}
+                            className="w-full aspect-video object-cover"
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -237,5 +241,82 @@ export function RecommendedProducts({
         </div>
       </div>
     </section>
+  );
+}
+
+// 动态缩放的 iframe 组件
+interface ScaledIframeProps {
+  src: string;
+}
+
+function ScaledIframe({ src }: ScaledIframeProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0.25);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+
+  // 标准桌面尺寸
+  const DESKTOP_WIDTH = 1024;
+  const DESKTOP_HEIGHT = 768;
+
+  // 计算缩放比例
+  const calculateScale = () => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const containerWidth = rect.width;
+      const containerHeight = rect.height;
+
+      // 计算宽度和高度的缩放比例，取较小的值以确保完整显示
+      const scaleX = containerWidth / DESKTOP_WIDTH;
+      const scaleY = containerHeight / DESKTOP_HEIGHT;
+      const newScale = Math.min(scaleX, scaleY);
+
+      setScale(newScale);
+      setContainerSize({ width: containerWidth, height: containerHeight });
+    }
+  };
+
+  // 监听容器尺寸变化
+  useEffect(() => {
+    calculateScale();
+
+    const resizeObserver = new ResizeObserver(() => {
+      calculateScale();
+    });
+
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+
+    // 监听窗口大小变化
+    const handleResize = () => {
+      setTimeout(calculateScale, 100); // 延迟执行以确保布局完成
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="w-full aspect-4/3 border-0 rounded-md overflow-hidden relative bg-white"
+    >
+      <iframe
+        className="absolute top-0 left-0 border-0 pointer-events-none"
+        src={src}
+        style={{
+          width: `${DESKTOP_WIDTH}px`,
+          height: `${DESKTOP_HEIGHT}px`,
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+        }}
+        loading="lazy"
+        sandbox="allow-same-origin allow-scripts"
+      />
+    </div>
   );
 }
