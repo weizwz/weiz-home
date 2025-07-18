@@ -6,6 +6,7 @@ import {
   RocketOutlined,
   HeartOutlined,
   MenuOutlined,
+  LinkOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
 import { Recommended } from "./Recommended";
@@ -19,7 +20,7 @@ export function PersonalHomepage() {
     { title: "服务", id: "#" },
     { title: "主题", id: "#" },
     { title: "表情", id: "#" },
-    { title: "项目", id: "#" },
+    { title: "关于", id: "about" },
   ];
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -84,7 +85,7 @@ export function PersonalHomepage() {
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center hover:">
-        <div className="bg-white/30 backdrop-blur-md rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
+        <div className="bg-white/30 backdrop-blur-sm rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
           <div className="flex items-center">
             <Avatar
               size={40}
@@ -146,7 +147,12 @@ export function PersonalHomepage() {
             )}
 
             {/* 博客按钮 */}
-            <Button type="primary" className="" shape="round">
+            <Button
+              type="primary"
+              className=""
+              shape="round"
+              href="https://note.weizwz.com/"
+            >
               博客
             </Button>
           </div>
@@ -161,7 +167,7 @@ export function PersonalHomepage() {
           width={300}
         >
           <div className="p-4">
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-between items-center mb-6">
               <div className="flex items-center">
                 <Avatar
                   size={40}
@@ -169,9 +175,9 @@ export function PersonalHomepage() {
                   className="mr-2"
                   style={{ backgroundColor: "#FFC107" }}
                 >
-                  WZ
+                  W
                 </Avatar>
-                <span className="text-lg font-bold">Wei Z</span>
+                <span className="ml-2 text-lg font-bold">weizwz</span>
               </div>
               <Button
                 type="text"
@@ -180,12 +186,17 @@ export function PersonalHomepage() {
               />
             </div>
 
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col">
               {navItems.map((item, index) => (
                 <a
                   key={index}
                   className="px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    document
+                      .getElementById(item.id)
+                      ?.scrollIntoView({ behavior: "smooth" });
+                    setMobileMenuOpen(false);
+                  }}
                 >
                   {item.title}
                 </a>
@@ -194,15 +205,21 @@ export function PersonalHomepage() {
               <div className="border-t border-gray-200 my-4 pt-4">
                 <Button
                   type="primary"
-                  block
+                  shape="round"
+                  icon={<LinkOutlined />}
                   className="mb-3"
-                  style={{ backgroundColor: "#36CFC9", borderColor: "#36CFC9" }}
-                  icon={<WechatOutlined />}
+                  href="https://note.weizwz.com/"
+                >
+                  博客
+                </Button>
+                <br />
+                <Button
+                  type="default"
+                  shape="round"
+                  icon={<MailOutlined />}
+                  href="mailto:weizwz@foxmail.com"
                 >
                   联系我
-                </Button>
-                <Button type="primary" block className="" shape="round">
-                  博客
                 </Button>
               </div>
             </div>
@@ -220,10 +237,14 @@ export function PersonalHomepage() {
             </h1>
             <h1 className="text-8xl font-bold mb-6 tracking-tight">
               <span className="text-black">ENGAGE </span>
-              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">FUTURE</span>
+              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">
+                FUTURE
+              </span>
             </h1>
             <div className="text-center">
-              <p className="text-3xl font-bold text-gray-600 mb-2">分享编码世界</p>
+              <p className="text-3xl font-bold text-gray-600 mb-2">
+                分享编码世界
+              </p>
               <p className="text-3xl font-bold text-gray-400 mb-8">
                 拥抱现代科技生活
               </p>
@@ -246,7 +267,7 @@ export function PersonalHomepage() {
                 icon={<GithubOutlined />}
                 className="border-gray-300 px-4 py-3 h-auto text-base rounded-full"
                 shape="round"
-                href="https://github.com"
+                href="https://github.com/weizwz"
                 target="_blank"
               />
               <Button
@@ -254,7 +275,7 @@ export function PersonalHomepage() {
                 icon={<MailOutlined />}
                 className="border-gray-300 px-4 py-3 h-auto text-base rounded-full"
                 shape="round"
-                href="mailto:your-email@example.com"
+                href="mailto:weizwz@foxmail.com"
               />
             </div>
           </div>
@@ -267,7 +288,7 @@ export function PersonalHomepage() {
       {/* About Section */}
       <section id="about" className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">
+          <h2 className="text-4xl font-bold text-center mb-16">
             关于我
           </h2>
           <div className="grid md:grid-cols-2 gap-10">
