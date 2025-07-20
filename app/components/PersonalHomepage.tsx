@@ -6,7 +6,7 @@ import {
   RocketOutlined,
   HeartOutlined,
   MenuOutlined,
-  LinkOutlined,
+  ReadOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
 import { Recommended } from "./Recommended";
@@ -82,16 +82,25 @@ export function PersonalHomepage() {
     }
   }, [activeIndex]);
   return (
-    <div className="min-h-screen">
+    <div id="home" className="min-h-screen">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center hover:">
         <div className="bg-white/30 backdrop-blur-sm rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
           <div className="flex items-center">
             <Avatar
               size={40}
-              src="https://p.weizwz.com/chenxuyuan-alone_0a7cc2c87b232b1f.webp"
-              className="bg-gray-100!"
+              src="https://p.weizwz.com/home_bc2e3ce7f2e00827.webp"
+              className="cursor-pointer hover:scale-120 duration-300 ease-[cubic-bezier(0.175, 0.885, 0.32, 1.275)]"
+              onClick={() =>
+                document
+                  .getElementById("home")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
             />
+            {
+              isMobile && 
+              <span className="ml-2 text-lg font-semibold">weizwz</span>
+            }
           </div>
 
           {/* 桌面导航 */}
@@ -132,7 +141,7 @@ export function PersonalHomepage() {
             </div>
           )}
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center gap-4">
             {/* 移动端汉堡菜单按钮 */}
             {isMobile && (
               <Button
@@ -168,11 +177,10 @@ export function PersonalHomepage() {
               <div className="flex items-center">
                 <Avatar
                   size={40}
-                  src="https://p.weizwz.com/chenxuyuan-alone_0a7cc2c87b232b1f.webp"
+                  src="https://p.weizwz.com/home_bc2e3ce7f2e00827.webp"
                   className="mr-2"
-                  style={{ backgroundColor: "#FFC107" }}
                 />
-                <span className="ml-2 text-lg font-bold">weizwz</span>
+                <span className="ml-2 text-lg font-semibold">weizwz</span>
               </div>
               <Button
                 type="text"
@@ -201,7 +209,7 @@ export function PersonalHomepage() {
                 <Button
                   type="primary"
                   shape="round"
-                  icon={<LinkOutlined />}
+                  icon={<ReadOutlined />}
                   className="mb-3"
                   href="https://note.weizwz.com/"
                 >
@@ -214,7 +222,7 @@ export function PersonalHomepage() {
                   icon={<MailOutlined />}
                   href="mailto:weizwz@foxmail.com"
                 >
-                  联系我
+                  联系
                 </Button>
               </div>
             </div>
