@@ -1,5 +1,6 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 import { ConfigProvider } from 'antd'
+import '@ant-design/v5-patch-for-react-19'
 
 import type { Route } from './+types/root'
 import './app.css'
