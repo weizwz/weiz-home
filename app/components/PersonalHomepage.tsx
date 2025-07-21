@@ -1,4 +1,4 @@
-import { Avatar, Card, Tag, Button, Drawer } from "antd";
+import { Avatar, Card, Button, Drawer } from "antd";
 import {
   GithubOutlined,
   MailOutlined,
@@ -16,10 +16,10 @@ export function PersonalHomepage() {
   // 导航项数据
   const navItems = [
     { title: "推荐", id: "recommend" },
-    { title: "媒体", id: "#" },
-    { title: "服务", id: "#" },
-    { title: "主题", id: "#" },
-    { title: "表情", id: "#" },
+    { title: "媒体", id: "contact" },
+    { title: "服务", id: "about" },
+    { title: "主题", id: "recommend" },
+    { title: "表情", id: "contact" },
     { title: "关于", id: "about" },
   ];
 
@@ -84,7 +84,7 @@ export function PersonalHomepage() {
   return (
     <div id="home" className="min-h-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center hover:">
+      <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center">
         <div className="bg-white/30 backdrop-blur-sm rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
           <div className="flex items-center">
             <Avatar
@@ -97,10 +97,9 @@ export function PersonalHomepage() {
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             />
-            {
-              isMobile && 
+            {isMobile && (
               <span className="ml-2 text-lg font-semibold">weizwz</span>
-            }
+            )}
           </div>
 
           {/* 桌面导航 */}
@@ -291,9 +290,7 @@ export function PersonalHomepage() {
       {/* About Section */}
       <section id="about" className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">
-            关于我
-          </h2>
+          <h2 className="text-4xl font-bold text-center mb-16">关于我</h2>
           <div className="grid md:grid-cols-2 gap-10">
             <Card className="card-hover shadow-xl border-0 rounded-2xl overflow-hidden">
               <div className="text-center p-6">
