@@ -10,6 +10,7 @@ interface Product {
   iframe: string;
   image?: string;
   imageAlt?: string;
+  border?: Boolean;
   link: string;
 }
 
@@ -41,11 +42,14 @@ export function Recommended({
     },
     {
       id: 3,
-      title: "funAnimation",
-      subtitle: "有趣的样式和动画",
-      description: "进一步了解 前端特效 →",
-      iframe: "https://weizwz.com/fun-animation/",
-      link: "https://weizwz.com/fun-animation/",
+      title: "味值商城",
+      subtitle: "适配多端的移动商城",
+      description: "进一步了解 uniapp开发 →",
+      iframe: "",
+      border: false,
+      image: "https://p.weizwz.com/weizshop/weizshop_design_7c5778e27ee7238e.webp",
+      imageAlt: "味值商城截图展示",
+      link: "https://github.com/weizwz/weiz-shop",
     },
     {
       id: 4,
@@ -67,13 +71,11 @@ export function Recommended({
     },
     {
       id: 6,
-      title: "味值商城",
-      subtitle: " uniapp移动端商城开发",
-      description: "进一步了解 移动端开发 →",
-      iframe: "",
-      image: "https://p.weizwz.com/weizshop_4951d4ae88031f5b.webp",
-      imageAlt: "味值商城截图展示",
-      link: "https://github.com/weizwz/weiz-shop",
+      title: "funAnimation",
+      subtitle: "有趣的样式和动画",
+      description: "进一步了解 前端特效 →",
+      iframe: "https://weizwz.com/fun-animation/",
+      link: "https://weizwz.com/fun-animation/",
     },
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -209,19 +211,12 @@ export function Recommended({
                         <span>{product.description}</span>
                       </a>
                     </div>
-                    <div className="mt-8 bg-gray-800 rounded-xl border-6 border-gray-800">
+                    <div className={`mt-8 rounded-xl ${product.border === false ? '' : 'border-5 border-gray-800'}`}>
                       {/* Mac-style window header */}
-                      <div className="-mt-0.5 pb-1 px-1.5 flex items-center">
-                        <div className="flex space-x-1">
-                          <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
-                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
-                          <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                        </div>
-                      </div>
-                      {/* Image container */}
-                      <div className="overflow-hidden rounded-lg rounded-t-none">
-                        {product.iframe ? (
+                      {product.iframe ? (
+                        <div className="overflow-hidden rounded-md">
                           <ScaledIframe src={product.iframe} />
+                        </div>
                         ) : (
                           <div className="w-full aspect-8/5 rounded-md overflow-hidden">
                             <img
@@ -231,7 +226,6 @@ export function Recommended({
                             />
                           </div>
                         )}
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -320,7 +314,7 @@ function ScaledIframe({ src }: ScaledIframeProps) {
   return (
     <div
       ref={containerRef}
-      className="w-full aspect-8/5 border-0 rounded-md overflow-hidden relative bg-white"
+      className="w-full aspect-8/5 border-0 rounded-md overflow-hidden relative"
     >
       <iframe
         className="absolute top-0 left-0 border-0 pointer-events-none"
