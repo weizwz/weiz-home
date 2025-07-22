@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import { Avatar, Button, Drawer } from "antd";
 import {
   GithubOutlined,
@@ -10,7 +11,6 @@ import { Recommended } from "./Recommended";
 import { BlogArticles } from "./BlogArticles";
 import { About } from "./About";
 import { ProjectShowcase } from "./ProjectShowcase";
-import { useState, useRef, useEffect } from "react";
 import { Footer } from "./Footer";
 
 export function PersonalHomepage() {
@@ -83,7 +83,7 @@ export function PersonalHomepage() {
     <div id="home" className="min-h-screen">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center">
-        <div className="bg-white/50 backdrop-blur-sm rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
+        <div className="bg-white/50 backdrop-blur-xs rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
           <div className="flex items-center">
             <Avatar
               size={40}
@@ -109,7 +109,7 @@ export function PersonalHomepage() {
             >
               {/* 滑动背景指示器 */}
               <div
-                className="absolute bg-blue-100 border border-blue-500 rounded-full transition-all duration-500"
+                className="absolute bg-white/80 border border-blue-500 rounded-full transition-all duration-500"
                 style={{
                   width: `${indicatorStyle.width}px`,
                   left: `${indicatorStyle.left}px`,
@@ -124,7 +124,7 @@ export function PersonalHomepage() {
               {navItems.map((item, index) => (
                 <a
                   key={index}
-                  className="px-3 py-1.5 text-gray-700 hover:text-blue-500 relative nav-item cursor-pointer"
+                  className="px-3 py-1.5 text-gray-800 hover:text-blue-500 relative nav-item cursor-pointer"
                   onMouseEnter={() => handleMouseEnter(index)}
                   onClick={() =>
                     document

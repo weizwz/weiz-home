@@ -28,10 +28,27 @@ export function ProjectShowcase({
   secondaryButtonLink = "https://cover.weizwz.com/editor/",
 }: ProjectShowcaseProps) {
   return (
-    <section className="py-20 w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
+    <section className="py-20 mx-24 m-auto rounded-4xl relative overflow-hidden">
       {/* 背景装饰 */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(120,119,198,0.3),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(255,119,198,0.15),transparent_50%)]"></div>
+      <img
+        src="https://p.weizwz.com/cover/ThisCover-bg_0bff3a65cf12c9dd.webp"
+        alt="bg"
+        className="absolute inset-0 rounded-4xl w-full object-fill blur-2xl"
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 30% 40%, rgba(99,102,241,0.6), transparent 50%)",
+        }}
+      ></div>
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 80% 80%, rgba(129,140,248,0.4), transparent 50%)",
+        }}
+      ></div>
 
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="text-center">
@@ -96,7 +113,7 @@ export function ProjectShowcase({
               />
             </div>
             <div
-              className="absolute bottom-10 left-1/3 opacity-80 animate-bounce"
+              className="absolute bottom-10 left-1/3 opacity-80 animate-pulse"
               style={{ animationDelay: "2s" }}
             >
               <WechatOutlined
@@ -105,14 +122,10 @@ export function ProjectShowcase({
               />
             </div>
             <div
-              className="absolute bottom-0 right-1/4 opacity-80 animate-pulse"
+              className="absolute bottom-0 right-1/4 opacity-80 animate-bounce"
               style={{ animationDelay: "0.5s" }}
             >
-              {" "}
-              <GithubOutlined
-                className="text-5xl"
-                style={{ color: "#9811FB" }}
-              />
+              <GithubOutlined className="text-5xl" style={{ color: "#000" }} />
             </div>
             <div
               className="absolute top-1/2 left-10 opacity-50 animate-bounce"
@@ -129,7 +142,7 @@ export function ProjectShowcase({
             >
               <AntDesignOutlined
                 className="text-5xl"
-                style={{ color: "#F6329A" }}
+                style={{ color: "#F75561" }}
               />
             </div>
           </div>
