@@ -12,32 +12,26 @@ export function Links() {
         </p>
         <div className="flex justify-center flex-wrap gap-6">
           <Button
-            type="primary"
             size="large"
             shape="round"
             icon={<GithubOutlined />}
-            className="bg-gray-800 border-gray-800 hover:bg-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-6 h-auto text-lg rounded-full"
             href="https://github.com/weizwz"
             target="_blank"
           >
             GitHub
           </Button>
           <Button
-            type="primary"
             size="large"
             shape="round"
             icon={<MailOutlined />}
-            className="bg-white text-blue-600 border-white hover:bg-gray-100 shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-6 h-auto text-lg rounded-full"
             href="mailto:weizwz@foxmail.com"
           >
             邮箱
           </Button>
           <Button
-            type="primary"
             size="large"
             shape="round"
             icon={<EditOutlined />}
-            className="bg-green-500 border-green-500 hover:bg-green-400 shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-6 h-auto text-lg rounded-full"
             href="https://note.weizwz.com/pages/links"
             target="_blank"
           >
