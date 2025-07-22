@@ -1,15 +1,14 @@
-import { Avatar, Card, Button, Drawer } from "antd";
+import { Avatar, Button, Drawer } from "antd";
 import {
   GithubOutlined,
   MailOutlined,
   WechatOutlined,
-  RocketOutlined,
-  HeartOutlined,
   MenuOutlined,
   ReadOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
 import { Recommended } from "./Recommended";
+import { About } from "./About";
 import { useState, useRef, useEffect } from "react";
 
 export function PersonalHomepage() {
@@ -288,47 +287,11 @@ export function PersonalHomepage() {
       <Recommended />
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white dark:bg-gray-800">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">关于我</h2>
-          <div className="grid md:grid-cols-2 gap-10">
-            <Card className="card-hover shadow-xl border-0 rounded-2xl overflow-hidden">
-              <div className="text-center p-6">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <RocketOutlined className="text-3xl text-blue-600" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-800">
-                  技术热情
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  热爱探索新技术，专注于现代 Web 开发，
-                  追求代码质量和用户体验的完美结合。
-                  始终保持学习的心态，拥抱技术变化。
-                </p>
-              </div>
-            </Card>
-            <Card className="card-hover shadow-xl border-0 rounded-2xl overflow-hidden">
-              <div className="text-center p-6">
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <HeartOutlined className="text-3xl text-red-600" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-800">
-                  开源精神
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  积极参与开源社区，分享技术经验，
-                  相信开源的力量能让世界变得更美好。
-                  通过代码连接世界，用技术创造价值。
-                </p>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <About />
 
       {/* Contact Section */}
       <section id="contact" className="py-20 gradient-bg">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+        <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8 text-white">联系我</h2>
           <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
             有想法？让我们一起创造些什么吧！
