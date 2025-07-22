@@ -10,7 +10,6 @@ import { Recommended } from "./Recommended";
 import { BlogArticles } from "./BlogArticles";
 import { About } from "./About";
 import { ProjectShowcase } from "./ProjectShowcase";
-import { Links } from "./Links";
 import { useState, useRef, useEffect } from "react";
 
 export function PersonalHomepage() {
@@ -297,9 +296,6 @@ export function PersonalHomepage() {
 
       {/* About Section */}
       <About />
-
-      {/* Contact Section */}
-      <Links />
 
       {/* Footer */}
       <footer className="py-8 bg-gray-900 text-center">
