@@ -7,6 +7,7 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 import { Recommended } from "./Recommended";
+import { BlogArticles } from "./BlogArticles";
 import { About } from "./About";
 import { ProjectShowcase } from "./ProjectShowcase";
 import { Links } from "./Links";
@@ -290,6 +291,9 @@ export function PersonalHomepage() {
 
       {/* Project Showcase Section */}
       <ProjectShowcase />
+
+      {/* Blog Articles Section */}
+      <BlogArticles />
 
       {/* About Section */}
       <About />
