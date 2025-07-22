@@ -19,7 +19,7 @@ interface BlogArticlesProps {
 }
 
 export function BlogArticles({
-  title = "我的博客",
+  title = "我的文章",
   subtitle = "来自博客的最新动态，发现更多精彩内容",
 }: BlogArticlesProps) {
   const articles: Article[] = [
@@ -173,7 +173,7 @@ export function BlogArticles({
   }, [currentSlide, articles.length, isPaused]);
 
   return (
-    <section id="blog" className="py-20 relative overflow-hidden">
+    <section id="article" className="py-20 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         <h2 className="text-4xl font-bold text-center mb-4">{title}</h2>
         <p className="text-gray-500 text-center mb-12">{subtitle}</p>

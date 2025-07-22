@@ -17,10 +17,7 @@ export function PersonalHomepage() {
   // 导航项数据
   const navItems = [
     { title: "推荐", id: "recommend" },
-    { title: "媒体", id: "contact" },
-    { title: "服务", id: "about" },
-    { title: "主题", id: "recommend" },
-    { title: "表情", id: "contact" },
+    { title: "文章", id: "article" },
     { title: "关于", id: "about" },
   ];
 
