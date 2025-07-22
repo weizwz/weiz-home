@@ -8,6 +8,18 @@
   background-clip: text;
 }
 
+.max-w-8xl {
+  max-width: 90rem;
+}
+
+.max-w-9xl {
+  max-width: 100rem;
+}
+
+.max-w-10xl {
+  max-width: 120rem;
+}
+
 /* 动画效果 */
 @keyframes float-simple {
   0%,
@@ -63,15 +75,8 @@
   animation: float 6s ease-in-out infinite;
 }
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
-
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }

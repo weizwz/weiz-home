@@ -28,7 +28,7 @@ export function ProjectShowcase({
   secondaryButtonLink = "https://cover.weizwz.com/editor/",
 }: ProjectShowcaseProps) {
   return (
-    <section className="py-20 mx-7 rounded-4xl bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
+    <section className="py-20 w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
       {/* 背景装饰 */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(120,119,198,0.3),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(255,119,198,0.15),transparent_50%)]"></div>

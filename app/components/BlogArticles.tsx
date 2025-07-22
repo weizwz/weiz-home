@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { DoubleRightOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { LeftOutlined, RightOutlined, DoubleRightOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 
 interface Article {
@@ -211,7 +211,7 @@ export function BlogArticles({
                         <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm font-medium rounded-full">
                           {article.category}
                         </span>
-                        <img src={article.icon} className='w-10' h-10 alt='img'/>
+                        <img src={article.icon} className="w-10 h-10" alt="icon" />
                       </div>
                       <h3 className="text-4xl text-center font-bold text-white mb-4">
                         {article.title}
