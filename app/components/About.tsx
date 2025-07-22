@@ -1,7 +1,7 @@
 import {
   HeartOutlined,
-  EditOutlined,
-  EllipsisOutlined,
+  BulbOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 
 interface AboutProps {
@@ -18,7 +18,7 @@ export function About({ title = "关于我" }: AboutProps) {
           <div className="card-hover border-1 border-slate-200 shadow-md shadow-slate-200 rounded-3xl overflow-hidden">
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <EditOutlined
+                <SearchOutlined
                   className="text-3xl"
                   style={{ color: "#DBEAFE" }}
                 />
@@ -34,7 +34,7 @@ export function About({ title = "关于我" }: AboutProps) {
           <div className="card-hover border-1 border-slate-200 shadow-md shadow-slate-200 rounded-3xl overflow-hidden">
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <EllipsisOutlined
+                <BulbOutlined 
                   className="text-3xl"
                   style={{ color: "#DBFCE6" }}
                 />
