@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { ArrowRightOutlined, DoubleRightOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { DoubleRightOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 
 interface Article {
