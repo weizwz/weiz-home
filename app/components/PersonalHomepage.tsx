@@ -11,6 +11,7 @@ import { BlogArticles } from "./BlogArticles";
 import { About } from "./About";
 import { ProjectShowcase } from "./ProjectShowcase";
 import { useState, useRef, useEffect } from "react";
+import { Footer } from "./Footer";
 
 export function PersonalHomepage() {
   // 导航项数据
@@ -298,11 +299,7 @@ export function PersonalHomepage() {
       <About />
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-900 text-center">
-        <p className="text-gray-400">
-          © 2025 weizwz. Made with ❤️ using React & Ant Design
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }
