@@ -9,13 +9,18 @@
 }
 
 /* 动画效果 */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes float-simple {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .float-animation {
-  animation: float 3s ease-in-out infinite;
+  animation: float-simple 3s ease-in-out infinite;
 }
 
 /* 卡片悬停效果 */
@@ -25,7 +30,7 @@
 
 .card-hover:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px rgba(98, 116, 140, 0.2);
 }
 
 /* 渐变背景 */
@@ -38,6 +43,24 @@
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 浮动动画 */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-3deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 @theme {

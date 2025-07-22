@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Recommended } from "./Recommended";
 import { About } from "./About";
+import { ProjectShowcase } from "./ProjectShowcase";
 import { Links } from "./Links";
 import { useState, useRef, useEffect } from "react";
 
@@ -84,7 +85,7 @@ export function PersonalHomepage() {
     <div id="home" className="min-h-screen">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 py-4 flex justify-center">
-        <div className="bg-white/30 backdrop-blur-sm rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
+        <div className="bg-white/50 backdrop-blur-sm rounded-full shadow-lg py-3 px-6 flex gap-4 items-center justify-between">
           <div className="flex items-center">
             <Avatar
               size={40}
@@ -286,6 +287,9 @@ export function PersonalHomepage() {
 
       {/* Recommended Products Section */}
       <Recommended />
+
+      {/* Project Showcase Section */}
+      <ProjectShowcase />
 
       {/* About Section */}
       <About />
