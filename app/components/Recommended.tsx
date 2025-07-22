@@ -195,7 +195,7 @@ export function Recommended({
                   onMouseEnter={() => setIsPaused(true)}
                   onMouseLeave={() => setIsPaused(false)}
                 >
-                  <div className="bg-white rounded-3xl p-6 md:p-8 shadow-md h-full hover:shadow-xl transition-shadow duration-300">
+                  <div className="bg-white rounded-3xl p-6 md:p-8 border-1 border-slate-200 shadow-md shadow-slate-200 h-full hover:shadow-xl transition-shadow duration-300">
                     <div>
                       <h3 className="text-xl text-gray-500 text-center font-bold mb-1">
                         {product.subtitle}
