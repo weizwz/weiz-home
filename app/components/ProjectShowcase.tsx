@@ -28,13 +28,8 @@ export function ProjectShowcase({
   secondaryButtonLink = "https://cover.weizwz.com/editor/",
 }: ProjectShowcaseProps) {
   return (
-    <section className="py-20 mx-24 m-auto rounded-4xl relative overflow-hidden">
+    <section className="py-20 mx-7 m-auto rounded-4xl bg-gradient-to-br from-slate-900 via-indigo-700 to-slate-800 relative overflow-hidden">
       {/* 背景装饰 */}
-      <img
-        src="https://p.weizwz.com/cover/ThisCover-bg_0bff3a65cf12c9dd.webp"
-        alt="bg"
-        className="absolute inset-0 rounded-4xl w-full object-fill blur-2xl"
-      />
       <div
         className="absolute inset-0"
         style={{
@@ -123,7 +118,7 @@ export function ProjectShowcase({
             </div>
             <div
               className="absolute bottom-0 right-1/4 opacity-80 animate-bounce"
-              style={{ animationDelay: "0.5s" }}
+              style={{ animationDelay: "1s" }}
             >
               <GithubOutlined className="text-5xl" style={{ color: "#000" }} />
             </div>
@@ -138,7 +133,7 @@ export function ProjectShowcase({
             </div>
             <div
               className="absolute top-1/3 right-10 opacity-60 animate-pulse"
-              style={{ animationDelay: "2.5s" }}
+              style={{ animationDelay: "2s" }}
             >
               <AntDesignOutlined
                 className="text-5xl"
