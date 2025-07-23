@@ -7,7 +7,6 @@ import {
   BulbOutlined,
 } from "@ant-design/icons";
 import { Button } from "antd";
-import { useState, useEffect, useRef } from "react";
 
 interface NoteShowcaseProps {
   title?: string;
@@ -99,7 +98,7 @@ export function NoteShowcase({
           <div className="absolute inset-0 flex justify-center items-center">
             {/* 浮动的知识图标 */}
             <div
-              className="absolute top-1/8 left-1/12 opacity-70 animate-pulse"
+              className="absolute top-1/8 left-1/6 opacity-70 animate-pulse"
               style={{ animationDelay: "0s" }}
             >
               <BookOutlined className="text-4xl" style={{ color: "#ffffff" }} />
@@ -120,13 +119,13 @@ export function NoteShowcase({
               />
             </div>
             <div
-              className="absolute bottom-2 right-1/10 opacity-80 animate-bounce"
+              className="absolute bottom-2 right-1/8 opacity-80 animate-bounce"
               style={{ animationDelay: "1s" }}
             >
               <ReadOutlined className="text-4xl" style={{ color: "#ffffff" }} />
             </div>
             <div
-              className="absolute top-1/2 left-1/20 opacity-60 animate-bounce"
+              className="absolute top-1/2 left-1/12 opacity-60 animate-bounce"
               style={{ animationDelay: "1.5s" }}
             >
               <CodeOutlined className="text-5xl" style={{ color: "#ffffff" }} />
@@ -142,7 +141,7 @@ export function NoteShowcase({
           {/* 主要内容展示 */}
           <div className="w-full relative z-10 flex items-center justify-center gap-8">
             {/* 笔记本电脑 */}
-            <div className="w-3/4 min-w-100 aspect-[9/5]">
+            <div className="w-1/2 min-w-100 aspect-[8/5]">
               <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-3 shadow-2xl">
                 <div className="w-full h-full bg-white rounded-lg relative overflow-hidden">
                   {/* 博客界面 iframe */}
