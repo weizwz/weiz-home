@@ -18,7 +18,7 @@ export function About({ title = "关于我" }: AboutProps) {
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16">{title}</h2>
 
-        <div className="grid md:grid-cols-3 gap-10 mb-16 px-3">
+        <div className="grid md:grid-cols-3 gap-10 mb-16 md:px-3">
           <div className="card-hover border-1 border-slate-200 shadow-md shadow-slate-200 rounded-3xl overflow-hidden">
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -72,14 +72,14 @@ export function About({ title = "关于我" }: AboutProps) {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
             有想法？让我们一起创造些什么吧！<br />
             欢迎与我交流技术、分享想法或探讨合作机会
           </p>
           
           <div className="flex justify-center flex-wrap gap-6">
             <Button
-            type="primary"
+              type="primary"
               size="large"
               shape="round"
               icon={<GithubOutlined />}

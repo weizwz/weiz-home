@@ -191,7 +191,7 @@ export function Recommended({
                   key={product.id}
                   className={`${
                     isMobile ? "w-full" : "w-1/3"
-                  } flex-shrink-0 px-3`}
+                  } flex-shrink-0 md:px-3`}
                   onMouseEnter={() => setIsPaused(true)}
                   onMouseLeave={() => setIsPaused(false)}
                 >

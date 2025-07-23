@@ -29,7 +29,7 @@ export function NoteShowcase({
 }: NoteShowcaseProps) {
   return (
     <section
-      className="pt-20 mx-7 m-auto rounded-4xl bg-gradient-to-br from-blue-500 via-sky-500 to-blue-700 relative overflow-hidden"
+      className="py-12 md:py-20 mx-4 md:mx-7 m-auto rounded-2xl md:rounded-4xl bg-gradient-to-br from-blue-500 via-sky-500 to-blue-700 relative overflow-hidden"
       style={{
         background:
           "linear-gradient(135deg, #409eff 0%, #3a8ee6 50%, #409eff 100%)",
@@ -59,24 +59,24 @@ export function NoteShowcase({
           </div>
 
           {/* 主标题 */}
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight px-4">
             {subtitle}
           </h2>
 
           {/* 描述文字 */}
-          <p className="text-blue-100 mb-10 max-w-4xl mx-auto leading-relaxed text-lg">
+          <p className="text-blue-100 mb-8 md:mb-10 max-w-4xl mx-auto leading-relaxed text-sm sm:text-base md:text-lg px-4">
             {description}
           </p>
 
           {/* 按钮组 */}
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
             <Button
               type="primary"
               size="large"
               shape="round"
               href={primaryButtonLink}
               target="_blank"
-              className="bg-white text-blue-600 border-white hover:bg-blue-50 hover:text-blue-700 hover:border-blue-50"
+              className="bg-white text-blue-600 border-white hover:bg-blue-50 hover:text-blue-700 hover:border-blue-50 w-full sm:w-auto"
             >
               {primaryButtonText}
             </Button>
@@ -85,7 +85,7 @@ export function NoteShowcase({
               shape="round"
               href={secondaryButtonLink}
               target="_blank"
-              className="border-white text-white hover:bg-white hover:text-blue-600 transition-all duration-300"
+              className="border-white text-white hover:bg-white hover:text-blue-600 transition-all duration-300 w-full sm:w-auto"
             >
               {secondaryButtonText}
             </Button>
@@ -158,7 +158,7 @@ export function NoteShowcase({
                   </div>
                 </div>
               </div>
-              <div className="w-full h-4 bg-gray-600 rounded-t-md rounded-b-2xl border-8 border-gray-600"></div>
+              <div className="w-full h-3 md:h-4 bg-gray-600 rounded-t-md rounded-b-xl md:rounded-b-2xl border-4 md:border-8 border-gray-600"></div>
             </div>
           </div>
         </div>

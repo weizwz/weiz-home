@@ -230,32 +230,33 @@ export function PersonalHomepage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden flex items-center pt-20 bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10">
-        <div className="relative max-w-6xl mx-auto px-4 py-20 w-full">
+      <section className="relative overflow-hidden flex items-center pt-16 md:pt-20 bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 dark:[--pattern-fg:var(--color-white)]/10">
+        <div className="relative max-w-8xl mx-auto px-4 py-12 md:py-20 w-full">
           <div className="text-center">
-            <h1 className="text-8xl font-bold mb-2 tracking-tight">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-2 tracking-tight">
               <span className="text-black">WEIZWZ </span>
               <span className="text-gray-400">CODING</span>
             </h1>
-            <h1 className="text-8xl font-bold mb-6 tracking-tight">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 md:mb-6 tracking-tight">
               <span className="text-black">ENGAGE </span>
               <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 text-transparent bg-clip-text">
                 FUTURE
               </span>
             </h1>
             <div className="text-center">
-              <p className="text-3xl font-bold text-gray-600 mb-2">
+              <p className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-600 mb-1 md:mb-2">
                 分享编码世界
               </p>
-              <p className="text-3xl font-bold text-gray-400 mb-8">
+              <p className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-400 mb-6 md:mb-8">
                 拥抱现代科技生活
               </p>
             </div>
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
               <Button
                 type="primary"
                 size="large"
                 shape="round"
+                className="w-full sm:w-auto"
                 onClick={() =>
                   document
                     .getElementById("about")
@@ -264,21 +265,23 @@ export function PersonalHomepage() {
               >
                 了解我
               </Button>
-              <Button
-                size="large"
-                icon={<GithubOutlined />}
-                className="border-gray-300 px-4 py-3 h-auto text-base rounded-full"
-                shape="round"
-                href="https://github.com/weizwz"
-                target="_blank"
-              />
-              <Button
-                size="large"
-                icon={<MailOutlined />}
-                className="border-gray-300 px-4 py-3 h-auto text-base rounded-full"
-                shape="round"
-                href="mailto:weizwz@foxmail.com"
-              />
+              <div className="flex gap-3 sm:gap-4 justify-center">
+                <Button
+                  size="large"
+                  icon={<GithubOutlined />}
+                  className="border-gray-300 px-4 py-3 h-auto text-base rounded-full flex-1 sm:flex-none"
+                  shape="round"
+                  href="https://github.com/weizwz"
+                  target="_blank"
+                />
+                <Button
+                  size="large"
+                  icon={<MailOutlined />}
+                  className="border-gray-300 px-4 py-3 h-auto text-base rounded-full flex-1 sm:flex-none"
+                  shape="round"
+                  href="mailto:weizwz@foxmail.com"
+                />
+              </div>
             </div>
           </div>
         </div>

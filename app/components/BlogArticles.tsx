@@ -175,8 +175,8 @@ export function BlogArticles({
   return (
     <section id="article" className="py-20 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 relative z-10">
-        <h2 className="text-4xl font-bold text-center mb-4">{title}</h2>
-        <p className="text-gray-500 text-center mb-12">{subtitle}</p>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 md:mb-4 px-4">{title}</h2>
+        <p className="text-gray-500 text-center mb-8 md:mb-12 text-sm md:text-base px-4">{subtitle}</p>
 
         <div className="relative">
           <div
@@ -198,11 +198,11 @@ export function BlogArticles({
                   key={article.id}
                   className={`${
                     isMobile ? "w-full" : "w-1/3"
-                  } flex-shrink-0 px-3`}
+                  } flex-shrink-0 md:px-3`}
                   onMouseEnter={() => setIsPaused(true)}
                   onMouseLeave={() => setIsPaused(false)}
                 >
-                  <div className="bg-white/80 backdrop-blur-sm rounded-3xl border-1 border-slate-200 shadow-md shadow-slate-200 h-full hover:shadow-xl transition-all duration-300 overflow-hidden">
+                  <div className="bg-white/80 backdrop-blur-sm rounded-2xl md:rounded-3xl border-1 border-slate-200 shadow-md shadow-slate-200 h-full hover:shadow-xl transition-all duration-300 overflow-hidden">
                     {/* 文章头部 - 渐变背景 */}
                     <div
                       className={`bg-gradient-to-br ${article.gradient} p-6 relative`}
@@ -219,8 +219,8 @@ export function BlogArticles({
                     </div>
 
                     {/* 文章内容 */}
-                    <div className="p-6">
-                      <p className="leading-relaxed mb-4 line-clamp-2">
+                    <div className="p-4 md:p-6">
+                      <p className="leading-relaxed mb-3 md:mb-4 line-clamp-2 text-sm md:text-base">
                         {article.description}
                       </p>
                       <div className="flex items-center justify-between">
