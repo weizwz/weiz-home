@@ -4,7 +4,7 @@ import {
   ShareAltOutlined,
   ReadOutlined,
   CodeOutlined,
-  BulbOutlined,
+  LikeOutlined,
 } from "@ant-design/icons";
 import { Button } from "antd";
 
@@ -104,7 +104,7 @@ export function NoteShowcase({
               <BookOutlined className="text-4xl" style={{ color: "#ffffff" }} />
             </div>
             <div
-              className="absolute top-0 right-[32%] opacity-70 animate-pulse"
+              className="absolute top-0 right-[32%] opacity-70 animate-bounce"
               style={{ animationDelay: "1s" }}
             >
               <EditOutlined className="text-3xl" style={{ color: "#ffffff" }} />
@@ -119,7 +119,7 @@ export function NoteShowcase({
               />
             </div>
             <div
-              className="absolute bottom-2 right-1/8 opacity-80 animate-bounce"
+              className="absolute top-1/3 right-1/6 opacity-80 animate-bounce"
               style={{ animationDelay: "1s" }}
             >
               <ReadOutlined className="text-4xl" style={{ color: "#ffffff" }} />
@@ -131,10 +131,10 @@ export function NoteShowcase({
               <CodeOutlined className="text-5xl" style={{ color: "#ffffff" }} />
             </div>
             <div
-              className="absolute top-1/3 right-10 opacity-70 animate-bounce"
+              className="absolute top-2/3 right-1/5 opacity-50 animate-ping"
               style={{ animationDelay: "1.8s" }}
             >
-              <BulbOutlined className="text-4xl" style={{ color: "#ffffff" }} />
+              <LikeOutlined className="text-4xl" style={{ color: "#ffffff" }} />
             </div>
           </div>
 
