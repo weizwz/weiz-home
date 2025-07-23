@@ -1,8 +1,0 @@
-{
-  "name": "home",
-  "compatibility_date": "2025-07-23",
-  "assets": {
-    "directory": "./build",
-    "not_found_handling": "single-page-application"
-  }
-}
