@@ -18,7 +18,7 @@ export function About({ title = "关于我" }: AboutProps) {
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16">{title}</h2>
 
-        <div className="grid md:grid-cols-3 gap-10 mb-16">
+        <div className="grid md:grid-cols-3 gap-10 mb-16 px-3">
           <div className="card-hover border-1 border-slate-200 shadow-md shadow-slate-200 rounded-3xl overflow-hidden">
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">

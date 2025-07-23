@@ -141,7 +141,7 @@ export function NoteShowcase({
           {/* 主要内容展示 */}
           <div className="w-full relative z-10 flex items-center justify-center gap-8">
             {/* 笔记本电脑 */}
-            <div className="w-1/2 min-w-100 aspect-[8/5]">
+            <div className="w-1/2 min-w-80 aspect-[8/5]">
               <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-3 shadow-2xl">
                 <div className="w-full h-full bg-white rounded-lg relative overflow-hidden">
                   {/* 博客界面 iframe */}
