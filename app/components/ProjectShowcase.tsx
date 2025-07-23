@@ -1,9 +1,6 @@
 import {
-  AntDesignOutlined,
   GithubOutlined,
-  GoogleOutlined,
   JavaScriptOutlined,
-  WechatOutlined,
   ZhihuOutlined,
 } from "@ant-design/icons";
 import { Button } from "antd";
@@ -90,31 +87,25 @@ export function ProjectShowcase({
           <div className="absolute inset-0 flex justify-center items-center">
             {/* 浮动的应用图标 */}
             <div
-              className="absolute top-12 left-1/5 opacity-30 animate-pulse"
+              className="absolute top-12 left-1/5 opacity-70 animate-pulse"
               style={{ animationDelay: "0s" }}
             >
               <ZhihuOutlined
                 className="text-3xl"
-                style={{ color: "#2272F6" }}
+                style={{ color: "#2B7FFF" }}
               />
             </div>
             <div
-              className="absolute top-16 right-1/3 opacity-90 animate-pulse"
+              className="absolute top-16 right-[32%] opacity-70 animate-spin"
               style={{ animationDelay: "1s" }}
             >
-              <GoogleOutlined
-                className="text-5xl"
-                style={{ color: "#FBBC04" }}
-              />
+              <img src="https://api.iconify.design/devicon:react.svg" className="w-16 h-16" alt="icon" />
             </div>
             <div
-              className="absolute bottom-10 left-1/3 opacity-80 animate-pulse"
+              className="absolute bottom-10 left-[29%] opacity-80 animate-pulse"
               style={{ animationDelay: "2s" }}
             >
-              <WechatOutlined
-                className="text-4xl"
-                style={{ color: "#00C950" }}
-              />
+              <img src="https://api.iconify.design/simple-icons:xiaohongshu.svg?color=%23FF2341" className="w-24 h-16" alt="icon" />
             </div>
             <div
               className="absolute bottom-0 right-1/4 opacity-80 animate-bounce"
@@ -132,13 +123,10 @@ export function ProjectShowcase({
               />
             </div>
             <div
-              className="absolute top-1/3 right-10 opacity-60 animate-pulse"
+              className="absolute top-1/3 right-10 opacity-70 animate-pulse"
               style={{ animationDelay: "2s" }}
             >
-              <AntDesignOutlined
-                className="text-5xl"
-                style={{ color: "#F75561" }}
-              />
+              <img src="https://api.iconify.design/simple-icons:juejin.svg?color=%232380FF" className="w-12 h-12" alt="icon" />
             </div>
           </div>
 
