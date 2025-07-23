@@ -24,8 +24,8 @@ export function NoteShowcase({
   description = "在这里，我们分享最新的技术趋势、编程技巧和开发心得，一起成长，共同进步",
   primaryButtonText = "建站历史",
   secondaryButtonText = "访问",
-  primaryButtonLink = "https://note.weizwz.com/",
-  secondaryButtonLink = "https://note.weizwz.com/about/",
+  primaryButtonLink = "https://note.weizwz.com/pages/logs",
+  secondaryButtonLink = "https://note.weizwz.com/",
 }: NoteShowcaseProps) {
   return (
     <section
