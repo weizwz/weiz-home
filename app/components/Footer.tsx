@@ -24,8 +24,8 @@ export function Footer() {
         <a target="_blank" href="https://github.com/weizwz" title="本站代码托管于 Github">
           <img alt="Github" src="https://img.shields.io/badge/Code-Github-432DD7?logo=github&amp;logoColor=fff"/>
         </a>
-        <a target="_blank" href="https://dash.cloudflare.com/" title="本站部署于 Cloudflare">
-          <img alt="Cloudflare" src="https://img.shields.io/badge/Deploy-Cloudflare-F5762A?logo=cloudflare&amp;logoColor=fff"/>
+        <a target="_blank" href="https://vercel.com/" title="本站部署于 Vercel">
+          <img alt="Vercel" src="https://img.shields.io/badge/Deploy-Vercel-000?logo=vercel&amp;logoColor=fff"/>
         </a>
       </div>
     </footer>
