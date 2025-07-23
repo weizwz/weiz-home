@@ -56,8 +56,8 @@ export function Recommended({
       title: "资源监控中心",
       subtitle: "信息可视化大屏系统",
       description: "进一步了解 大屏可视化 →",
-      iframe: "https://weizwz.com/vite-vue3-charts/#/",
-      link: "https://weizwz.com/vite-vue3-charts/",
+      iframe: "https://vue3-charts.weizwz.com/",
+      link: "https://vue3-charts.weizwz.com/",
     },
     {
       id: 5,
@@ -74,8 +74,8 @@ export function Recommended({
       title: "funAnimation",
       subtitle: "有趣的样式和动画",
       description: "进一步了解 前端特效 →",
-      iframe: "https://weizwz.com/fun-animation/",
-      link: "https://weizwz.com/fun-animation/",
+      iframe: "https://animation.weizwz.com/",
+      link: "https://animation.weizwz.com/",
     },
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
