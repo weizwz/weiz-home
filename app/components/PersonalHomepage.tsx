@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import { Recommended } from "./Recommended";
 import { BlogArticles } from "./BlogArticles";
+import { NoteShowcase } from "./NoteShowcase";
 import { About } from "./About";
 import { ProjectShowcase } from "./ProjectShowcase";
 import { Footer } from "./Footer";
@@ -291,6 +292,9 @@ export function PersonalHomepage() {
 
       {/* Blog Articles Section */}
       <BlogArticles />
+
+      {/* Note Showcase Section */}
+      <NoteShowcase />
 
       {/* About Section */}
       <About />
