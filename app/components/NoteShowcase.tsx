@@ -169,7 +169,7 @@ export function NoteShowcase({
           <div className='relative z-10 flex items-center justify-center gap-6 md:gap-12 scale-90 md:scale-100'>
             {/* 手机 */}
             <div className='relative'>
-              <div className='w-28 md:w-36 h-52 md:h-64 bg-gradient-to-br from-gray-400 to-gray-500 rounded-2xl md:rounded-3xl p-2 shadow-2xl transform rotate-12 hover:rotate-6 transition-transform duration-500'>
+              <div className='w-28 md:w-36 h-52 md:h-64 bg-gradient-to-br from-gray-300 to-gray-400 rounded-2xl md:rounded-3xl p-2 shadow-2xl transform rotate-12 hover:rotate-6 transition-transform duration-500'>
                 <div className='w-full h-full bg-white rounded-xl md:rounded-2xl flex items-center justify-center overflow-hidden relative'>
                   {/* 手机状态条 */}
                   <div className='absolute z-1 bottom-1 left-6 right-6 h-1 bg-gray-500 rounded'></div>
