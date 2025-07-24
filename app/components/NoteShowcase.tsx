@@ -28,13 +28,7 @@ export function NoteShowcase({
   secondaryButtonLink = "https://note.weizwz.com/",
 }: NoteShowcaseProps) {
   return (
-    <section
-      className="py-12 md:py-20 mx-4 md:mx-7 m-auto rounded-2xl md:rounded-4xl bg-gradient-to-br from-blue-500 via-sky-500 to-blue-700 relative overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(135deg, #409eff 0%, #3a8ee6 50%, #409eff 100%)",
-      }}
-    >
+    <section className="py-10 md:pt-20 mx-4 md:mx-7 m-auto rounded-2xl md:rounded-4xl bg-gradient-to-b from-blue-500 via-blue-800 to-sky-700 relative overflow-hidden">
       {/* 背景装饰 */}
       <div
         className="absolute inset-0"
@@ -120,7 +114,7 @@ export function NoteShowcase({
             </div>
             <div
               className="absolute top-1/3 right-1/6 opacity-80 animate-bounce"
-              style={{ animationDelay: "1s" }}
+              style={{ animationDelay: "1.2s" }}
             >
               <ReadOutlined className="text-4xl" style={{ color: "#ffffff" }} />
             </div>

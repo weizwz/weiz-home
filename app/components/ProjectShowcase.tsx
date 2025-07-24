@@ -25,7 +25,7 @@ export function ProjectShowcase({
   secondaryButtonLink = "https://cover.weizwz.com/editor/",
 }: ProjectShowcaseProps) {
   return (
-    <section className="py-12 md:py-20 mx-4 md:mx-7 m-auto rounded-2xl md:rounded-4xl bg-gradient-to-br from-slate-900 via-indigo-700 to-slate-800 relative overflow-hidden">
+    <section className="py-10 md:py-20 mx-4 md:mx-7 m-auto rounded-2xl md:rounded-4xl bg-gradient-to-br from-slate-900 via-indigo-700 to-slate-800 relative overflow-hidden">
       {/* 背景装饰 */}
       <div
         className="absolute inset-0"
