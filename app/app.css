@@ -75,6 +75,53 @@
   animation: float 6s ease-in-out infinite;
 }
 
+/* 卡通背景动画 */
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-8px) translateX(4px);
+  }
+  50% {
+    transform: translateY(-4px) translateX(-2px);
+  }
+  75% {
+    transform: translateY(-12px) translateX(6px);
+  }
+}
+
+@keyframes rotate-gentle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes scale-breath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* 自然元素动画 */
+.animate-gentle-float {
+  animation: gentle-float 8s ease-in-out infinite;
+}
+
+.animate-rotate-gentle {
+  animation: rotate-gentle 12s linear infinite;
+}
+
+.animate-scale-breath {
+  animation: scale-breath 4s ease-in-out infinite;
+}
+
 html,
 body {
   @media (prefers-color-scheme: dark) {
