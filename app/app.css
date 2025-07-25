@@ -8,6 +8,20 @@
   background-clip: text;
 }
 
+/* 自定义文章图标、背景 */
+.article-icon-bg {
+  background: var(--weiz-icon-color);
+}
+
+.article-icon {
+  display: inline-block;
+  background: white;
+  mask: var(--url) no-repeat center center;
+  -webkit-mask: var(--url) no-repeat center center;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+}
+
 .max-w-8xl {
   max-width: 90rem;
 }
@@ -22,10 +36,12 @@
 
 /* 动画效果 */
 @keyframes float-simple {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -59,13 +75,16 @@
 
 /* 浮动动画 */
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   33% {
     transform: translateY(-10px) rotate(5deg);
   }
+
   66% {
     transform: translateY(5px) rotate(-3deg);
   }
@@ -77,33 +96,44 @@
 
 /* 卡通背景动画 */
 @keyframes gentle-float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) translateX(0px);
   }
+
   25% {
     transform: translateY(-8px) translateX(4px);
   }
+
   50% {
     transform: translateY(-4px) translateX(-2px);
   }
+
   75% {
     transform: translateY(-12px) translateX(6px);
   }
 }
 
 @keyframes rotate-gentle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(0deg);
   }
+
   50% {
     transform: rotate(180deg);
   }
 }
 
 @keyframes scale-breath {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }

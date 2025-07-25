@@ -1,6 +1,7 @@
 import { BookOutlined, EditOutlined, ShareAltOutlined, ReadOutlined, CodeOutlined, LikeOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { useRef, useState, useEffect } from 'react'
+import { config } from '../config'
 
 interface NoteShowcaseProps {
   title?: string
@@ -18,8 +19,8 @@ export function NoteShowcase({
   description = '在这里，我们分享最新的技术趋势、编程技巧和开发心得，一起成长，共同进步',
   primaryButtonText = '建站历史',
   secondaryButtonText = '访问',
-  primaryButtonLink = 'https://note.weizwz.com/pages/logs',
-  secondaryButtonLink = 'https://note.weizwz.com/'
+  primaryButtonLink = config.blog.logsUrl,
+  secondaryButtonLink = config.blog.url
 }: NoteShowcaseProps) {
   return (
     <section className='py-10 md:pt-20 mx-4 md:mx-7 m-auto rounded-2xl md:rounded-4xl bg-gradient-to-br from-sky-500 via-blue-500 to-blue-600 relative overflow-hidden'>
@@ -176,7 +177,7 @@ export function NoteShowcase({
 
                   {/* 手机iframe */}
                   <div className='w-full h-full overflow-hidden rounded-lg'>
-                    <ScaledIframe src='https://note.weizwz.com/' isMobile={true} />
+                    <ScaledIframe src={config.blog.url} isMobile={true} />
                   </div>
                 </div>
               </div>
@@ -188,7 +189,7 @@ export function NoteShowcase({
                 <div className='w-full aspect-8/5  bg-white rounded-lg relative overflow-hidden'>
                   {/* 笔记本iframe */}
                   <div className='w-full h-full overflow-hidden rounded-md'>
-                    <ScaledIframe src='https://note.weizwz.com/' />
+                    <ScaledIframe src={config.blog.url} />
                   </div>
                 </div>
               </div>

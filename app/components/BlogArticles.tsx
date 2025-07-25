@@ -1,6 +1,7 @@
 import { Button } from 'antd'
-import { LeftOutlined, RightOutlined, DoubleRightOutlined } from '@ant-design/icons'
+import { LeftOutlined, RightOutlined, ArrowRightOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react'
+import { config } from '../config'
 
 interface Article {
   id: number
@@ -9,9 +10,8 @@ interface Article {
   description: string
   date: string
   link: string
-  gradient: string
-  icon: string
-  tags?: string[]
+  styleName: string
+  tags: string[]
 }
 
 interface RSSItem {
@@ -29,22 +29,14 @@ interface BlogArticlesProps {
 }
 
 // RSS 解析函数
-const parseRSSFeed = async (rssUrl: string, useProxy: boolean = false): Promise<RSSItem[]> => {
+const parseRSSFeed = async (rssUrl: string): Promise<RSSItem[]> => {
   try {
     const response = await fetch(rssUrl)
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
-    let xmlText: string
-
-    if (useProxy) {
-      // 如果使用代理，需要解析 JSON 响应
-      const jsonResponse = await response.json()
-      xmlText = jsonResponse.contents
-    } else {
-      xmlText = await response.text()
-    }
+    const xmlText = await response.text()
 
     // 创建 DOMParser 来解析 XML
     const parser = new DOMParser()
@@ -119,108 +111,11 @@ const parseRSSFeed = async (rssUrl: string, useProxy: boolean = false): Promise<
   }
 }
 
-// 根据标签和分类生成图标和渐变色
-const getArticleStyle = (category: string, tags: string[]) => {
-  const allTags = [...tags, category].map((tag) => tag.toLowerCase())
+// 根据标签生成图标和渐变色的 className
+const getArticleStyle = (tags: string[]) => {
+  const mainTag = tags[0].toLowerCase()
 
-  // 根据关键词匹配图标和颜色 - 按优先级排序
-
-  // 设计工具类
-  if (allTags.some((tag) => tag.includes('ps') || tag.includes('photoshop') || tag.includes('图片处理'))) {
-    return {
-      gradient: 'from-green-500 to-teal-600',
-      icon: 'https://api.iconify.design/devicon-plain:photoshop.svg?color=%23fff'
-    }
-  }
-
-  // 建站相关
-  if (allTags.some((tag) => tag.includes('vitepress') || tag.includes('建站') || tag.includes('博客'))) {
-    return {
-      gradient: 'from-cyan-400 to-purple-600',
-      icon: 'https://api.iconify.design/simple-icons:vitepress.svg?color=%23fff'
-    }
-  }
-
-  // 系统相关
-  if (allTags.some((tag) => tag.includes('macos') || tag.includes('系统') || tag.includes('优化') || tag.includes('mac'))) {
-    return {
-      gradient: 'from-sky-300 to-blue-500',
-      icon: 'https://api.iconify.design/streamline-logos:mac-finder-logo-solid.svg?color=%23fff'
-    }
-  }
-
-  // 开发工具
-  if (allTags.some((tag) => tag.includes('vscode') || tag.includes('编程') || tag.includes('开发工具') || tag.includes('ide'))) {
-    return {
-      gradient: 'from-sky-500 to-sky-600',
-      icon: 'https://api.iconify.design/akar-icons:vscode-fill.svg?color=%23fff'
-    }
-  }
-
-  // 前端技术
-  if (
-    allTags.some(
-      (tag) =>
-        tag.includes('react') ||
-        tag.includes('vue') ||
-        tag.includes('前端') ||
-        tag.includes('javascript') ||
-        tag.includes('js') ||
-        tag.includes('typescript') ||
-        tag.includes('ts')
-    )
-  ) {
-    return {
-      gradient: 'from-blue-400 to-cyan-500',
-      icon: 'https://api.iconify.design/devicon:react.svg?color=%23fff'
-    }
-  }
-
-  // 资源分享
-  if (allTags.some((tag) => tag.includes('图标') || tag.includes('资源') || tag.includes('icon') || tag.includes('分享'))) {
-    return {
-      gradient: 'from-rose-300 to-red-400',
-      icon: 'https://api.iconify.design/pepicons-print:circle-big-filled.svg?color=%23fff'
-    }
-  }
-
-  // 后端技术
-  if (allTags.some((tag) => tag.includes('node') || tag.includes('python') || tag.includes('java') || tag.includes('后端') || tag.includes('服务器'))) {
-    return {
-      gradient: 'from-green-400 to-emerald-500',
-      icon: 'https://api.iconify.design/material-symbols:code.svg?color=%23fff'
-    }
-  }
-
-  // 数据库
-  if (allTags.some((tag) => tag.includes('mysql') || tag.includes('mongodb') || tag.includes('数据库') || tag.includes('sql'))) {
-    return {
-      gradient: 'from-orange-400 to-red-500',
-      icon: 'https://api.iconify.design/material-symbols:database.svg?color=%23fff'
-    }
-  }
-
-  // 工具软件
-  if (allTags.some((tag) => tag.includes('工具') || tag.includes('软件') || tag.includes('效率'))) {
-    return {
-      gradient: 'from-purple-400 to-pink-500',
-      icon: 'https://api.iconify.design/material-symbols:build.svg?color=%23fff'
-    }
-  }
-
-  // 教程类
-  if (allTags.some((tag) => tag.includes('教程') || tag.includes('学习') || tag.includes('入门'))) {
-    return {
-      gradient: 'from-amber-400 to-orange-500',
-      icon: 'https://api.iconify.design/material-symbols:school.svg?color=%23fff'
-    }
-  }
-
-  // 默认样式
-  return {
-    gradient: 'from-indigo-400 to-purple-500',
-    icon: 'https://api.iconify.design/material-symbols:article-outline.svg?color=%23fff'
-  }
+  return 'weiz-icon-' + mainTag
 }
 
 // 格式化日期
@@ -246,7 +141,7 @@ const formatDate = (dateString: string): string => {
 // 转换 RSS 数据为组件需要的格式
 const convertRSSToArticles = (rssItems: RSSItem[]): Article[] => {
   return rssItems.slice(0, 12).map((item, index) => {
-    const style = getArticleStyle(item.category, item.tags)
+    const styleName = getArticleStyle(item.tags)
 
     return {
       id: index + 1,
@@ -255,8 +150,7 @@ const convertRSSToArticles = (rssItems: RSSItem[]): Article[] => {
       description: item.description,
       date: formatDate(item.pubDate),
       link: item.link,
-      gradient: style.gradient,
-      icon: style.icon,
+      styleName,
       tags: item.tags
     }
   })
@@ -271,32 +165,32 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
     {
       id: 1,
       title: 'PS快速替换证件照背景',
-      category: '图像处理',
+      category: '资源',
       description: '本文介绍了一种使用Photoshop快速替换证件照背景的方法，且替换效果自然无杂色和毛边',
       date: '2025年06月19日',
       link: 'https://note.weizwz.com/editor/ps/photo-change-bg',
-      gradient: 'from-green-500 to-teal-600',
-      icon: 'https://api.iconify.design/devicon-plain:photoshop.svg?color=%23fff'
+      styleName: 'weizwz-icon-ps',
+      tags: ['ps', '图片']
     },
     {
       id: 2,
-      title: 'VitePress集成Twikoo评论',
-      category: '建站资源',
+      title: '如何快速无缝的从 vscode 转向AI编辑器 cursor、kiro、trae 等',
+      category: '资源',
       description: '本文介绍了在VitePress中集成Twikoo的方法，包括安装插件、封装组件、利用布局插槽等步骤',
       date: '2025年05月15日',
       link: 'https://note.weizwz.com/vitepress/extend/vitepress-twikoo',
-      gradient: 'from-cyan-400 to-purple-600',
-      icon: 'https://api.iconify.design/simple-icons:vitepress.svg?color=%23fff'
+      styleName: 'weizwz-icon-ai',
+      tags: ['ai', 'vscode']
     },
     {
       id: 3,
       title: 'MacOS Sequoia系统优化',
-      category: '系统优化',
+      category: '资源',
       description: '本文介绍了 MacOS Sequoia 系统的基础优化设置，包括修改截屏保存位置、修复启动图标错乱等',
       date: '2025年04月26日',
       link: 'https://note.weizwz.com/macos/setting/base-init',
-      gradient: 'from-sky-300 to-blue-500',
-      icon: 'https://api.iconify.design/streamline-logos:mac-finder-logo-solid.svg?color=%23fff'
+      styleName: 'weizwz-icon-macos',
+      tags: ['macos']
     }
   ]
 
@@ -305,47 +199,15 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
     const fetchArticles = async () => {
       try {
         setLoading(true)
-        let rssItems: RSSItem[] = []
 
-        // 尝试多种获取方式
-        const fetchMethods = [
-          // 方法1: 使用 allorigins 代理
-          async () => {
-            const proxyUrl = 'https://api.allorigins.win/get?url='
-            const targetUrl = encodeURIComponent('https://note.weizwz.com/feed.xml')
-            return await parseRSSFeed(`${proxyUrl}${targetUrl}`, true)
-          },
-          // 方法2: 使用 cors-anywhere 代理
-          async () => {
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-            const targetUrl = 'https://note.weizwz.com/feed.xml'
-            return await parseRSSFeed(`${proxyUrl}${targetUrl}`)
-          },
-          // 方法3: 直接尝试（可能会失败，但值得一试）
-          async () => {
-            return await parseRSSFeed('https://note.weizwz.com/feed.xml')
-          }
-        ]
-
-        // 依次尝试各种方法
-        for (const method of fetchMethods) {
-          try {
-            rssItems = await method()
-            if (rssItems.length > 0) {
-              break // 成功获取数据，跳出循环
-            }
-          } catch (error) {
-            console.warn('RSS 获取方法失败，尝试下一种方法:', error)
-            continue // 继续尝试下一种方法
-          }
-        }
+        // 使用 CORS 代理获取 RSS 数据
+        const rssItems = await parseRSSFeed(config.api.rss)
 
         if (rssItems.length > 0) {
           const convertedArticles = convertRSSToArticles(rssItems)
           setArticles(convertedArticles)
         } else {
-          // 如果所有方法都失败，使用备用数据
-          console.warn('所有 RSS 获取方法都失败，使用备用数据')
+          // 如果 RSS 没有数据，使用备用数据
           setArticles(fallbackArticles)
         }
       } catch (error) {
@@ -478,14 +340,14 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
                     onMouseLeave={() => setIsPaused(false)}>
                     <div className='bg-white/80 backdrop-blur-sm rounded-2xl md:rounded-3xl border-1 border-slate-200 shadow-md shadow-slate-200 h-full hover:shadow-xl transition-all duration-300 overflow-hidden'>
                       {/* 文章头部 - 渐变背景 */}
-                      <div className={`bg-gradient-to-br ${article.gradient} p-6 relative`}>
+                      <div className={`article-icon-bg ${article.styleName} p-6 relative`}>
                         <div className='flex items-center justify-between mb-4'>
                           <span className='inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm font-medium rounded-full'>
                             {article.category}
                           </span>
-                          <img src={article.icon} className='w-10 h-10' alt='icon' />
+                          <div className='w-10 h-10 article-icon'></div>
                         </div>
-                        <h3 className='text-4xl text-center font-bold text-white mb-4'>{article.title}</h3>
+                        <h3 className='text-4xl text-center font-bold text-white mb-4 line-clamp-2'>{article.title}</h3>
                       </div>
 
                       {/* 文章内容 */}
@@ -494,7 +356,14 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
                         <div className='flex items-center justify-between'>
                           <span className='text-sm text-blue-500'>{article.date}</span>
 
-                          <Button type='primary' shape='round' icon={<DoubleRightOutlined />} href={article.link} target='_blank'>
+                          <Button
+                            className='pl-8!'
+                            type='primary'
+                            shape='round'
+                            icon={<ArrowRightOutlined />}
+                            iconPosition='end'
+                            href={article.link}
+                            target='_blank'>
                             阅读全文
                           </Button>
                         </div>

@@ -1,9 +1,12 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "react-router";
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({}: LoaderFunctionArgs) {
   try {
+    // 从环境变量获取 RSS URL，提供默认值
+    const rssUrl = process.env.RSS_FEED_URL || 'https://note.weizwz.com/feed.xml';
+    
     // 获取 RSS 数据
-    const response = await fetch('https://note.weizwz.com/feed.xml');
+    const response = await fetch(rssUrl);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
