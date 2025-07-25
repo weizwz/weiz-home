@@ -164,33 +164,34 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
   const fallbackArticles: Article[] = [
     {
       id: 1,
-      title: 'PS快速替换证件照背景',
+      title: '如何快速无缝的从 vscode 转向AI编辑器 cursor、kiro、trae 等',
       category: '资源',
-      description: '本文介绍了一种使用Photoshop快速替换证件照背景的方法，且替换效果自然无杂色和毛边',
-      date: '2025年06月19日',
-      link: 'https://note.weizwz.com/editor/ps/photo-change-bg',
-      styleName: 'weizwz-icon-ps',
-      tags: ['ps', '图片']
+      description: '本文介绍了如何从 VSCode 快速无缝转向 AI 编辑器，如 kiro、cursor、trae 等',
+      date: '2025年07月25日',
+      link: config.blog.url + '/editor/ai/to-kiro',
+      styleName: 'weiz-icon-ai',
+      tags: ['AI', 'VSCode']
     },
     {
       id: 2,
-      title: '如何快速无缝的从 vscode 转向AI编辑器 cursor、kiro、trae 等',
+      title: 'MacOS Sequoia系统优化',
       category: '资源',
-      description: '本文介绍了在VitePress中集成Twikoo的方法，包括安装插件、封装组件、利用布局插槽等步骤',
-      date: '2025年05月15日',
-      link: 'https://note.weizwz.com/vitepress/extend/vitepress-twikoo',
-      styleName: 'weizwz-icon-ai',
-      tags: ['ai', 'vscode']
+      description: '本文介绍了 MacOS Sequoia 系统的基础优化设置，包括修改截屏保存位置、修复启动图标错乱、关闭安装来源限制等系统级操作',
+      date: '2025年04月26日',
+      link: config.blog.url + '/macos/setting/base-init',
+      styleName: 'weiz-icon-macos',
+      tags: ['MacOS']
     },
     {
       id: 3,
-      title: 'MacOS Sequoia系统优化',
+      title: 'VitePress 建站资源汇总',
       category: '资源',
-      description: '本文介绍了 MacOS Sequoia 系统的基础优化设置，包括修改截屏保存位置、修复启动图标错乱等',
-      date: '2025年04月26日',
-      link: 'https://note.weizwz.com/macos/setting/base-init',
-      styleName: 'weizwz-icon-macos',
-      tags: ['macos']
+      description:
+        '本文汇总了使用 VitePress 搭建博客的资源与配置方法，包括暗黑模式切换动画、DocSearch 搜索、Fancybox 图片查看器、GitHub Giscus 评论系统、Cloudflare R2 图床配置等内容',
+      date: '2025年04月18日',
+      link: config.blog.url + '/vitepress/all/resource-all',
+      styleName: 'weiz-icon-vitepress',
+      tags: ['VitePress', '网站']
     }
   ]
 
@@ -340,14 +341,16 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
                     onMouseLeave={() => setIsPaused(false)}>
                     <div className='bg-white/80 backdrop-blur-sm rounded-2xl md:rounded-3xl border-1 border-slate-200 shadow-md shadow-slate-200 h-full hover:shadow-xl transition-all duration-300 overflow-hidden'>
                       {/* 文章头部 - 渐变背景 */}
-                      <div className={`article-icon-bg ${article.styleName} p-6 relative`}>
+                      <div className={`${article.styleName} article-icon-bg p-6 relative`}>
                         <div className='flex items-center justify-between mb-4'>
                           <span className='inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm font-medium rounded-full'>
                             {article.category}
                           </span>
                           <div className='w-10 h-10 article-icon'></div>
                         </div>
-                        <h3 className='text-4xl text-center font-bold text-white mb-4 line-clamp-2'>{article.title}</h3>
+                        <div className='min-h-20 flex items-center justify-center mb-4'>
+                          <h3 className='text-4xl text-center font-bold text-white line-clamp-2'>{article.title}</h3>
+                        </div>
                       </div>
 
                       {/* 文章内容 */}

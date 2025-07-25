@@ -56,6 +56,12 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   if (isRouteErrorResponse(error)) {
     is404 = error.status === 404
     message = is404 ? '404' : '错误'
+    
+    // 过滤 Chrome DevTools 的请求，不显示错误页面
+    if (is404 && error.data && typeof error.data === 'string' && 
+        error.data.includes('.well-known/appspecific/com.chrome.devtools.json')) {
+      return null; // 不显示错误页面
+    }
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     stack = error.stack
   }
