@@ -326,7 +326,7 @@ function ScaledIframe({ src }: ScaledIframeProps) {
           transformOrigin: "top left",
         }}
         loading="lazy"
-        sandbox="allow-same-origin allow-scripts"
+        referrerPolicy="no-referrer"
       />
     </div>
   );

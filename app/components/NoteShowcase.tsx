@@ -169,8 +169,8 @@ export function NoteShowcase({
           <div className='relative z-10 flex items-center justify-center gap-6 md:gap-12 scale-90 md:scale-100'>
             {/* 手机 */}
             <div className='relative'>
-              <div className='w-28 md:w-36 h-52 md:h-64 bg-gradient-to-br from-gray-300 to-gray-400 rounded-2xl md:rounded-3xl p-2 shadow-2xl transform rotate-12 hover:rotate-6 transition-transform duration-500'>
-                <div className='w-full h-full bg-white rounded-xl md:rounded-2xl flex items-center justify-center overflow-hidden relative'>
+              <div className='w-28 md:w-36 bg-gradient-to-br from-gray-300 to-gray-400 rounded-2xl md:rounded-3xl p-2 shadow-2xl transform rotate-12 hover:rotate-6 transition-transform duration-500'>
+                <div className='w-full aspect-9/16 bg-white rounded-xl md:rounded-2xl flex items-center justify-center overflow-hidden relative'>
                   {/* 手机状态条 */}
                   <div className='absolute z-1 bottom-1 left-6 right-6 h-1 bg-gray-500 rounded'></div>
 
@@ -184,8 +184,8 @@ export function NoteShowcase({
 
             {/* 笔记本电脑 */}
             <div className='relative'>
-              <div className='w-72 md:w-96 h-48 md:h-64 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl md:rounded-2xl p-3 shadow-2xl'>
-                <div className='w-full h-full bg-white rounded-lg relative overflow-hidden'>
+              <div className='w-72 md:w-96 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl md:rounded-2xl p-3 shadow-2xl'>
+                <div className='w-full aspect-8/5  bg-white rounded-lg relative overflow-hidden'>
                   {/* 笔记本iframe */}
                   <div className='w-full h-full overflow-hidden rounded-md'>
                     <ScaledIframe src='https://note.weizwz.com/' />
@@ -264,7 +264,7 @@ function ScaledIframe({ src, isMobile = false }: ScaledIframeProps) {
   return (
     <div ref={containerRef} className={`w-full border-0 rounded-md overflow-hidden relative ${isMobile ? 'aspect-9/16' : 'aspect-8/5'}`}>
       <iframe
-        className='absolute top-0 left-0 border-0 pointer-events-none'
+        className={`absolute top-0 left-0 border-0 pointer-events-none`}
         src={src}
         style={{
           width: `${frameWidth}px`,
@@ -273,7 +273,7 @@ function ScaledIframe({ src, isMobile = false }: ScaledIframeProps) {
           transformOrigin: 'top left'
         }}
         loading='lazy'
-        sandbox='allow-same-origin allow-scripts'
+        referrerPolicy='no-referrer'
         {...(isMobile && {
           title: 'Mobile View'
         })}
