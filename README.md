@@ -26,7 +26,7 @@
 
 文章订阅接口：https://note.weizwz.com/feed.xml 。需要替换成自己的接口，参考此接口返回内容，包含文章 标题、日期、摘要、类型等标签
 
-文章卡片背景色和图标：iconify 图标 api 和 app/style/icon.scss 相结合，觉得麻烦就让 krio 随机生成吧
+文章卡片背景色和图标：iconify 图标 api 和 app/style/icon.scss 相结合，觉得麻烦就让 kiro 随机生成吧
 
 部署：使用 Vercel，免费方便，域名自费（腾讯阿里买都可以），使用的 cloudflare 解析
 
