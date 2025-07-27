@@ -21,11 +21,8 @@ export function About({ title = "关于我" }: AboutProps) {
         <div className="grid md:grid-cols-3 gap-10 mb-16 md:px-3">
           <div className="card-hover border-1 border-slate-200 shadow-md shadow-slate-200 rounded-3xl overflow-hidden">
             <div className="text-center p-6">
-              <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <SearchOutlined
-                  className="text-3xl"
-                  style={{ color: "#DBEAFE" }}
-                />
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <img className="w-full h-full rounded-full" src="https://p.weizwz.com/chenxuyuan-alone_0a7cc2c87b232b1f.webp" alt="head" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-800">求知者</h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -83,7 +80,7 @@ export function About({ title = "关于我" }: AboutProps) {
               size="large"
               shape="round"
               icon={<GithubOutlined />}
-              href="https://github.com/weizwz"
+              href="https://github.com/weizwz/weiz-home"
               target="_blank"
             >
               GitHub
