@@ -133,6 +133,11 @@
   --weiz-icon-color: linear-gradient(-225deg, #919193 0%, #44107A 29%, #FF1361 67%, #FFF800 100%);
   --url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpath d='M7 15V9l2 2l2-2v6m3-2l2 2l2-2m-2 2V9'/%3E%3C/g%3E%3C/svg%3E");
 }
+.weiz-icon-next.js,
+.weiz-icon-nextjs {
+  --weiz-icon-color: #161616;
+  --url: url(https://api.iconify.design/i-lineicons:nextjs.svg);
+}
 .weiz-icon-nginx {
   --weiz-icon-color: #168A39;
   --url: url(https://api.iconify.design/tabler/hexagon-letter-n-filled.svg);
@@ -158,6 +163,11 @@
   --weiz-icon-color: linear-gradient(145deg, #007EC7 0%, #007EC7 48%, #FFC748 48%, #FFC748 100%);
   --url: url(https://api.iconify.design/devicon/python.svg);
 }
+.weiz-icon-react,
+.weiz-icon-reactjs {
+  --weiz-icon-color: #097EA4;
+  --url: url(https://api.iconify.design/i-la:react.svg);
+}
 .weiz-icon-router,
 .weiz-icon-路由 {
   --weiz-icon-color: #1B7FF9;
@@ -174,6 +184,11 @@
 .weiz-icon-svg {
   --weiz-icon-color: #FFA741;
   --url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 8h-2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2v-4h-1M7 8H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3m7-8l1.5 8h1L14 8'/%3E%3C/svg%3E");
+}
+.weiz-icon-tailwind,
+.weiz-icon-tailwindcss {
+  --weiz-icon-color: linear-gradient(135deg, #16BCFF 0%, #53EAFD 100%);
+  --url: url(https://api.iconify.design/i-ri:tailwind-css-fill.svg);
 }
 .weiz-icon-terminology,
 .weiz-icon-术语 {
