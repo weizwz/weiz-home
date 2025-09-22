@@ -24,14 +24,6 @@ export function NoteShowcase({
 }: NoteShowcaseProps) {
   return (
     <section className='py-10 md:pt-20 mx-4 md:mx-7 m-auto rounded-2xl md:rounded-4xl bg-gradient-to-br from-sky-500 via-blue-500 to-blue-600 relative overflow-hidden'>
-      {/* 光环效果 */}
-      <div className='absolute inset-0'>
-        <div className='absolute top-20 left-1/4 w-32 h-32 border border-blue-300/10 rounded-full animate-ping'></div>
-        <div className='absolute bottom-32 right-1/3 w-40 h-40 border border-cyan-300/8 rounded-full animate-ping' style={{ animationDelay: '1s' }}></div>
-        <div className='absolute top-1/2 left-1/6 w-24 h-24 border border-sky-300/12 rounded-full animate-ping' style={{ animationDelay: '2s' }}></div>
-        <div className='absolute top-1/3 right-1/5 w-20 h-20 border border-blue-200/15 rounded-full animate-ping' style={{ animationDelay: '3s' }}></div>
-      </div>
-
       {/* 光束效果 */}
       <div className='absolute inset-0'>
         <div className='absolute top-0 left-1/4 w-px h-32 bg-gradient-to-b from-blue-300/20 to-transparent animate-pulse'></div>
@@ -63,14 +55,11 @@ export function NoteShowcase({
         <div className='absolute bottom-48 left-1/6 w-1 h-1 bg-white/35 rounded-full animate-pulse blur-sm' style={{ animationDelay: '2s' }}></div>
 
         {/* 书本和笔记元素 */}
-        <div className='absolute top-28 left-2/3 text-blue-200/40 text-2xl animate-pulse' style={{ animationDelay: '0.8s' }}>
-          📚
-        </div>
         <div className='absolute bottom-36 right-2/3 text-cyan-200/35 text-xl animate-pulse' style={{ animationDelay: '2.2s' }}>
-          ✏️
+          ✎
         </div>
         <div className='absolute top-2/3 right-1/6 text-sky-200/30 text-lg animate-pulse' style={{ animationDelay: '3.5s' }}>
-          📝
+          🔖
         </div>
         <div className='absolute top-1/4 left-1/8 text-blue-300/25 text-xl animate-pulse' style={{ animationDelay: '1.2s' }}>
           💡
@@ -110,7 +99,7 @@ export function NoteShowcase({
         <div className='text-center'>
           {/* 项目标签 */}
           <div className='inline-block text-white text-xl font-medium mb-6 px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm border border-white/20'>
-            📚 {title}
+            📝 {title}
           </div>
 
           {/* 主标题 */}
@@ -143,29 +132,6 @@ export function NoteShowcase({
 
         {/* 知识展示区域 */}
         <div className='relative flex justify-center items-center py-8'>
-          {/* 背景装饰图标 */}
-          <div className='absolute inset-0 flex justify-center items-center'>
-            {/* 浮动的知识图标 */}
-            <div className='absolute top-1/8 left-1/6 opacity-70 animate-pulse' style={{ animationDelay: '0s' }}>
-              <BookOutlined className='text-4xl' style={{ color: '#ffffff' }} />
-            </div>
-            <div className='absolute top-0 right-[32%] opacity-70 animate-bounce' style={{ animationDelay: '1s' }}>
-              <EditOutlined className='text-3xl' style={{ color: '#ffffff' }} />
-            </div>
-            <div className='absolute bottom-0 left-[39%] opacity-80 animate-pulse' style={{ animationDelay: '2s' }}>
-              <ShareAltOutlined className='text-5xl' style={{ color: '#ffffff' }} />
-            </div>
-            <div className='absolute top-1/3 right-1/6 opacity-80 animate-bounce' style={{ animationDelay: '1.2s' }}>
-              <ReadOutlined className='text-4xl' style={{ color: '#ffffff' }} />
-            </div>
-            <div className='absolute top-1/2 left-1/12 opacity-60 animate-bounce' style={{ animationDelay: '1.5s' }}>
-              <CodeOutlined className='text-5xl' style={{ color: '#ffffff' }} />
-            </div>
-            <div className='absolute top-2/3 right-1/5 opacity-50 animate-ping' style={{ animationDelay: '1.8s' }}>
-              <LikeOutlined className='text-4xl' style={{ color: '#ffffff' }} />
-            </div>
-          </div>
-
           {/* 主要设备展示 */}
           <div className='relative z-10 flex items-center justify-center gap-6 md:gap-12 scale-90 md:scale-100'>
             {/* 手机 */}

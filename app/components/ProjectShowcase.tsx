@@ -93,29 +93,6 @@ export function ProjectShowcase({
 
         {/* 设备展示区域 */}
         <div className='relative flex justify-center items-center pt-8 md:pt-16'>
-          {/* 背景装饰图标 */}
-          <div className='absolute inset-0 flex justify-center items-center'>
-            {/* 浮动的应用图标 */}
-            <div className='absolute top-12 left-1/5 opacity-70 animate-pulse' style={{ animationDelay: '0s' }}>
-              <ZhihuOutlined className='text-3xl' style={{ color: '#2B7FFF' }} />
-            </div>
-            <div className='absolute top-16 right-[32%] opacity-70 animate-spin' style={{ animationDelay: '1s' }}>
-              <img src='https://api.iconify.design/devicon:react.svg' className='w-16 h-16' alt='icon' />
-            </div>
-            <div className='absolute bottom-10 left-[29%] opacity-80 animate-pulse' style={{ animationDelay: '2s' }}>
-              <img src='https://api.iconify.design/simple-icons:xiaohongshu.svg?color=%23FF2341' className='w-24 h-16' alt='icon' />
-            </div>
-            <div className='absolute bottom-0 right-1/4 opacity-80 animate-bounce' style={{ animationDelay: '1s' }}>
-              <GithubOutlined className='text-5xl' style={{ color: '#000' }} />
-            </div>
-            <div className='absolute top-1/2 left-10 opacity-50 animate-bounce' style={{ animationDelay: '1.5s' }}>
-              <JavaScriptOutlined className='text-5xl' style={{ color: '#FEBA00' }} />
-            </div>
-            <div className='absolute top-1/3 right-10 opacity-70 animate-pulse' style={{ animationDelay: '2s' }}>
-              <img src='https://api.iconify.design/simple-icons:juejin.svg?color=%232380FF' className='w-12 h-12' alt='icon' />
-            </div>
-          </div>
-
           {/* 主要设备展示 */}
           <div className='relative z-10 flex items-center justify-center gap-4 md:gap-8 scale-75 md:scale-100'>
             {/* 手机 */}
