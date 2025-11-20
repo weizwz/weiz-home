@@ -105,13 +105,8 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
           <div className='relative'>
             <div className='overflow-hidden pb-10' onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
               <div
-                className='flex transition-transform duration-500 ease-in-out md:[--slide-percentage:33.33333%]'
+                className='flex transition-transform duration-500 ease-in-out [--slide-percentage:100%] md:[--slide-percentage:33.33333%]'
                 style={{
-                  // 使用 CSS 变量处理移动端/桌面端差异
-                  // 移动端: 100% (1 item)
-                  // 桌面端: 33.33% (3 items)
-                  // @ts-ignore
-                  '--slide-percentage': '100%',
                   transform: `translateX(calc(-${currentSlide} * var(--slide-percentage)))`
                 }}>
                 {articles.map((article) => (
