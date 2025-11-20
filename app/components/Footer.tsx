@@ -1,3 +1,5 @@
+import { config } from "../config";
+
 export function Footer() {
   return (
     <footer className="w-full px-4 md:px-12 py-12 flex flex-col items-center gap-4">
@@ -21,7 +23,7 @@ export function Footer() {
         <a target="_blank" href="https://iconify.design/" title="本站图标API使用 iconify">
           <img alt="iconify" src="https://img.shields.io/badge/Icon API-iconify-1769AA?logo=iconify&amp;logoColor=fff"/>
         </a>
-        <a target="_blank" href="https://github.com/weizwz" title="本站代码托管于 Github">
+        <a target="_blank" href={config.social.github} title="本站代码托管于 Github">
           <img alt="Github" src="https://img.shields.io/badge/Code-Github-432DD7?logo=github&amp;logoColor=fff"/>
         </a>
         <a target="_blank" href="https://vercel.com/" title="本站部署于 Vercel">

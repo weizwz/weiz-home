@@ -8,6 +8,8 @@ import {
 } from "@ant-design/icons";
 import { Button } from "antd";
 
+import { config } from "../config";
+
 interface AboutProps {
   title?: string;
 }
@@ -90,7 +92,7 @@ export function About({ title = "关于我" }: AboutProps) {
               size="large"
               shape="round"
               icon={<MailOutlined />}
-              href="mailto:weizwz@foxmail.com"
+              href={config.social.email}
             >
               邮箱
             </Button>
@@ -99,7 +101,7 @@ export function About({ title = "关于我" }: AboutProps) {
               size="large"
               shape="round"
               icon={<EditOutlined />}
-              href="https://note.weizwz.com/pages/links"
+              href={config.blog.linksUrl}
               target="_blank"
             >
               留言
