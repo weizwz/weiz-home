@@ -13,8 +13,13 @@ import { NoteShowcase } from "./NoteShowcase";
 import { About } from "./About";
 import { ProjectShowcase } from "./ProjectShowcase";
 import { Footer } from "./Footer";
+import type { Article } from "../types/article";
 
-export function PersonalHomepage() {
+interface PersonalHomepageProps {
+  articles?: Article[];
+}
+
+export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
   // 导航项数据
   const navItems = [
     { title: "推荐", id: "recommend" },
@@ -32,21 +37,8 @@ export function PersonalHomepage() {
 
   // 移动端菜单状态
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
-  // 检测是否为移动设备
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkIsMobile();
-    window.addEventListener("resize", checkIsMobile);
-
-    return () => {
-      window.removeEventListener("resize", checkIsMobile);
-    };
-  }, []);
+  // 处理鼠标进入导航项
 
   // 处理鼠标进入导航项
   const handleMouseEnter = (index: number) => {
@@ -96,18 +88,15 @@ export function PersonalHomepage() {
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             />
-            {isMobile && (
-              <span className="ml-2 text-lg font-semibold">weizwz</span>
-            )}
+            <span className="ml-2 text-lg font-semibold md:hidden">weizwz</span>
           </div>
 
           {/* 桌面导航 */}
-          {!isMobile && (
-            <div
-              className="flex items-center relative"
-              ref={navRef}
-              onMouseLeave={handleMouseLeave}
-            >
+          <div
+            className="hidden md:flex items-center relative"
+            ref={navRef}
+            onMouseLeave={handleMouseLeave}
+          >
               {/* 滑动背景指示器 */}
               <div
                 className="absolute bg-white/80 border border-blue-500 rounded-full transition-all duration-500"
@@ -137,18 +126,16 @@ export function PersonalHomepage() {
                 </a>
               ))}
             </div>
-          )}
-
           <div className="flex items-center gap-4">
             {/* 移动端汉堡菜单按钮 */}
-            {isMobile && (
+            <div className="md:hidden flex items-center">
               <Button
                 type="text"
                 icon={<MenuOutlined />}
                 onClick={() => setMobileMenuOpen(true)}
                 className="flex items-center justify-center"
               />
-            )}
+            </div>
 
             {/* 博客按钮 */}
             <Button
@@ -294,7 +281,7 @@ export function PersonalHomepage() {
       <ProjectShowcase />
 
       {/* Blog Articles Section */}
-      <BlogArticles />
+      <BlogArticles articles={articles} />
 
       {/* Note Showcase Section */}
       <NoteShowcase />

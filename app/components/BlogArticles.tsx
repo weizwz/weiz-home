@@ -1,252 +1,27 @@
 import { Button } from 'antd'
 import { LeftOutlined, RightOutlined, ArrowRightOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react'
-import { config } from '../config'
-
-interface Article {
-  id: number
-  title: string
-  category: string
-  description: string
-  date: string
-  link: string
-  styleName: string
-  tags: string[]
-}
-
-interface RSSItem {
-  title: string
-  link: string
-  description: string
-  pubDate: string
-  category: string
-  tags: string[]
-}
+import type { Article } from '../types/article'
 
 interface BlogArticlesProps {
   title?: string
   subtitle?: string
+  articles?: Article[]
 }
 
-// RSS 解析函数
-const parseRSSFeed = async (rssUrl: string): Promise<RSSItem[]> => {
-  try {
-    const response = await fetch(rssUrl)
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
+export function BlogArticles({ title = '我的文章', subtitle = '来自博客的最新动态，发现更多精彩内容', articles = [] }: BlogArticlesProps) {
 
-    const xmlText = await response.text()
-
-    // 创建 DOMParser 来解析 XML
-    const parser = new DOMParser()
-    const xmlDoc = parser.parseFromString(xmlText, 'text/xml')
-
-    // 检查解析错误
-    const parseError = xmlDoc.querySelector('parsererror')
-    if (parseError) {
-      throw new Error('XML 解析错误')
-    }
-
-    // 获取所有 item 元素
-    const items = xmlDoc.querySelectorAll('item')
-
-    const rssItems: RSSItem[] = []
-
-    items.forEach((item) => {
-      // 处理 CDATA 包装的内容
-      const extractCDATA = (content: string | null | undefined): string => {
-        if (!content) return ''
-        return content.replace(/^<!\[CDATA\[|\]\]>$/g, '').trim()
-      }
-
-      const titleElement = item.querySelector('title')
-      const title = extractCDATA(titleElement?.textContent) || ''
-
-      const link = item.querySelector('link')?.textContent?.trim() || ''
-
-      const descriptionElement = item.querySelector('description')
-      const description = extractCDATA(descriptionElement?.textContent) || ''
-
-      const pubDate = item.querySelector('pubDate')?.textContent?.trim() || ''
-      const category = item.querySelector('category')?.textContent?.trim() || '技术'
-
-      // 处理标签，可能有多个 tag 元素
-      const tagElements = item.querySelectorAll('tag')
-      let tags: string[] = []
-
-      if (tagElements.length > 0) {
-        tagElements.forEach((tagEl) => {
-          const tagContent = tagEl.textContent?.trim()
-          if (tagContent) {
-            // 如果标签包含逗号，按逗号分割
-            const splitTags = tagContent
-              .split(',')
-              .map((tag) => tag.trim())
-              .filter((tag) => tag)
-            tags.push(...splitTags)
-          }
-        })
-      }
-
-      // 去重标签
-      tags = [...new Set(tags)]
-
-      if (title && link) {
-        rssItems.push({
-          title,
-          link,
-          description,
-          pubDate,
-          category,
-          tags
-        })
-      }
-    })
-
-    return rssItems
-  } catch (error) {
-    console.error('解析 RSS 失败:', error)
-    return []
-  }
-}
-
-// 根据标签生成图标和渐变色的 className
-const getArticleStyle = (tags: string[]) => {
-  const mainTag = tags[0].toLowerCase()
-
-  return 'weiz-icon-' + mainTag
-}
-
-// 格式化日期
-const formatDate = (dateString: string): string => {
-  try {
-    const date = new Date(dateString)
-
-    // 检查日期是否有效
-    if (isNaN(date.getTime())) {
-      return dateString
-    }
-
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, '0')
-    const day = String(date.getDate()).padStart(2, '0')
-
-    return `${year}年${month}月${day}日`
-  } catch {
-    return dateString
-  }
-}
-
-// 转换 RSS 数据为组件需要的格式
-const convertRSSToArticles = (rssItems: RSSItem[]): Article[] => {
-  return rssItems.slice(0, 12).map((item, index) => {
-    const styleName = getArticleStyle(item.tags)
-
-    return {
-      id: index + 1,
-      title: item.title,
-      category: item.category,
-      description: item.description,
-      date: formatDate(item.pubDate),
-      link: item.link,
-      styleName,
-      tags: item.tags
-    }
-  })
-}
-
-export function BlogArticles({ title = '我的文章', subtitle = '来自博客的最新动态，发现更多精彩内容' }: BlogArticlesProps) {
-  const [articles, setArticles] = useState<Article[]>([])
-  const [loading, setLoading] = useState(true)
-
-  // 备用文章数据
-  const fallbackArticles: Article[] = [
-    {
-      id: 1,
-      title: '如何快速无缝的从 vscode 转向AI编辑器 cursor、kiro、trae 等',
-      category: '资源',
-      description: '本文介绍了如何从 VSCode 快速无缝转向 AI 编辑器，如 kiro、cursor、trae 等',
-      date: '2025年07月25日',
-      link: config.blog.url + '/editor/ai/to-kiro',
-      styleName: 'weiz-icon-ai',
-      tags: ['AI', 'VSCode']
-    },
-    {
-      id: 2,
-      title: 'MacOS Sequoia系统优化',
-      category: '资源',
-      description: '本文介绍了 MacOS Sequoia 系统的基础优化设置，包括修改截屏保存位置、修复启动图标错乱、关闭安装来源限制等系统级操作',
-      date: '2025年04月26日',
-      link: config.blog.url + '/macos/setting/base-init',
-      styleName: 'weiz-icon-macos',
-      tags: ['MacOS']
-    },
-    {
-      id: 3,
-      title: 'VitePress 建站资源汇总',
-      category: '资源',
-      description:
-        '本文汇总了使用 VitePress 搭建博客的资源与配置方法，包括暗黑模式切换动画、DocSearch 搜索、Fancybox 图片查看器、GitHub Giscus 评论系统、Cloudflare R2 图床配置等内容',
-      date: '2025年04月18日',
-      link: config.blog.url + '/vitepress/all/resource-all',
-      styleName: 'weiz-icon-vitepress',
-      tags: ['VitePress', '网站']
-    }
-  ]
-
-  // 获取 RSS 数据
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        setLoading(true)
-
-        // 使用 CORS 代理获取 RSS 数据
-        const rssItems = await parseRSSFeed(config.api.rss)
-
-        if (rssItems.length > 0) {
-          const convertedArticles = convertRSSToArticles(rssItems)
-          setArticles(convertedArticles)
-        } else {
-          // 如果 RSS 没有数据，使用备用数据
-          setArticles(fallbackArticles)
-        }
-      } catch (error) {
-        console.error('获取文章失败:', error)
-        // 如果获取失败，使用备用数据
-        setArticles(fallbackArticles)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchArticles()
-  }, [])
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
-  const [isMobile, setIsMobile] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
-
-  // 检测是否为移动设备
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    checkIsMobile()
-    window.addEventListener('resize', checkIsMobile)
-
-    return () => {
-      window.removeEventListener('resize', checkIsMobile)
-    }
-  }, [])
 
   // 计算PC端的最大滑动位置
   const maxSlidePC = Math.max(0, articles.length - 3)
 
   const nextSlide = () => {
+    const isMobile = window.innerWidth < 768;
     if (isMobile) {
       // 移动端：一次滚动一个模块
       setCurrentSlide((prev) => (prev === articles.length - 1 ? 0 : prev + 1))
@@ -262,6 +37,7 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
   }
 
   const prevSlide = () => {
+    const isMobile = window.innerWidth < 768;
     if (isMobile) {
       // 移动端：一次滚动一个模块
       setCurrentSlide((prev) => (prev === 0 ? articles.length - 1 : prev - 1))
@@ -311,7 +87,7 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
   }, [currentSlide, articles.length, isPaused])
 
   // 如果没有文章数据，不渲染组件
-  if (!loading && articles.length === 0) {
+  if (articles.length === 0) {
     return null
   }
 
@@ -321,7 +97,7 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
         <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 md:mb-4 px-4'>{title}</h2>
         <p className='text-gray-500 text-center mb-8 md:mb-12 text-sm md:text-base px-4'>{subtitle}</p>
 
-        {loading ? (
+        {false ? (
           <div className='flex justify-center items-center py-20'>
             <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500'></div>
           </div>
@@ -329,14 +105,19 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
           <div className='relative'>
             <div className='overflow-hidden pb-10' onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
               <div
-                className='flex transition-transform duration-500 ease-in-out'
+                className='flex transition-transform duration-500 ease-in-out md:[--slide-percentage:33.33333%]'
                 style={{
-                  transform: isMobile ? `translateX(-${currentSlide * 100}%)` : `translateX(-${currentSlide * 33.33}%)`
+                  // 使用 CSS 变量处理移动端/桌面端差异
+                  // 移动端: 100% (1 item)
+                  // 桌面端: 33.33% (3 items)
+                  // @ts-ignore
+                  '--slide-percentage': '100%',
+                  transform: `translateX(calc(-${currentSlide} * var(--slide-percentage)))`
                 }}>
                 {articles.map((article) => (
                   <div
                     key={article.id}
-                    className={`${isMobile ? 'w-full' : 'w-1/3'} flex-shrink-0 md:px-3`}
+                    className={`w-full md:w-1/3 flex-shrink-0 md:px-3`}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}>
                     <div className='bg-white/80 backdrop-blur-sm rounded-2xl md:rounded-3xl border-1 border-slate-200 shadow-md shadow-slate-200 h-full hover:shadow-xl transition-all duration-300 overflow-hidden'>
