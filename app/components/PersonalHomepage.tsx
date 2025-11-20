@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { Avatar, Button, Drawer } from "antd";
+import { useState, useRef, useEffect, Suspense, lazy } from "react";
+import { Avatar, Button, Drawer, Spin } from "antd";
 import {
   GithubOutlined,
   MailOutlined,
@@ -7,12 +7,14 @@ import {
   ReadOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
-import { Recommended } from "./Recommended";
-import { BlogArticles } from "./BlogArticles";
-import { NoteShowcase } from "./NoteShowcase";
-import { About } from "./About";
-import { ProjectShowcase } from "./ProjectShowcase";
-import { Footer } from "./Footer";
+
+// Lazy load components
+const Recommended = lazy(() => import("./Recommended").then(module => ({ default: module.Recommended })));
+const BlogArticles = lazy(() => import("./BlogArticles").then(module => ({ default: module.BlogArticles })));
+const NoteShowcase = lazy(() => import("./NoteShowcase").then(module => ({ default: module.NoteShowcase })));
+const About = lazy(() => import("./About").then(module => ({ default: module.About })));
+const ProjectShowcase = lazy(() => import("./ProjectShowcase").then(module => ({ default: module.ProjectShowcase })));
+const Footer = lazy(() => import("./Footer").then(module => ({ default: module.Footer })));
 import type { Article } from "../types/article";
 import { config } from "../config";
 
@@ -135,6 +137,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
                 icon={<MenuOutlined />}
                 onClick={() => setMobileMenuOpen(true)}
                 className="flex items-center justify-center"
+                aria-label="Open menu"
               />
             </div>
 
@@ -172,6 +175,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
                 type="text"
                 icon={<CloseOutlined />}
                 onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
               />
             </div>
 
@@ -261,6 +265,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
                   shape="round"
                   href={config.social.github}
                   target="_blank"
+                  aria-label="GitHub"
                 />
                 <Button
                   size="large"
@@ -268,6 +273,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
                   className="border-gray-300 px-4 py-3 h-auto text-base rounded-full flex-1 sm:flex-none"
                   shape="round"
                   href={config.social.email}
+                  aria-label="Email"
                 />
               </div>
             </div>
@@ -275,23 +281,30 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
         </div>
       </section>
 
-      {/* Recommended Products Section */}
-      <Recommended />
+      {/* Lazy Loaded Sections */}
+      <Suspense fallback={
+        <div className="flex justify-center items-center py-20">
+          <Spin size="large" />
+        </div>
+      }>
+        {/* Recommended Products Section */}
+        <Recommended />
 
-      {/* Project Showcase Section */}
-      <ProjectShowcase />
+        {/* Project Showcase Section */}
+        <ProjectShowcase />
 
-      {/* Blog Articles Section */}
-      <BlogArticles articles={articles} />
+        {/* Blog Articles Section */}
+        <BlogArticles articles={articles} />
 
-      {/* Note Showcase Section */}
-      <NoteShowcase />
+        {/* Note Showcase Section */}
+        <NoteShowcase />
 
-      {/* About Section */}
-      <About />
+        {/* About Section */}
+        <About />
 
-      {/* Footer */}
-      <Footer />
+        {/* Footer */}
+        <Footer />
+      </Suspense>
     </div>
   );
 }

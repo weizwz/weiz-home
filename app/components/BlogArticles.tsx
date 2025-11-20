@@ -166,12 +166,14 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
                   shape='circle'
                   onClick={prevSlide}
                   className='flex items-center justify-center border-indigo-300 text-indigo-600 hover:bg-indigo-50 hover:border-indigo-400 transition-colors'
+                  aria-label="Previous slide"
                 />
                 <Button
                   icon={<RightOutlined />}
                   shape='circle'
                   onClick={nextSlide}
                   className='flex items-center justify-center border-indigo-300 text-indigo-600 hover:bg-indigo-50 hover:border-indigo-400 transition-colors'
+                  aria-label="Next slide"
                 />
               </div>
             </div>
