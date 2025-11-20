@@ -14,6 +14,7 @@ import { About } from "./About";
 import { ProjectShowcase } from "./ProjectShowcase";
 import { Footer } from "./Footer";
 import type { Article } from "../types/article";
+import { config } from "../config";
 
 interface PersonalHomepageProps {
   articles?: Article[];
@@ -80,7 +81,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
           <div className="flex items-center">
             <Avatar
               size={40}
-              src="https://p.weizwz.com/home_bc2e3ce7f2e00827.webp"
+              src={config.social.avatar}
               className="cursor-pointer hover:scale-120 duration-300 ease-[cubic-bezier(0.175, 0.885, 0.32, 1.275)]"
               onClick={() =>
                 document
@@ -141,7 +142,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
             <Button
               type="primary"
               shape="round"
-              href="https://note.weizwz.com/"
+              href={config.blog.url}
               target="_blank"
             >
               博客
@@ -162,7 +163,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
               <div className="flex items-center">
                 <Avatar
                   size={40}
-                  src="https://p.weizwz.com/home_bc2e3ce7f2e00827.webp"
+                  src={config.social.avatar}
                   className="mr-2"
                 />
                 <span className="ml-2 text-lg font-semibold">weizwz</span>
@@ -196,7 +197,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
                   shape="round"
                   icon={<ReadOutlined />}
                   className="mb-3"
-                  href="https://note.weizwz.com/"
+                  href={config.blog.url}
                   target="_blank"
                 >
                   博客
@@ -206,7 +207,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
                   type="default"
                   shape="round"
                   icon={<MailOutlined />}
-                  href="mailto:weizwz@foxmail.com"
+                  href={config.social.email}
                 >
                   联系
                 </Button>
@@ -258,7 +259,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
                   icon={<GithubOutlined />}
                   className="border-gray-300 px-4 py-3 h-auto text-base rounded-full flex-1 sm:flex-none"
                   shape="round"
-                  href="https://github.com/weizwz"
+                  href={config.social.github}
                   target="_blank"
                 />
                 <Button
@@ -266,7 +267,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
                   icon={<MailOutlined />}
                   className="border-gray-300 px-4 py-3 h-auto text-base rounded-full flex-1 sm:flex-none"
                   shape="round"
-                  href="mailto:weizwz@foxmail.com"
+                  href={config.social.email}
                 />
               </div>
             </div>
