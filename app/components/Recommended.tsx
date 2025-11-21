@@ -167,8 +167,8 @@ export function Recommended({
   }, [currentSlide, products.length, isPaused]);
 
   return (
-    <section id="recommend" className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-6xl mx-auto px-4">
+    <section id="recommend" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-4">{title}</h2>
         <p className="text-gray-500 text-center mb-12">{subtitle}</p>
 
