@@ -16,131 +16,102 @@ interface NoteShowcaseProps {
 export function NoteShowcase({
   title = '唯知笔记',
   logo = config.blog.logo,
-  subtitle = '探索知识的无限可能',
-  description = '在这里，我们分享最新的技术趋势、编程技巧和开发心得，一起成长，共同进步',
-  primaryButtonText = '更新日志',
-  secondaryButtonText = '访问',
-  primaryButtonLink = config.blog.logsUrl,
-  secondaryButtonLink = config.blog.url
+  subtitle = '个人博客',
+  description = '基于现代 Web 技术栈构建的个人博客平台，专注于技术文章分享和知识沉淀。支持 本地搜索、代码高亮、标签分类等功能。采用响应式设计，提供优秀的阅读体验。',
+  primaryButtonText = '访问博客',
+  secondaryButtonText = '站点日志',
+  primaryButtonLink = config.blog.url,
+  secondaryButtonLink = config.blog.logsUrl
 }: NoteShowcaseProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovering, setIsHovering] = useState(false)
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect()
-      setMousePosition({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      })
-    }
-  }
+  
+  const techStack = ['VitePress', 'Vue3', 'ElementPlus', 'Cloudflare'];
 
   return (
-    <section 
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-      className='py-20 mx-4 md:mx-7 m-auto rounded-2xl md:rounded-4xl relative overflow-hidden group'
-    >
-      {/* Background Layers */}
-      
-      {/* 1. Blurred Background (Always visible) */}
-      <div 
-        className='absolute inset-0 bg-cover bg-center bg-no-repeat blur-xl scale-110 transition-transform duration-700'
-        style={{ 
-          backgroundImage: `url('https://p.weizwz.com/siteshot_note_all.webp')`,
-        }}
-      ></div>
+    <section className='py-20 bg-gray-50'>
+      <div className='max-w-7xl mx-auto px-4 md:px-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center'>
+          
+          {/* Left Column: Visual (Browser Frame) */}
+          <div className='relative lg:col-span-7 order-last lg:order-first'>
+            {/* Background Blob */}
+            <div className='absolute -inset-4 bg-blue-100/50 rounded-xl -z-10 blur-2xl'></div>
 
-      {/* 1.5 Blue Tint Overlay for Blurred State */}
-      <div className='absolute inset-0 bg-gradient-to-br from-sky-500/40 to-blue-600/40 mix-blend-overlay'></div>
-
-      {/* 2. Clear Background (Revealed by spotlight) */}
-      <div 
-        className='absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-300'
-        style={{ 
-          backgroundImage: `url('https://p.weizwz.com/siteshot_note_all.webp')`,
-          backgroundPosition: 'top center',
-          maskImage: `radial-gradient(circle 240px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(circle 240px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
-          opacity: isHovering ? 1 : 0
-        }}
-      ></div>
-
-      {/* 3. Dark Overlay for text readability */}
-      <div className='absolute inset-0 bg-blue-950/40 z-1 pointer-events-none'></div>
-
-      {/* Content */}
-      <div className='max-w-8xl mx-auto px-4 relative z-10'>
-        <div className='text-center'>
-          {/* 项目标签 */}
-          <div className='flex items-center w-fit m-auto text-white text-xl font-medium mb-6 px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm border border-white/20 shadow-lg'>
-            <img src={logo} alt="logo" className="w-6 h-6 mr-2" /> <span>{title}</span>
-          </div>
-
-          {/* 主标题 */}
-          <h2 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight px-4 drop-shadow-lg'>{subtitle}</h2>
-
-          {/* 描述文字 */}
-          <p className='text-gray-200 mb-8 md:mb-10 max-w-4xl mx-auto leading-relaxed text-sm sm:text-base md:text-lg px-4 drop-shadow-md'>{description}</p>
-
-          {/* 按钮组 */}
-          <div className='flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 mb-16'>
-            <Button
-              size='large'
-              shape='round'
-              href={primaryButtonLink}
-              target='_blank'
-              className='bg-transparent! border-white/50! text-white! hover:bg-white/40! hover:border-white! backdrop-blur-md w-full sm:w-auto h-12 px-8 text-lg'>
-              {primaryButtonText}
-            </Button>
-            <Button
-              type='primary'
-              size='large'
-              shape='round'
-              href={secondaryButtonLink}
-              target='_blank'
-              className='backdrop-blur-md w-full sm:w-auto h-12 px-8 text-lg'>
-              {secondaryButtonText}
-            </Button>
-          </div>
-        </div>
-
-        {/* 知识展示区域 (Mockups) */}
-        <div className='relative flex justify-center items-center'>
-          {/* 主要设备展示 */}
-          <div className='relative z-10 flex items-end justify-center gap-6 md:gap-12 scale-90 md:scale-100'>
-            {/* 手机 */}
-            <div className='relative transform translate-y-4 md:translate-y-8 z-20'>
-              <div className='w-24 md:w-32 bg-gray-800 rounded-2xl md:rounded-3xl p-1.5 shadow-2xl border border-gray-700'>
-                <div className='w-full aspect-9/18 bg-black rounded-xl md:rounded-2xl overflow-hidden relative'>
-                   <img 
-                    src="https://p.weizwz.com/note.weizwz.com_mobile_d5167b4e5c4c9f25.webp" 
-                    alt="Mobile View" 
-                    className="w-full h-full object-cover object-top"
-                  />
+            {/* Browser Window */}
+            <div className='bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50'>
+              {/* Browser Header */}
+              <div className='bg-gray-50 px-4 pt-4 flex items-center gap-2'>
+                <div className='w-3 h-3 rounded-full bg-red-400'></div>
+                <div className='w-3 h-3 rounded-full bg-yellow-400'></div>
+                <div className='w-3 h-3 rounded-full bg-green-400'></div>
+                {/* Address Bar Mockup */}
+                <div className='ml-2 pl-2 flex-1 bg-white h-6 rounded-xl border border-gray-200/50 text-gray-400 text-sm truncate'>
+                  https://note.weizwz.com/
                 </div>
               </div>
-            </div>
 
-            {/* 笔记本电脑 */}
-            <div className='relative z-10'>
-              <div className='w-64 md:w-96 bg-gray-800 rounded-t-xl md:rounded-t-2xl p-2 pb-0 shadow-2xl border border-gray-700 border-b-0'>
-                <div className='w-full aspect-16/10 bg-black rounded-t-lg overflow-hidden relative'>
-                  <img 
-                    src="https://p.weizwz.com/note.weizwz.com_8_5_62b3a31a82669509.webp" 
-                    alt="Desktop View" 
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
+              {/* Browser Content (Image) */}
+              <div className='relative h-[400px] md:h-[500px] overflow-hidden bg-gray-50 group pt-2'>
+                <img 
+                  src="https://p.weizwz.com/siteshot_note.webp" 
+                  alt="Blog Preview"
+                  className="w-full object-top transition-transform duration-700 group-hover:scale-[1.02]"
+                />
+                {/* Inner Shadow */}
+                <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.05)]"></div>
               </div>
-              {/* Laptop Base */}
-              <div className='w-[110%] -ml-[5%] h-3 md:h-4 bg-gray-700 rounded-b-xl md:rounded-b-2xl shadow-xl border-t border-gray-600'></div>
             </div>
           </div>
+
+          {/* Right Column: Content */}
+          <div className='text-left space-y-8 lg:col-span-5'>
+            {/* Tag */}
+            <div className='inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-medium'>
+              {subtitle}
+            </div>
+
+            {/* Title */}
+            <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-tight'>
+              {title}
+            </h2>
+
+            {/* Description */}
+            <p className='text-lg text-gray-600 leading-relaxed max-w-xl'>
+              {description}
+            </p>
+
+            {/* Tech Stack */}
+            <div className='flex flex-wrap gap-3'>
+              {techStack.map((tech) => (
+                <span key={tech} className='px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium'>
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            {/* Buttons */}
+            <div className='flex flex-wrap gap-4 pt-4'>
+              <Button 
+                type='primary' 
+                size='large' 
+                shape='round' 
+                href={primaryButtonLink} 
+                target='_blank' 
+                className="w-full sm:w-auto"
+              >
+                {primaryButtonText}
+              </Button>
+              <Button 
+                size='large' 
+                shape='round' 
+                href={secondaryButtonLink} 
+                target='_blank' 
+                className="w-full sm:w-auto"
+              >
+                {secondaryButtonText}
+              </Button>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

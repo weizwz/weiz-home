@@ -130,43 +130,7 @@ export function ProjectShowcase({
     <section className='py-20 max-w-7xl mx-auto px-4 md:px-8'>
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center'>
 
-        {/* Left Column: Browser Frame Visual */}
-        <div className='relative lg:col-span-6'>
-          {/* Background Blob */}
-          <div className='absolute -inset-4 bg-blue-100/50 rounded-xl -z-10 blur-2xl'></div>
-          
-          {/* Browser Window */}
-          <div className='bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50'>
-            {/* Browser Header */}
-            <div className='bg-gray-50 px-4 pt-4 flex items-center gap-2'>
-              <div className='w-3 h-3 rounded-full bg-red-400'></div>
-              <div className='w-3 h-3 rounded-full bg-yellow-400'></div>
-              <div className='w-3 h-3 rounded-full bg-green-400'></div>
-              {/* Address Bar Mockup */}
-              <div className='ml-2 pl-2 flex-1 bg-white h-6 rounded-xl border border-gray-200/50 text-gray-200 text-sm'>https://cover.weizwz.com/</div>
-            </div>
-
-            {/* Browser Content (Scrolling Animation) */}
-            <div className='h-[400px] md:h-[500px] p-4 overflow-hidden bg-gray-50'>
-              <div className='h-full relative overflow-hidden rounded-xl'>
-                <div className="absolute inset-0 flex gap-4 justify-center overflow-hidden opacity-90 h-[150%] -top-[25%]">
-                  {columns.map((col, i) => (
-                    <ScrollingColumn 
-                      key={i} 
-                      images={col.images} 
-                      direction={i % 2 === 0 ? 'up' : 'down'} 
-                      duration={col.duration} 
-                    />
-                  ))}
-                </div>
-                {/* Inner Shadow/Overlay for depth */}
-                <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.05)]"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Content */}
+        {/* Left Column: Content */}
         <div className='text-left space-y-8 lg:col-span-6'>
           {/* Tag */}
           <div className='inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-medium'>
@@ -215,6 +179,43 @@ export function ProjectShowcase({
             </Button>
           </div>
         </div>
+
+        {/* Right Column: Browser Frame Visual */}
+        <div className='relative lg:col-span-6'>
+          {/* Background Blob */}
+          <div className='absolute -inset-4 bg-blue-100/50 rounded-xl -z-10 blur-2xl'></div>
+          
+          {/* Browser Window */}
+          <div className='bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50'>
+            {/* Browser Header */}
+            <div className='bg-gray-50 px-4 pt-4 flex items-center gap-2'>
+              <div className='w-3 h-3 rounded-full bg-red-400'></div>
+              <div className='w-3 h-3 rounded-full bg-yellow-400'></div>
+              <div className='w-3 h-3 rounded-full bg-green-400'></div>
+              {/* Address Bar Mockup */}
+              <div className='ml-2 pl-2 flex-1 bg-white h-6 rounded-xl border border-gray-200/50 text-gray-400 text-sm'>{secondaryButtonLink}</div>
+            </div>
+
+            {/* Browser Content (Scrolling Animation) */}
+            <div className='h-[400px] md:h-[500px] p-4 overflow-hidden bg-gray-50'>
+              <div className='h-full relative overflow-hidden rounded-xl'>
+                <div className="absolute inset-0 flex gap-4 justify-center overflow-hidden opacity-90 h-[150%] -top-[25%]">
+                  {columns.map((col, i) => (
+                    <ScrollingColumn 
+                      key={i} 
+                      images={col.images} 
+                      direction={i % 2 === 0 ? 'up' : 'down'} 
+                      duration={col.duration} 
+                    />
+                  ))}
+                </div>
+                {/* Inner Shadow/Overlay for depth */}
+                <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.05)]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   )
