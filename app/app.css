@@ -158,3 +158,31 @@ body {
     color-scheme: dark;
   }
 }
+/* Vertical Scroll Animation */
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 56s linear infinite;
+}
+
+.animate-scroll-down {
+  animation: scroll-down 64s linear infinite;
+}

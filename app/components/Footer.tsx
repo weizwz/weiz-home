@@ -2,7 +2,7 @@ import { config } from "../config";
 
 export function Footer() {
   return (
-    <footer className="w-full px-4 md:px-12 py-12 flex flex-col items-center gap-4">
+    <footer className="w-full p-4 md:px-12 py-10 flex flex-col items-center gap-4">
       <p>
         Copyright © 2025 {new Date().getFullYear() === 2025 ? '' : '-' + new Date().getFullYear()}
         <a className="font-bold text-blue-500 ml-2" target="_blank" href="https://weizwz.com/">weizwz</a>

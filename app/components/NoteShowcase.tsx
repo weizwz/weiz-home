@@ -1,6 +1,6 @@
 import { Button } from 'antd'
 import { config } from '../config'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 
 interface NoteShowcaseProps {
   title?: string
@@ -64,8 +64,8 @@ export function NoteShowcase({
         style={{ 
           backgroundImage: `url('https://p.weizwz.com/siteshot_note_all.webp')`,
           backgroundPosition: 'top center',
-          maskImage: `radial-gradient(circle 250px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(circle 250px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
+          maskImage: `radial-gradient(circle 240px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(circle 240px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
           opacity: isHovering ? 1 : 0
         }}
       ></div>
