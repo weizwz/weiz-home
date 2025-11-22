@@ -153,7 +153,7 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
                     className={`w-full md:w-1/3 flex-shrink-0 md:px-4`}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}>
-                    <div className='bg-white rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 h-full p-8 flex flex-col group relative overflow-hidden text-left'>
+                    <div className='bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 h-full p-8 flex flex-col group relative overflow-hidden text-left'>
                       
                       {/* Header: Category and Icon */}
                       <div className='flex justify-between items-center mb-6'>
