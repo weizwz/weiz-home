@@ -1,5 +1,5 @@
 import { Button } from 'antd'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 
 interface ProjectShowcaseProps {
   title?: string
@@ -116,13 +116,13 @@ export function ProjectShowcase({
   ];
 
   // Create 5 columns with randomized images and durations
-  const columns = Array.from({ length: 3 }).map((_, i) => {
+  const columns = useMemo(() => Array.from({ length: 3 }).map((_, i) => {
     // Shuffle images and pick 10 random ones
     const shuffled = [...images].sort(() => Math.random() - 0.5).slice(0, 10);
     // Random duration between 40s and 80s
     const duration = 40 + Math.random() * 40;
     return { images: shuffled, duration };
-  });
+  }), []);
 
   const techStack = ['Next.js', 'TailwindCSS', 'Iconify API', 'Unsplash API'];
 
@@ -133,7 +133,7 @@ export function ProjectShowcase({
         {/* Left Column: Content */}
         <div className='text-left space-y-8 lg:col-span-6'>
           {/* Tag */}
-          <div className='inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-medium'>
+          <div className='inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium'>
             {subTitle}
           </div>
 
@@ -183,10 +183,10 @@ export function ProjectShowcase({
         {/* Right Column: Browser Frame Visual */}
         <div className='relative lg:col-span-6'>
           {/* Background Blob */}
-          <div className='absolute -inset-4 bg-blue-100/50 rounded-xl -z-10 blur-2xl'></div>
+          <div className='absolute -inset-4 bg-indigo-200/50 rounded-3xl z-0 blur-2xl'></div>
           
           {/* Browser Window */}
-          <div className='bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50'>
+          <div className='bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200/50 relative z-1'>
             {/* Browser Header */}
             <div className='bg-gray-50 px-4 pt-4 flex items-center gap-2'>
               <div className='w-3 h-3 rounded-full bg-red-400'></div>

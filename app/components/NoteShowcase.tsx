@@ -34,10 +34,10 @@ export function NoteShowcase({
           {/* Left Column: Visual (Browser Frame) */}
           <div className='relative lg:col-span-7 order-last lg:order-first'>
             {/* Background Blob */}
-            <div className='absolute -inset-4 bg-blue-100/50 rounded-xl -z-10 blur-2xl'></div>
+            <div className='absolute -inset-4 bg-blue-200/50 rounded-3xl z-0 blur-2xl'></div>
 
             {/* Browser Window */}
-            <div className='bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50'>
+            <div className='bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200/50 relative z-1'>
               {/* Browser Header */}
               <div className='bg-gray-50 px-4 pt-4 flex items-center gap-2'>
                 <div className='w-3 h-3 rounded-full bg-red-400'></div>
@@ -45,16 +45,16 @@ export function NoteShowcase({
                 <div className='w-3 h-3 rounded-full bg-green-400'></div>
                 {/* Address Bar Mockup */}
                 <div className='ml-2 pl-2 flex-1 bg-white h-6 rounded-xl border border-gray-200/50 text-gray-400 text-sm truncate'>
-                  https://note.weizwz.com/
+                  {primaryButtonLink}
                 </div>
               </div>
 
               {/* Browser Content (Image) */}
-              <div className='relative h-[400px] md:h-[500px] overflow-hidden bg-gray-50 group pt-2'>
+              <div className='relative h-[400px] md:h-[500px] overflow-hidden bg-white group pt-1'>
                 <img 
                   src="https://p.weizwz.com/siteshot_note.webp" 
                   alt="Blog Preview"
-                  className="w-full object-top transition-transform duration-700 group-hover:scale-[1.02]"
+                  className="w-full object-top transition-transform duration-800 group-hover:scale-[1.03]"
                 />
                 {/* Inner Shadow */}
                 <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.05)]"></div>

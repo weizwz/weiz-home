@@ -92,7 +92,7 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
   }
 
   return (
-    <section id='article' className='py-20 bg-gray-50 relative overflow-hidden'>
+    <section id='article' className='py-20 bg-white relative overflow-hidden'>
       <div className='max-w-7xl mx-auto px-4 relative z-10'>
         <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 md:mb-4 px-4'>{title}</h2>
         <p className='text-gray-500 text-center mb-8 md:mb-12 text-sm md:text-base px-4'>{subtitle}</p>
