@@ -26,6 +26,8 @@
 
 部署 `npx run deploy`
 
+*使用 pnpm start 启动时，ant 按钮样式会丢失，但构建无问题。本地启动，使用 pnpm dev 即可*
+
 ## 其他
 
 带壳截图工具： https://mockuphone.com/
