@@ -1,7 +1,8 @@
 import type { AppLoadContext, EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
 import { isbot } from "isbot";
-import { renderToReadableStream } from "react-dom/server";
+import { renderToReadableStream } from "react-dom/server.edge";
+import { createCache, extractStyle, StyleProvider } from "@ant-design/cssinjs";
 
 export default async function handleRequest(
   request: Request,
@@ -11,8 +12,13 @@ export default async function handleRequest(
   loadContext: AppLoadContext
 ) {
   let userAgent = request.headers.get("user-agent");
+  
+  const cache = createCache();
+
   let stream = await renderToReadableStream(
-    <ServerRouter context={routerContext} url={request.url} />,
+    <StyleProvider cache={cache}>
+      <ServerRouter context={routerContext} url={request.url} />
+    </StyleProvider>,
     {
       signal: request.signal,
       onError(error: unknown) {
