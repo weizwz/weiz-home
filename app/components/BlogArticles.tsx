@@ -2,6 +2,8 @@ import { Button } from 'antd'
 import { LeftOutlined, RightOutlined, ArrowRightOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react'
 import type { Article } from '../types/article'
+import { Section } from './common/Section'
+import { Card } from './common/Card'
 
 interface BlogArticlesProps {
   title?: string
@@ -106,8 +108,8 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
   }
 
   return (
-    <section id='article' className='pt-20 pb-20 bg-white relative overflow-hidden'>
-      <div className='max-w-7xl mx-auto px-4 relative z-10'>
+    <Section id='article' className='bg-white relative overflow-hidden' maxWidth='max-w-7xl'>
+      <div className='relative z-10'>
         
         {/* Header Section: Title/Subtitle Left, Buttons Right */}
         <div className='flex flex-col md:flex-row md:items-end justify-between mb-12 px-4'>
@@ -153,7 +155,7 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
                     className={`w-full md:w-1/3 flex-shrink-0 md:px-4`}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}>
-                    <div className='bg-white rounded-3xl border border-slate-200 shadow-md shadow-slate-200 hover:shadow-xl transition-all duration-300 h-full p-8 flex flex-col group relative overflow-hidden text-left'>
+                    <Card className='h-full p-8 flex flex-col group relative overflow-hidden text-left'>
                       
                       {/* Header: Category and Icon */}
                       <div className='flex justify-between items-center mb-6'>
@@ -188,7 +190,7 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
                         </a>
                       </div>
                       
-                    </div>
+                    </Card>
                   </div>
                 ))}
               </div>
@@ -217,6 +219,6 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
           </div>
         )}
       </div>
-    </section>
+    </Section>
   )
 }

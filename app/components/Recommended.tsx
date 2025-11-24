@@ -1,6 +1,8 @@
 import { Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { Section } from "./common/Section";
+import { Card } from "./common/Card";
 
 interface Product {
   id: number;
@@ -167,8 +169,7 @@ export function Recommended({
   }, [currentSlide, products.length, isPaused]);
 
   return (
-    <section id="recommend" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4">
+    <Section id="recommend" className="bg-gray-50" maxWidth="max-w-7xl">
         <h2 className="text-4xl font-bold text-center mb-4">{title}</h2>
         <p className="text-gray-500 text-center mb-12">{subtitle}</p>
 
@@ -196,7 +197,7 @@ export function Recommended({
                   onMouseEnter={() => setIsPaused(true)}
                   onMouseLeave={() => setIsPaused(false)}
                 >
-                  <div className="bg-white rounded-3xl p-6 md:p-8 border-1 border-slate-200 shadow-md shadow-slate-200 h-full hover:shadow-xl transition-shadow duration-300">
+                  <Card className="p-6 md:p-8 h-full hover:shadow-xl transition-shadow duration-300">
                     <div>
                       <h3 className="text-xl text-gray-500 text-center font-bold mb-1">
                         {product.subtitle}
@@ -222,7 +223,7 @@ export function Recommended({
                         />
                       </div>
                     </div>
-                  </div>
+                  </Card>
                 </div>
               ))}
             </div>
@@ -245,84 +246,8 @@ export function Recommended({
             </div>
           </div>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }
 
-// 动态缩放的 iframe 组件
-interface ScaledIframeProps {
-  src: string;
-}
 
-function ScaledIframe({ src }: ScaledIframeProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(0.25);
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-
-  // 标准桌面尺寸
-  const DESKTOP_WIDTH = 1024;
-  const DESKTOP_HEIGHT = 640;
-
-  // 计算缩放比例
-  const calculateScale = () => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const containerWidth = rect.width;
-      const containerHeight = rect.height;
-
-      // 计算宽度和高度的缩放比例，取较小的值以确保完整显示
-      const scaleX = containerWidth / DESKTOP_WIDTH;
-      const scaleY = containerHeight / DESKTOP_HEIGHT;
-      const newScale = Math.min(scaleX, scaleY);
-
-      setScale(newScale);
-      setContainerSize({ width: containerWidth, height: containerHeight });
-    }
-  };
-
-  // 监听容器尺寸变化
-  useEffect(() => {
-    calculateScale();
-
-    const resizeObserver = new ResizeObserver(() => {
-      calculateScale();
-    });
-
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
-
-    // 监听窗口大小变化
-    const handleResize = () => {
-      setTimeout(calculateScale, 100); // 延迟执行以确保布局完成
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  return (
-    <div
-      ref={containerRef}
-      className="w-full aspect-8/5 border-0 rounded-md overflow-hidden relative"
-    >
-      <iframe
-        className="absolute top-0 left-0 border-0 pointer-events-none"
-        src={src}
-        style={{
-          width: `${DESKTOP_WIDTH}px`,
-          height: `${DESKTOP_HEIGHT}px`,
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
-        }}
-        loading="lazy"
-        referrerPolicy="no-referrer"
-      />
-    </div>
-  );
-}

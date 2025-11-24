@@ -1,7 +1,10 @@
 
 import { Button } from 'antd'
-import { ArrowRightOutlined, GithubOutlined } from '@ant-design/icons';
+
 import { useMemo } from 'react'
+import { Section } from './common/Section'
+import { BrowserFrame } from './common/BrowserFrame'
+import { TechStack } from './common/TechStack'
 
 interface ProjectShowcaseProps {
   title?: string
@@ -67,7 +70,7 @@ export function ProjectShowcase({
   const techStack = ['Next.js', 'TailwindCSS', 'Iconify API', 'Unsplash API'];
 
   return (
-    <section className='py-20 max-w-7xl mx-auto px-4 md:px-8'>
+    <Section className='py-20' maxWidth='max-w-7xl'>
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center'>
 
         {/* Left Column: Content */}
@@ -88,13 +91,7 @@ export function ProjectShowcase({
           </p>
 
           {/* Tech Stack */}
-          <div className='flex flex-wrap gap-3'>
-            {techStack.map((tech) => (
-              <span key={tech} className='px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium'>
-                {tech}
-              </span>
-            ))}
-          </div>
+          <TechStack items={techStack} />
 
           {/* Buttons */}
           <div className='flex flex-wrap gap-4 pt-4'>
@@ -126,16 +123,7 @@ export function ProjectShowcase({
           <div className='absolute -inset-4 bg-indigo-200/50 rounded-3xl z-0 blur-2xl'></div>
           
           {/* Browser Window */}
-          <div className='bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200/50 relative z-1'>
-            {/* Browser Header */}
-            <div className='bg-gray-50 px-4 pt-4 flex items-center gap-2'>
-              <div className='w-3 h-3 rounded-full bg-red-400'></div>
-              <div className='w-3 h-3 rounded-full bg-yellow-400'></div>
-              <div className='w-3 h-3 rounded-full bg-green-400'></div>
-              {/* Address Bar Mockup */}
-              <div className='ml-2 pl-2 flex-1 bg-white h-6 rounded-xl border border-gray-200/50 text-gray-400 text-sm'>{secondaryButtonLink}</div>
-            </div>
-
+          <BrowserFrame url={secondaryButtonLink}>
             {/* Browser Content (Carousel) */}
             <div className='h-[400px] md:h-[500px] p-4 overflow-hidden bg-gray-50'>
               <div className='h-full relative overflow-hidden rounded-xl flex gap-4'>
@@ -163,10 +151,10 @@ export function ProjectShowcase({
                   ))}
               </div>
             </div>
-          </div>
+          </BrowserFrame>
         </div>
 
       </div>
-    </section>
+    </Section>
   )
 }
