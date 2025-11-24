@@ -50,7 +50,7 @@ export function NoteShowcase({
               </div>
 
               {/* Browser Content (Image) */}
-              <div className='relative h-[400px] md:h-[500px] overflow-hidden bg-white group pt-1'>
+              <div className='relative h-auto overflow-hidden bg-white group pt-1'>
                 <img 
                   src="https://p.weizwz.com/siteshot_note.webp" 
                   alt="Blog Preview"
