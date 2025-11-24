@@ -186,3 +186,22 @@ body {
 .animate-scroll-down {
   animation: scroll-down 64s linear infinite;
 }
+@keyframes scroll-up-half {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scroll-down-half {
+  0% {
+    transform: translateY(-50%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

@@ -1,5 +1,7 @@
+
 import { Button } from 'antd'
-import { useEffect, useRef, useState, useMemo } from 'react'
+import { ArrowRightOutlined, GithubOutlined } from '@ant-design/icons';
+import { useMemo } from 'react'
 
 interface ProjectShowcaseProps {
   title?: string
@@ -13,116 +15,54 @@ interface ProjectShowcaseProps {
 }
 
 // JS-based Scrolling Column Component
-function ScrollingColumn({ images, direction = 'up', duration = 40 }: { images: string[], direction?: 'up' | 'down', duration?: number }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [contentHeight, setContentHeight] = useState(0);
-  
-  // Measure content height once images are loaded/rendered
-  useEffect(() => {
-    if (containerRef.current) {
-      // The height of one set of images is half the total scrollable height (since we duplicate)
-      // But simpler: we just measure the first child (the wrapper of the first set)
-      const firstSet = containerRef.current.firstElementChild as HTMLElement;
-      if (firstSet) {
-        const resizeObserver = new ResizeObserver(() => {
-           setContentHeight(firstSet.offsetHeight);
-        });
-        resizeObserver.observe(firstSet);
-        return () => resizeObserver.disconnect();
-      }
-    }
-  }, []);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container || contentHeight === 0) return;
 
-    let startTime: number | null = null;
-    let animationFrameId: number;
-
-    // Speed calculation: pixels per millisecond
-    const speed = contentHeight / (duration * 1000); 
-
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      
-      // Calculate offset based on direction
-      let offset = (elapsed * speed) % contentHeight;
-      
-      if (direction === 'up') {
-        // Move up: 0 -> -contentHeight
-        container.style.transform = `translateY(-${offset}px)`;
-      } else {
-        // Move down: -contentHeight -> 0
-        // We start at -contentHeight and add offset
-        container.style.transform = `translateY(-${contentHeight - offset}px)`;
-      }
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [contentHeight, direction, duration]);
-
-  return (
-    <div className="h-full overflow-hidden relative w-1/3 min-w-[150px]">
-       <div ref={containerRef} className="will-change-transform">
-          {/* Render two copies for seamless looping */}
-          {[0, 1].map((copyIndex) => (
-            <div key={copyIndex} className="flex flex-col gap-8 pb-8">
-              {images.map((src, j) => (
-                <div key={`${copyIndex}-${j}`} className="w-full h-fit rounded-xl shadow-sm">
-                  <img src={src} alt="" className="w-full h-auto object-cover transition-all duration-500" />
-                </div>
-              ))}
-            </div>
-          ))}
-       </div>
-    </div>
-  );
-}
+// Background images for scrolling columns
+const IMAGES = [
+  'https://p.weizwz.com/cover/ThisCover_20250817_113149_50f33c9237daf1c6.webp',
+  'https://p.weizwz.com/cover/ThisCover_20250817_170842_0f88bd188cabcecc.webp',
+  'https://p.weizwz.com/cover/thiscover_example_1_2c9d37d69e1800f6.webp',
+  'https://p.weizwz.com/cover/thiscover_example_2_1c118ab0f9fc93e0.webp',
+  'https://p.weizwz.com/cover/thiscover_example_3_f41f7c9eb1e527a8.webp',
+  'https://p.weizwz.com/cover/thiscover_example_4_8e2644481e476e28.webp',
+  'https://p.weizwz.com/cover/ThisCover_20251122_200945_9817439a52309ebe.webp',
+  'https://p.weizwz.com/cover/ThisCover_20251122_200033_d6ef3e567113ef9c.webp',
+  'https://p.weizwz.com/cover/thiscover_example_5_1e1feb39361e31ca.webp',
+  'https://p.weizwz.com/cover/thiscover_example_6_92b78a7283d015eb.webp',
+  'https://p.weizwz.com/cover/thiscover_example_7_fdbfc2f7903cbd18.webp',
+  'https://p.weizwz.com/cover/thiscover_example_8_db9eec43bc97cbd4.webp',
+  'https://p.weizwz.com/cover/thiscover1_4x3_1c30c0287378464e.webp',
+  'https://p.weizwz.com/cover/thiscover3_2x3_56c6e944063ea327.webp',
+  'https://p.weizwz.com/cover/ThisCover_20251124_104354_aaf33287ee6a7ddd.webp',
+];
 
 export function ProjectShowcase({
   title = 'ThisCover',
   subTitle = '封面生成器',
   logo = 'https://p.weizwz.com/cover/cover_full_441653186ab35580.webp',
   description = '一个免费、漂亮的封面生成器，提供丰富的素材和众多模板。支持多种格式导出，让每个人都能轻松制作出专业级的封面设计。无需设计经验，点点点即可完成精美封面制作。',
-  primaryButtonText = '在线体验',
+  primaryButtonText = '立即体验',
   secondaryButtonText = '了解更多',
   primaryButtonLink = 'https://cover.weizwz.com/editor/',
   secondaryButtonLink = 'https://cover.weizwz.com/'
 }: ProjectShowcaseProps) {
-  // Background images for scrolling columns
-  const images = [
-    'https://p.weizwz.com/cover/ThisCover_20250817_113149_50f33c9237daf1c6.webp',
-    'https://p.weizwz.com/cover/ThisCover_20250817_162105_931f0a568023c6ef.webp',
-    'https://p.weizwz.com/cover/ThisCover_20250817_170842_0f88bd188cabcecc.webp',
-    'https://p.weizwz.com/cover/thiscover_example_1_2c9d37d69e1800f6.webp',
-    'https://p.weizwz.com/cover/thiscover_example_2_1c118ab0f9fc93e0.webp',
-    'https://p.weizwz.com/cover/thiscover_example_3_f41f7c9eb1e527a8.webp',
-    'https://p.weizwz.com/cover/thiscover_example_4_8e2644481e476e28.webp',
-    'https://p.weizwz.com/cover/thiscover_example_5_1e1feb39361e31ca.webp',
-    'https://p.weizwz.com/cover/thiscover_example_6_92b78a7283d015eb.webp',
-    'https://p.weizwz.com/cover/thiscover_example_7_fdbfc2f7903cbd18.webp',
-    'https://p.weizwz.com/cover/thiscover_example_8_db9eec43bc97cbd4.webp',
-    'https://p.weizwz.com/cover/thiscover1_4x3_1c30c0287378464e.webp',
-    'https://p.weizwz.com/cover/thiscover2_3x2_4a4e2de8d6047cd0.webp',
-    'https://p.weizwz.com/cover/thiscover3_2x3_56c6e944063ea327.webp'
-  ];
 
-  // Create 5 columns with randomized images and durations
-  const columns = useMemo(() => Array.from({ length: 3 }).map((_, i) => {
-    // Shuffle images and pick 10 random ones
-    const shuffled = [...images].sort(() => Math.random() - 0.5).slice(0, 10);
-    // Random duration between 40s and 80s
-    const duration = 40 + Math.random() * 40;
-    return { images: shuffled, duration };
-  }), []);
+  // Create 3 columns with sequential images and random durations
+  const columns = useMemo(() => {
+    const columnCount = 3;
+    const itemsPerColumn = Math.ceil(IMAGES.length / columnCount);
+    
+    return Array.from({ length: columnCount }).map((_, i) => {
+      // Slice images for this column to ensure uniqueness
+      const start = i * itemsPerColumn;
+      const end = start + itemsPerColumn;
+      const columnImages = IMAGES.slice(start, end);
+      
+      // Random duration between 32s and 42s
+      const duration = 22 + Math.random() * 10;
+      return { images: columnImages, duration };
+    });
+  }, []);
 
   const techStack = ['Next.js', 'TailwindCSS', 'Iconify API', 'Unsplash API'];
 
@@ -196,21 +136,31 @@ export function ProjectShowcase({
               <div className='ml-2 pl-2 flex-1 bg-white h-6 rounded-xl border border-gray-200/50 text-gray-400 text-sm'>{secondaryButtonLink}</div>
             </div>
 
-            {/* Browser Content (Scrolling Animation) */}
+            {/* Browser Content (Carousel) */}
             <div className='h-[400px] md:h-[500px] p-4 overflow-hidden bg-gray-50'>
-              <div className='h-full relative overflow-hidden rounded-xl'>
-                <div className="absolute inset-0 flex gap-4 justify-center overflow-hidden opacity-90 h-[150%] -top-[25%]">
+              <div className='h-full relative overflow-hidden rounded-xl flex gap-4'>
                   {columns.map((col, i) => (
-                    <ScrollingColumn 
-                      key={i} 
-                      images={col.images} 
-                      direction={i % 2 === 0 ? 'up' : 'down'} 
-                      duration={col.duration} 
-                    />
+                    <div key={i} className="w-1/3 h-full relative overflow-hidden">
+                      <div 
+                        key={col.duration}
+                        className="w-full flex flex-col gap-4 pb-4 will-change-transform"
+                        style={{
+                          animation: `scroll-${i % 2 === 0 ? 'up' : 'down'}-half ${col.duration}s linear infinite`
+                        }}
+                      >
+                        {/* Render two copies for seamless looping */}
+                        {[0, 1].map((copyIndex) => (
+                          <div key={copyIndex} className="flex flex-col gap-4">
+                            {col.images.map((src, j) => (
+                              <div key={`${copyIndex}-${j}`} className="w-full h-fit rounded-xl shadow-sm overflow-hidden">
+                                <img src={src} alt="" className="w-full h-auto object-cover" />
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   ))}
-                </div>
-                {/* Inner Shadow/Overlay for depth */}
-                <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.05)]"></div>
               </div>
             </div>
           </div>
