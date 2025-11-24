@@ -18,6 +18,14 @@
 
 打包 `pnpm run build`
 
+## 部署
+
+部署到 cloudflare pages
+
+登录 `npx wrangler login`
+
+部署 `npx run deploy`
+
 ## 其他
 
 带壳截图工具： https://mockuphone.com/

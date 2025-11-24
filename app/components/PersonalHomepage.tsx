@@ -263,7 +263,7 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
                   icon={<GithubOutlined />}
                   className="border-gray-300 px-4 py-3 h-auto text-base rounded-full flex-1 sm:flex-none"
                   shape="round"
-                  href={config.social.github}
+                  href={config.social.github + '/weiz-home'}
                   target="_blank"
                   aria-label="GitHub"
                 />

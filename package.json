@@ -2,25 +2,26 @@
   "name": "weiz-home",
   "private": true,
   "type": "module",
+  "version": "2.0.0",
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
+    "start": "wrangler pages dev build/client",
+    "deploy": "pnpm run build && wrangler pages deploy build/client",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
-    "@react-router/node": "^7.5.3",
-    "@react-router/serve": "^7.5.3",
     "antd": "^5.26.2",
     "isbot": "^5.1.27",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.5.3"
+    "react-router": "^7.9.6"
   },
   "devDependencies": {
-    "@react-router/dev": "^7.5.3",
+    "@react-router/cloudflare": "^7.9.6",
+    "@react-router/dev": "^7.9.6",
     "@tailwindcss/vite": "^4.1.4",
     "@types/node": "^20",
     "@types/react": "^19.1.2",
@@ -29,6 +30,7 @@
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.50.0"
   }
 }

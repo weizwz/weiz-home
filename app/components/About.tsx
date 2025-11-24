@@ -5,6 +5,8 @@ import {
 } from "@ant-design/icons";
 
 import { config } from "../config";
+import { Section } from "./common/Section";
+import { Card } from "./common/Card";
 
 interface AboutProps {
   title?: string;
@@ -21,11 +23,10 @@ export function About({ title = "你好，我是 weizwz" }: AboutProps) {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4">
+    <Section id="about" className="bg-gray-50" maxWidth="max-w-6xl">
         
         {/* Intro Card */}
-        <div className="bg-white rounded-3xl shadow-sm p-12 text-center max-w-5xl mx-auto mb-16">
+        <Card className="p-12 text-center max-w-5xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">{title}</h2>
           <p className="text-gray-500 text-lg leading-relaxed max-w-3xl mx-auto mb-10">
             一名充满热情的前端开发工程师，专注于构建高质量的 Web 应用和用户体验。拥有丰富的前端开发经验，熟练掌握现代 Web 技术栈，致力于通过技术创新解决实际问题，为用户创造价值。
@@ -41,7 +42,7 @@ export function About({ title = "你好，我是 weizwz" }: AboutProps) {
               </span>
             ))}
           </div>
-        </div>
+        </Card>
 
         {/* Contact Section */}
         <div className="text-center max-w-5xl mx-auto">
@@ -80,7 +81,6 @@ export function About({ title = "你好，我是 weizwz" }: AboutProps) {
           </div>
         </div>
 
-      </div>
-    </section>
+    </Section>
   );
 }
