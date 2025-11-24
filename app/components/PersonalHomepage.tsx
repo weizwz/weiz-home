@@ -293,11 +293,11 @@ export function PersonalHomepage({ articles = [] }: PersonalHomepageProps) {
         {/* Project Showcase Section */}
         <ProjectShowcase />
 
-        {/* Blog Articles Section */}
-        <BlogArticles articles={articles} />
-
         {/* Note Showcase Section */}
         <NoteShowcase />
+
+        {/* Blog Articles Section */}
+        <BlogArticles articles={articles} />
 
         {/* About Section */}
         <About />

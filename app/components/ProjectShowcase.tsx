@@ -1,9 +1,12 @@
-import { GithubOutlined, JavaScriptOutlined, ZhihuOutlined } from '@ant-design/icons'
+
 import { Button } from 'antd'
+import { ArrowRightOutlined, GithubOutlined } from '@ant-design/icons';
+import { useMemo } from 'react'
 
 interface ProjectShowcaseProps {
   title?: string
-  subtitle?: string
+  subTitle?: string
+  logo?: string
   description?: string
   primaryButtonText?: string
   secondaryButtonText?: string
@@ -11,120 +14,158 @@ interface ProjectShowcaseProps {
   secondaryButtonLink?: string
 }
 
+// JS-based Scrolling Column Component
+
+
+// Background images for scrolling columns
+const IMAGES = [
+  'https://p.weizwz.com/cover/ThisCover_20250817_113149_50f33c9237daf1c6.webp',
+  'https://p.weizwz.com/cover/ThisCover_20250817_170842_0f88bd188cabcecc.webp',
+  'https://p.weizwz.com/cover/thiscover_example_1_2c9d37d69e1800f6.webp',
+  'https://p.weizwz.com/cover/thiscover_example_2_1c118ab0f9fc93e0.webp',
+  'https://p.weizwz.com/cover/thiscover_example_3_f41f7c9eb1e527a8.webp',
+  'https://p.weizwz.com/cover/thiscover_example_4_8e2644481e476e28.webp',
+  'https://p.weizwz.com/cover/ThisCover_20251122_200945_9817439a52309ebe.webp',
+  'https://p.weizwz.com/cover/ThisCover_20251122_200033_d6ef3e567113ef9c.webp',
+  'https://p.weizwz.com/cover/thiscover_example_5_1e1feb39361e31ca.webp',
+  'https://p.weizwz.com/cover/thiscover_example_6_92b78a7283d015eb.webp',
+  'https://p.weizwz.com/cover/thiscover_example_7_fdbfc2f7903cbd18.webp',
+  'https://p.weizwz.com/cover/thiscover_example_8_db9eec43bc97cbd4.webp',
+  'https://p.weizwz.com/cover/thiscover1_4x3_1c30c0287378464e.webp',
+  'https://p.weizwz.com/cover/thiscover3_2x3_56c6e944063ea327.webp',
+  'https://p.weizwz.com/cover/ThisCover_20251124_104354_aaf33287ee6a7ddd.webp',
+];
+
 export function ProjectShowcase({
   title = 'ThisCover',
-  subtitle = '你的封面，我来设计',
-  description = '个性化主题和配置，丰富的图标，实时预览，适配多个主流平台，完全免费，还不来试试！',
-  primaryButtonText = '进一步了解',
-  secondaryButtonText = '开始',
-  primaryButtonLink = 'https://cover.weizwz.com/',
-  secondaryButtonLink = 'https://cover.weizwz.com/editor/'
+  subTitle = '封面生成器',
+  logo = 'https://p.weizwz.com/cover/cover_full_441653186ab35580.webp',
+  description = '一个免费、漂亮的封面生成器，提供丰富的素材和众多模板。支持多种格式导出，让每个人都能轻松制作出专业级的封面设计。无需设计经验，点点点即可完成精美封面制作。',
+  primaryButtonText = '立即体验',
+  secondaryButtonText = '了解更多',
+  primaryButtonLink = 'https://cover.weizwz.com/editor/',
+  secondaryButtonLink = 'https://cover.weizwz.com/'
 }: ProjectShowcaseProps) {
+
+  // Create 3 columns with sequential images and random durations
+  const columns = useMemo(() => {
+    const columnCount = 3;
+    const itemsPerColumn = Math.ceil(IMAGES.length / columnCount);
+    
+    return Array.from({ length: columnCount }).map((_, i) => {
+      // Slice images for this column to ensure uniqueness
+      const start = i * itemsPerColumn;
+      const end = start + itemsPerColumn;
+      const columnImages = IMAGES.slice(start, end);
+      
+      // Random duration between 32s and 42s
+      const duration = 22 + Math.random() * 10;
+      return { images: columnImages, duration };
+    });
+  }, []);
+
+  const techStack = ['Next.js', 'TailwindCSS', 'Iconify API', 'Unsplash API'];
+
   return (
-    <section className='py-10 md:py-20 mx-4 md:mx-7 m-auto rounded-2xl md:rounded-4xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-700 relative overflow-hidden'>
-      {/* 卡通云朵背景 */}
-      <div className='absolute inset-0'>
-        {/* 主要云朵 */}
-        <div className='absolute top-10 left-10 w-32 h-20 bg-white/10 rounded-full blur-sm animate-float'></div>
-        <div className='absolute top-20 right-20 w-24 h-16 bg-white/8 rounded-full blur-sm animate-float' style={{ animationDelay: '2s' }}></div>
-        <div className='absolute bottom-20 left-1/4 w-40 h-24 bg-white/12 rounded-full blur-sm animate-float' style={{ animationDelay: '4s' }}></div>
-        <div className='absolute bottom-10 right-1/3 w-28 h-18 bg-white/9 rounded-full blur-sm animate-float' style={{ animationDelay: '1s' }}></div>
+    <section className='py-20 max-w-7xl mx-auto px-4 md:px-8'>
+      <div className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center'>
 
-        {/* 小云朵 */}
-        <div className='absolute top-1/3 left-1/5 w-16 h-10 bg-white/6 rounded-full blur-sm animate-float' style={{ animationDelay: '3s' }}></div>
-        <div className='absolute top-2/3 right-1/5 w-20 h-12 bg-white/7 rounded-full blur-sm animate-float' style={{ animationDelay: '5s' }}></div>
-      </div>
-
-      {/* 几何装饰元素 */}
-      <div className='absolute inset-0'>
-        {/* 圆形装饰 */}
-        <div className='absolute top-16 left-1/3 w-4 h-4 bg-indigo-300/30 rounded-full animate-pulse'></div>
-        <div className='absolute top-32 right-1/4 w-6 h-6 bg-purple-300/25 rounded-full animate-pulse' style={{ animationDelay: '1s' }}></div>
-        <div className='absolute bottom-32 left-1/5 w-5 h-5 bg-violet-300/30 rounded-full animate-pulse' style={{ animationDelay: '2s' }}></div>
-        <div className='absolute bottom-16 right-1/3 w-3 h-3 bg-indigo-400/35 rounded-full animate-pulse' style={{ animationDelay: '3s' }}></div>
-
-        {/* 三角形装饰 */}
-        <div
-          className='absolute top-24 right-1/2 w-0 h-0 border-l-4 border-r-4 border-b-6 border-l-transparent border-r-transparent border-b-indigo-300/25 animate-bounce'
-          style={{ animationDelay: '1.5s' }}></div>
-        <div
-          className='absolute bottom-24 left-1/2 w-0 h-0 border-l-3 border-r-3 border-b-5 border-l-transparent border-r-transparent border-b-purple-300/30 animate-bounce'
-          style={{ animationDelay: '2.5s' }}></div>
-
-        {/* 星星装饰 */}
-        <div className='absolute top-20 left-2/3 text-indigo-200/40 text-lg animate-pulse' style={{ animationDelay: '0.5s' }}>
-          ✦
-        </div>
-        <div className='absolute bottom-28 right-2/3 text-purple-200/35 text-sm animate-pulse' style={{ animationDelay: '1.8s' }}>
-          ✧
-        </div>
-        <div className='absolute top-2/3 left-1/6 text-violet-200/40 text-base animate-pulse' style={{ animationDelay: '3.2s' }}>
-          ✦
-        </div>
-      </div>
-
-      {/* 渐变光效 */}
-      <div className='absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent'></div>
-      <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/3 to-transparent'></div>
-
-      <div className='max-w-6xl mx-auto px-4 relative z-10'>
-        <div className='text-center'>
-          {/* 项目标签 */}
-          <div className='inline-block text-white text-xl font-medium mb-6 px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm border border-white/20'>
-            ✨ {title}
+        {/* Left Column: Content */}
+        <div className='text-left space-y-8 lg:col-span-6'>
+          {/* Tag */}
+          <div className='inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium'>
+            {subTitle}
           </div>
 
-          {/* 主标题 */}
-          <h2 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight px-4'>{subtitle}</h2>
+          {/* Title */}
+          <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-tight'>
+            {title}
+          </h2>
 
-          {/* 描述文字 */}
-          <p className='text-gray-200 mb-8 md:mb-10 max-w-4xl mx-auto leading-relaxed text-sm sm:text-base px-4'>{description}</p>
+          {/* Description */}
+          <p className='text-lg text-gray-600 leading-relaxed max-w-xl'>
+            {description}
+          </p>
 
-          {/* 按钮组 */}
-          <div className='flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4'>
-            <Button type='primary' size='large' shape='round' href={primaryButtonLink} target='_blank' className='w-full sm:w-auto'>
+          {/* Tech Stack */}
+          <div className='flex flex-wrap gap-3'>
+            {techStack.map((tech) => (
+              <span key={tech} className='px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium'>
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* Buttons */}
+          <div className='flex flex-wrap gap-4 pt-4'>
+            <Button 
+              type='primary' 
+              size='large'
+              shape='round' 
+              href={primaryButtonLink} 
+              target='_blank' 
+              className="w-full sm:w-auto"
+            >
               {primaryButtonText}
             </Button>
-            <Button size='large' shape='round' href={secondaryButtonLink} target='_blank' className='w-full sm:w-auto'>
+            <Button 
+              shape='round' 
+              size='large'
+              href={secondaryButtonLink} 
+              target='_blank' 
+              className="w-full sm:w-auto"
+            >
               {secondaryButtonText}
             </Button>
           </div>
         </div>
 
-        {/* 设备展示区域 */}
-        <div className='relative flex justify-center items-center pt-8 md:pt-16'>
-          {/* 主要设备展示 */}
-          <div className='relative z-10 flex items-center justify-center gap-4 md:gap-8 scale-75 md:scale-100'>
-            {/* 手机 */}
-            <div className='relative'>
-              <div className='w-24 md:w-32 h-44 md:h-60 ml-12 md:ml-20 mr-2 md:mr-4 bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl md:rounded-3xl p-1.5 md:p-2 shadow-2xl transform rotate-24 hover:rotate-18 transition-transform duration-500'>
-                <div className='w-full h-full bg-black rounded-2xl flex items-center justify-center overflow-hidden'>
-                  <img src='https://p.weizwz.com/cover/thiscover3_2x3_56c6e944063ea327.webp' alt='封面3' className='h-full object-cover object-top' />
-                </div>
-              </div>
+        {/* Right Column: Browser Frame Visual */}
+        <div className='relative lg:col-span-6'>
+          {/* Background Blob */}
+          <div className='absolute -inset-4 bg-indigo-200/50 rounded-3xl z-0 blur-2xl'></div>
+          
+          {/* Browser Window */}
+          <div className='bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200/50 relative z-1'>
+            {/* Browser Header */}
+            <div className='bg-gray-50 px-4 pt-4 flex items-center gap-2'>
+              <div className='w-3 h-3 rounded-full bg-red-400'></div>
+              <div className='w-3 h-3 rounded-full bg-yellow-400'></div>
+              <div className='w-3 h-3 rounded-full bg-green-400'></div>
+              {/* Address Bar Mockup */}
+              <div className='ml-2 pl-2 flex-1 bg-white h-6 rounded-xl border border-gray-200/50 text-gray-400 text-sm'>{secondaryButtonLink}</div>
             </div>
 
-            {/* 笔记本电脑 */}
-            <div className='relative'>
-              <div className='w-60 md:w-80 h-40 md:h-52 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl md:rounded-2xl p-2 md:p-3 shadow-2xl'>
-                <div className='w-full h-full bg-gary-100 rounded-lg flex items-center justify-center relative overflow-hidden'>
-                  <div className='absolute top-2 left-2 w-3 h-3 bg-black rounded-full'></div>
-                  <img src='https://p.weizwz.com/cover/thiscover1_4x3_1c30c0287378464e.webp' alt='封面1' className='w-full object-cover object-top' />
-                </div>
-              </div>
-              <div className='w-60 md:w-80 h-2 md:h-3 bg-gray-600 rounded-t-md rounded-b-xl md:rounded-b-2xl'></div>
-            </div>
-
-            {/* 平板 */}
-            <div className='relative'>
-              <div className='w-42 md:w-56 h-30 md:h-40 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl md:rounded-2xl p-1.5 md:p-2 shadow-2xl transform rotate-45 hover:rotate-30 transition-transform duration-500'>
-                <div className='w-full h-full bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center overflow-hidden'>
-                  <img src='https://p.weizwz.com/cover/thiscover2_3x2_4a4e2de8d6047cd0.webp' alt='封面2' className='h-full object-cover object-top' />
-                </div>
+            {/* Browser Content (Carousel) */}
+            <div className='h-[400px] md:h-[500px] p-4 overflow-hidden bg-gray-50'>
+              <div className='h-full relative overflow-hidden rounded-xl flex gap-4'>
+                  {columns.map((col, i) => (
+                    <div key={i} className="w-1/3 h-full relative overflow-hidden">
+                      <div 
+                        key={col.duration}
+                        className="w-full flex flex-col gap-4 pb-4 will-change-transform"
+                        style={{
+                          animation: `scroll-${i % 2 === 0 ? 'up' : 'down'}-half ${col.duration}s linear infinite`
+                        }}
+                      >
+                        {/* Render two copies for seamless looping */}
+                        {[0, 1].map((copyIndex) => (
+                          <div key={copyIndex} className="flex flex-col gap-4">
+                            {col.images.map((src, j) => (
+                              <div key={`${copyIndex}-${j}`} className="w-full h-fit rounded-xl shadow-sm overflow-hidden">
+                                <img src={src} alt="" className="w-full h-auto object-cover" />
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   )

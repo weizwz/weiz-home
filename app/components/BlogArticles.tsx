@@ -9,7 +9,7 @@ interface BlogArticlesProps {
   articles?: Article[]
 }
 
-export function BlogArticles({ title = '我的文章', subtitle = '来自博客的最新动态，发现更多精彩内容', articles = [] }: BlogArticlesProps) {
+export function BlogArticles({ title = '最新文章', subtitle = '分享最新的技术趋势、编程技巧和开发心得', articles = [] }: BlogArticlesProps) {
 
 
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -91,11 +91,49 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
     return null
   }
 
+  // 获取标签样式
+  const getTagStyle = (category: string) => {
+    switch (category) {
+      case '资源':
+        return 'bg-emerald-100 text-emerald-600'
+      case '技术':
+        return 'bg-blue-100 text-blue-600'
+      case '博客':
+        return 'bg-purple-100 text-purple-600'
+      default:
+        return 'bg-gray-100 text-gray-600'
+    }
+  }
+
   return (
-    <section id='article' className='py-20 relative overflow-hidden'>
-      <div className='max-w-6xl mx-auto px-4 relative z-10'>
-        <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 md:mb-4 px-4'>{title}</h2>
-        <p className='text-gray-500 text-center mb-8 md:mb-12 text-sm md:text-base px-4'>{subtitle}</p>
+    <section id='article' className='pt-20 pb-20 bg-white relative overflow-hidden'>
+      <div className='max-w-7xl mx-auto px-4 relative z-10'>
+        
+        {/* Header Section: Title/Subtitle Left, Buttons Right */}
+        <div className='flex flex-col md:flex-row md:items-end justify-between mb-12 px-4'>
+          <div className='text-center md:text-left mb-6 md:mb-0'>
+            <h2 className='text-4xl font-bold mb-4'>{title}</h2>
+            <p className='text-gray-500'>{subtitle}</p>
+          </div>
+
+          {/* Navigation Buttons (Desktop) */}
+          <div className='hidden md:flex space-x-4'>
+            <Button
+              icon={<LeftOutlined />}
+              shape='circle'
+              onClick={prevSlide}
+              className='flex items-center justify-center border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 transition-all w-10 h-10'
+              aria-label="Previous slide"
+            />
+            <Button
+              icon={<RightOutlined />}
+              shape='circle'
+              onClick={nextSlide}
+              className='flex items-center justify-center border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 transition-all w-10 h-10'
+              aria-label="Next slide"
+            />
+          </div>
+        </div>
 
         {false ? (
           <div className='flex justify-center items-center py-20'>
@@ -105,78 +143,77 @@ export function BlogArticles({ title = '我的文章', subtitle = '来自博客�
           <div className='relative'>
             <div className='overflow-hidden pb-10' onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
               <div
-                className='flex transition-transform duration-500 ease-in-out md:[--slide-percentage:33.33333%]'
+                className='flex transition-transform duration-500 ease-in-out [--slide-percentage:100%] md:[--slide-percentage:33.33333%]'
                 style={{
-                  // 使用 CSS 变量处理移动端/桌面端差异
-                  // 移动端: 100% (1 item)
-                  // 桌面端: 33.33% (3 items)
-                  // @ts-ignore
-                  '--slide-percentage': '100%',
                   transform: `translateX(calc(-${currentSlide} * var(--slide-percentage)))`
                 }}>
                 {articles.map((article) => (
                   <div
                     key={article.id}
-                    className={`w-full md:w-1/3 flex-shrink-0 md:px-3`}
+                    className={`w-full md:w-1/3 flex-shrink-0 md:px-4`}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}>
-                    <div className='bg-white/80 backdrop-blur-sm rounded-2xl md:rounded-3xl border-1 border-slate-200 shadow-md shadow-slate-200 h-full hover:shadow-xl transition-all duration-300 overflow-hidden'>
-                      {/* 文章头部 - 渐变背景 */}
-                      <div className={`${article.styleName} article-icon-bg p-6 relative`}>
-                        <div className='flex items-center justify-between mb-4'>
-                          <span className='inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm font-medium rounded-full'>
-                            {article.category}
-                          </span>
-                          <div className='w-10 h-10 article-icon'></div>
-                        </div>
-                        <div className='min-h-20 flex items-center justify-center mb-4'>
-                          <h3 className='text-4xl text-center font-bold text-white line-clamp-2'>{article.title}</h3>
-                        </div>
+                    <div className='bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 h-full p-8 flex flex-col group relative overflow-hidden text-left'>
+                      
+                      {/* Header: Category and Icon */}
+                      <div className='flex justify-between items-center mb-6'>
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide ${getTagStyle(article.category)}`}>
+                          {article.category}
+                        </span>
+                        <div className={`w-12! h-12! weiz-icon ${article.styleName}`}></div>
                       </div>
 
-                      {/* 文章内容 */}
-                      <div className='p-4 md:p-6'>
-                        <p className='leading-relaxed mb-3 md:mb-4 line-clamp-2 text-sm md:text-base'>{article.description}</p>
-                        <div className='flex items-center justify-between'>
-                          <span className='text-sm text-blue-500'>{article.date}</span>
-
-                          <Button
-                            className='pl-8!'
-                            type='primary'
-                            shape='round'
-                            icon={<ArrowRightOutlined />}
-                            iconPosition='end'
-                            href={article.link}
-                            target='_blank'>
-                            阅读全文
-                          </Button>
-                        </div>
+                      {/* Body: Date, Title, Description */}
+                      <div className='flex-grow flex flex-col items-start mb-6'>
+                        <h3 className='w-full text-xl font-bold text-gray-900 mb-3 line-clamp-1 leading-tight group-hover:text-blue-500 transition-colors'>
+                          {article.title}
+                        </h3>
+                        <p className='text-gray-500 text-sm leading-relaxed line-clamp-3 w-full'>
+                          {article.description}
+                        </p>
                       </div>
+
+                      {/* Footer: Read More Link */}
+                      <div className='mt-auto pt-4 border-t border-gray-50 w-full flex justify-between items-center'>
+                        <div className='text-xs font-bold text-gray-400 uppercase tracking-wider'>
+                          {article.date}
+                        </div>
+                        <a 
+                          href={article.link} 
+                          target='_blank'
+                          className='inline-flex items-center text-gray-900 font-semibold text-sm group/link hover:text-blue-600 transition-colors'
+                        >
+                          阅读文章
+                          <ArrowRightOutlined className='ml-2 w-4 h-4 transform group-hover/link:translate-x-1 transition-transform' />
+                        </a>
+                      </div>
+                      
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* 导航按钮 */}
-            <div className='flex justify-center'>
+            
+            {/* Mobile Navigation Buttons (Bottom) */}
+            <div className='flex md:hidden justify-center mt-4'>
               <div className='flex space-x-4'>
                 <Button
                   icon={<LeftOutlined />}
                   shape='circle'
                   onClick={prevSlide}
-                  className='flex items-center justify-center border-indigo-300 text-indigo-600 hover:bg-indigo-50 hover:border-indigo-400 transition-colors'
+                  className='flex items-center justify-center border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 transition-all'
                   aria-label="Previous slide"
                 />
                 <Button
                   icon={<RightOutlined />}
                   shape='circle'
                   onClick={nextSlide}
-                  className='flex items-center justify-center border-indigo-300 text-indigo-600 hover:bg-indigo-50 hover:border-indigo-400 transition-colors'
+                  className='flex items-center justify-center border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 transition-all'
                   aria-label="Next slide"
                 />
               </div>
             </div>
+
           </div>
         )}
       </div>

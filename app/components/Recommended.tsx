@@ -7,8 +7,7 @@ interface Product {
   title: string;
   subtitle: string;
   description: string;
-  iframe: string;
-  image?: string;
+  image: string;
   imageAlt?: string;
   border?: Boolean;
   link: string;
@@ -29,7 +28,8 @@ export function Recommended({
       title: "唯知笔记",
       subtitle: "探索知识的无限可能",
       description: "进一步了解 我的博客 →",
-      iframe: "https://note.weizwz.com/",
+      image: "https://p.weizwz.com/siteshot_note.webp",
+      imageAlt: "唯知笔记截图展示",
       link: "https://note.weizwz.com/",
     },
     {
@@ -37,7 +37,8 @@ export function Recommended({
       title: "ThisCover",
       subtitle: "免费、漂亮的封面生成器",
       description: "进一步了解 封面工具 →",
-      iframe: "https://cover.weizwz.com/",
+      image: "https://p.weizwz.com/cover/cover.weizwz.com_8_5_b3d6c714f8bb59de.webp",
+      imageAlt: "ThisCover截图展示",
       link: "https://cover.weizwz.com/",
     },
     {
@@ -45,7 +46,6 @@ export function Recommended({
       title: "味值商城",
       subtitle: "适配多端的移动商城",
       description: "进一步了解 uniapp开发 →",
-      iframe: "",
       border: false,
       image: "https://p.weizwz.com/weizshop/weizshop_design_7c5778e27ee7238e.webp",
       imageAlt: "味值商城截图展示",
@@ -56,7 +56,8 @@ export function Recommended({
       title: "资源监控中心",
       subtitle: "信息可视化大屏系统",
       description: "进一步了解 大屏可视化 →",
-      iframe: "https://vue3-charts.weizwz.com/",
+      image: "https://p.weizwz.com/vue3-charts.weizwz.com_8_5_ec7fa3cd203a193d.webp",
+      imageAlt: "资源监控中心截图展示",
       link: "https://vue3-charts.weizwz.com/",
     },
     {
@@ -64,7 +65,6 @@ export function Recommended({
       title: "Recommend",
       subtitle: "漂亮的Hexo博客推荐模块",
       description: "进一步了解 博客插件 →",
-      iframe: "",
       image: "https://p.weizwz.com/weizwz.com_7a5050486184930b.webp",
       imageAlt: "hexo 博客导航插件",
       link: "https://note.weizwz.com/hexo/extend/hexo-butterfly-recommend",
@@ -74,7 +74,8 @@ export function Recommended({
       title: "funAnimation",
       subtitle: "有趣的样式和动画",
       description: "进一步了解 前端特效 →",
-      iframe: "https://animation.weizwz.com/",
+      image: "https://p.weizwz.com/animation.weizwz.com_8_5_27b63074250acd5b.webp",
+      imageAlt: "资源监控中心截图展示",
       link: "https://animation.weizwz.com/",
     },
   ];
@@ -166,8 +167,8 @@ export function Recommended({
   }, [currentSlide, products.length, isPaused]);
 
   return (
-    <section id="recommend" className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-6xl mx-auto px-4">
+    <section id="recommend" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-4">{title}</h2>
         <p className="text-gray-500 text-center mb-12">{subtitle}</p>
 
@@ -213,19 +214,13 @@ export function Recommended({
                     </div>
                     <div className={`mt-8 rounded-xl ${product.border === false ? '' : 'border-5 border-gray-800'}`}>
                       {/* Mac-style window header */}
-                      {product.iframe ? (
-                        <div className="overflow-hidden rounded-md">
-                          <ScaledIframe src={product.iframe} />
-                        </div>
-                        ) : (
-                          <div className="w-full aspect-8/5 rounded-md overflow-hidden">
-                            <img
-                              src={product.image}
-                              alt={product.imageAlt}
-                              className="w-full"
-                            />
-                          </div>
-                        )}
+                      <div className="w-full aspect-8/5 rounded-md overflow-hidden">
+                        <img
+                          src={product.image}
+                          alt={product.imageAlt}
+                          className="w-full"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
