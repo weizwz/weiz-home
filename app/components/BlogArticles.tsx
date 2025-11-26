@@ -183,7 +183,7 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
                         <a 
                           href={article.link} 
                           target='_blank'
-                          className='inline-flex items-center text-gray-900 font-semibold text-sm group/link hover:text-blue-600 transition-colors'
+                          className='inline-flex items-center text-gray-900 font-semibold text-sm group/link hover:text-blue-500 transition-colors'
                         >
                           阅读文章
                           <ArrowRightOutlined className='ml-2 w-4 h-4 transform group-hover/link:translate-x-1 transition-transform' />

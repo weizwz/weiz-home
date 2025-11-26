@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { Section } from "./common/Section";
 import { Card } from "./common/Card";
@@ -8,7 +8,6 @@ interface Product {
   id: number;
   title: string;
   subtitle: string;
-  description: string;
   image: string;
   imageAlt?: string;
   border?: Boolean;
@@ -27,55 +26,58 @@ export function Recommended({
   const products: Product[] = [
     {
       id: 1,
+      title: "唯知导航",
+      subtitle: "简洁、高效的网页导航",
+      border: false,
+      image: "https://p.weizwz.com/nav/nav.weizwz.com_8_5_202511261144_a5f666e34b9e4abc.webp",
+      imageAlt: "唯知导航截图展示",
+      link: "https://nav.weizwz.com/",
+    },
+    {
+      id: 2,
       title: "唯知笔记",
       subtitle: "探索知识的无限可能",
-      description: "进一步了解 →",
       image: "https://p.weizwz.com/siteshot_note.webp",
       imageAlt: "唯知笔记截图展示",
       link: "https://note.weizwz.com/",
     },
     {
-      id: 2,
+      id: 3,
       title: "ThisCover",
       subtitle: "免费、漂亮的封面生成器",
-      description: "进一步了解 →",
       image: "https://p.weizwz.com/cover/cover.weizwz.com_8_5_b3d6c714f8bb59de.webp",
       imageAlt: "ThisCover截图展示",
       link: "https://cover.weizwz.com/",
     },
     {
-      id: 3,
+      id: 4,
       title: "味值商城",
       subtitle: "适配多端的移动商城",
-      description: "进一步了解 →",
       border: false,
       image: "https://p.weizwz.com/weizshop/weizshop_design_7c5778e27ee7238e.webp",
       imageAlt: "味值商城截图展示",
       link: "https://github.com/weizwz/weiz-shop",
     },
     {
-      id: 4,
+      id: 5,
       title: "资源监控中心",
       subtitle: "信息可视化大屏系统",
-      description: "进一步了解 →",
       image: "https://p.weizwz.com/vue3-charts.weizwz.com_8_5_ec7fa3cd203a193d.webp",
       imageAlt: "资源监控中心截图展示",
       link: "https://vue3-charts.weizwz.com/",
     },
     {
-      id: 5,
+      id: 6,
       title: "Recommend",
       subtitle: "漂亮的Hexo博客推荐模块",
-      description: "进一步了解 →",
       image: "https://p.weizwz.com/weizwz.com_7a5050486184930b.webp",
       imageAlt: "hexo 博客导航插件",
       link: "https://note.weizwz.com/hexo/extend/hexo-butterfly-recommend",
     },
     {
-      id: 6,
+      id: 7,
       title: "funAnimation",
       subtitle: "有趣的样式和动画",
-      description: "进一步了解 →",
       image: "https://p.weizwz.com/animation.weizwz.com_8_5_27b63074250acd5b.webp",
       imageAlt: "资源监控中心截图展示",
       link: "https://animation.weizwz.com/",
@@ -208,12 +210,13 @@ export function Recommended({
                       <a
                         href={product.link}
                         target="_blank"
-                        className="text-blue-500 hover:text-blue-700 transition-colors flex items-center justify-center"
+                        className="text-blue-500 hover:text-blue-400 transition-colors flex items-center justify-center group"
                       >
-                        <span>{product.description}</span>
+                        进一步了解
+                        <ArrowRightOutlined className='ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform' />
                       </a>
                     </div>
-                    <div className={`mt-8 rounded-xl ${product.border === false ? '' : 'border-5 border-gray-800'}`}>
+                    <div className={`mt-8 rounded-xl box-border ${product.border === false ? '' : 'border-5 border-gray-800'}`}>
                       {/* Mac-style window header */}
                       <div className="w-full aspect-8/5 rounded-md overflow-hidden">
                         <img
