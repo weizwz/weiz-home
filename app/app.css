@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+:root {
+  --icon-color: theme('colors.neutral.900');
+}
 
 /* 自定义样式 */
 .gradient-text {
@@ -36,7 +40,6 @@
 
 /* 动画效果 */
 @keyframes float-simple {
-
   0%,
   100% {
     transform: translateY(0px);
@@ -75,7 +78,6 @@
 
 /* 浮动动画 */
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0px) rotate(0deg);
@@ -96,7 +98,6 @@
 
 /* 卡通背景动画 */
 @keyframes gentle-float {
-
   0%,
   100% {
     transform: translateY(0px) translateX(0px);
@@ -116,7 +117,6 @@
 }
 
 @keyframes rotate-gentle {
-
   0%,
   100% {
     transform: rotate(0deg);
@@ -128,7 +128,6 @@
 }
 
 @keyframes scale-breath {
-
   0%,
   100% {
     transform: scale(1);

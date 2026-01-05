@@ -12,8 +12,6 @@ interface BlogArticlesProps {
 }
 
 export function BlogArticles({ title = '最新文章', subtitle = '分享最新的技术趋势、编程技巧和开发心得', articles = [] }: BlogArticlesProps) {
-
-
   const [currentSlide, setCurrentSlide] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
@@ -23,7 +21,7 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
   const maxSlidePC = Math.max(0, articles.length - 3)
 
   const nextSlide = () => {
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 768
     if (isMobile) {
       // 移动端：一次滚动一个模块
       setCurrentSlide((prev) => (prev === articles.length - 1 ? 0 : prev + 1))
@@ -39,7 +37,7 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
   }
 
   const prevSlide = () => {
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 768
     if (isMobile) {
       // 移动端：一次滚动一个模块
       setCurrentSlide((prev) => (prev === 0 ? articles.length - 1 : prev - 1))
@@ -110,7 +108,6 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
   return (
     <Section id='article' className='bg-white relative overflow-hidden' maxWidth='max-w-7xl'>
       <div className='relative z-10'>
-        
         {/* Header Section: Title/Subtitle Left, Buttons Right */}
         <div className='flex flex-col md:flex-row md:items-end justify-between mb-12 px-4'>
           <div className='text-center md:text-left mb-6 md:mb-0'>
@@ -125,14 +122,14 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
               shape='circle'
               onClick={prevSlide}
               className='flex items-center justify-center border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 transition-all w-10 h-10'
-              aria-label="Previous slide"
+              aria-label='Previous slide'
             />
             <Button
               icon={<RightOutlined />}
               shape='circle'
               onClick={nextSlide}
               className='flex items-center justify-center border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 transition-all w-10 h-10'
-              aria-label="Next slide"
+              aria-label='Next slide'
             />
           </div>
         </div>
@@ -156,13 +153,12 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}>
                     <Card className='h-full p-8 flex flex-col group relative overflow-hidden text-left'>
-                      
                       {/* Header: Category and Icon */}
                       <div className='flex justify-between items-center mb-6'>
                         <span className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide ${getTagStyle(article.category)}`}>
                           {article.category}
                         </span>
-                        <div className={`w-12! h-12! weiz-icon ${article.styleName}`}></div>
+                        <div className={`w-12! h-12! icon ${article.styleName.replace('weiz-', '')}`}></div>
                       </div>
 
                       {/* Body: Date, Title, Description */}
@@ -170,32 +166,26 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
                         <h3 className='w-full text-xl font-bold text-gray-900 mb-3 line-clamp-1 leading-tight group-hover:text-blue-500 transition-colors'>
                           {article.title}
                         </h3>
-                        <p className='text-gray-500 text-sm leading-relaxed line-clamp-3 w-full'>
-                          {article.description}
-                        </p>
+                        <p className='text-gray-500 text-sm leading-relaxed line-clamp-3 w-full'>{article.description}</p>
                       </div>
 
                       {/* Footer: Read More Link */}
                       <div className='mt-auto pt-4 border-t border-gray-50 w-full flex justify-between items-center'>
-                        <div className='text-xs font-bold text-gray-400 uppercase tracking-wider'>
-                          {article.date}
-                        </div>
-                        <a 
-                          href={article.link} 
+                        <div className='text-xs font-bold text-gray-400 uppercase tracking-wider'>{article.date}</div>
+                        <a
+                          href={article.link}
                           target='_blank'
-                          className='inline-flex items-center text-gray-900 font-semibold text-sm group/link hover:text-blue-500 transition-colors'
-                        >
+                          className='inline-flex items-center text-gray-900 font-semibold text-sm group/link hover:text-blue-500 transition-colors'>
                           阅读文章
                           <ArrowRightOutlined className='ml-2 w-4 h-4 transform group-hover/link:translate-x-1 transition-transform' />
                         </a>
                       </div>
-                      
                     </Card>
                   </div>
                 ))}
               </div>
             </div>
-            
+
             {/* Mobile Navigation Buttons (Bottom) */}
             <div className='flex md:hidden justify-center mt-4'>
               <div className='flex space-x-4'>
@@ -204,18 +194,17 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
                   shape='circle'
                   onClick={prevSlide}
                   className='flex items-center justify-center border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 transition-all'
-                  aria-label="Previous slide"
+                  aria-label='Previous slide'
                 />
                 <Button
                   icon={<RightOutlined />}
                   shape='circle'
                   onClick={nextSlide}
                   className='flex items-center justify-center border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 transition-all'
-                  aria-label="Next slide"
+                  aria-label='Next slide'
                 />
               </div>
             </div>
-
           </div>
         )}
       </div>
