@@ -14,7 +14,7 @@
 
 /* 自定义文章图标、背景 */
 .article-icon-bg {
-  background: var(--weiz-icon-color);
+  background: var(--icon-color);
 }
 
 .article-icon {

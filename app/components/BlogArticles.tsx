@@ -158,7 +158,7 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
                         <span className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide ${getTagStyle(article.category)}`}>
                           {article.category}
                         </span>
-                        <div className={`w-12! h-12! icon ${article.styleName.replace('weiz-', '')}`}></div>
+                        <div className={`w-12! h-12! icon ${article.styleName}`}></div>
                       </div>
 
                       {/* Body: Date, Title, Description */}
