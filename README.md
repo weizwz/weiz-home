@@ -8,7 +8,7 @@
 
 使用 `create-react-router` 初始化，react19 + react-router7 + vite6 + tailwindcss4 + ts + antd5
 
-本项目80%代码由 Kiro 完成，拥抱 AI，畅享科技
+本项目 80%代码由 Kiro 完成，拥抱 AI，畅享科技
 
 ## 执行
 
@@ -24,9 +24,9 @@
 
 登录 `npx wrangler login`
 
-部署 `npx run deploy`
+部署 `pnpm run deploy`
 
-*使用 pnpm start 启动时，ant 按钮样式会丢失，但构建无问题。本地启动，使用 pnpm dev 即可*
+_使用 pnpm start 启动时，ant 按钮样式会丢失，但构建无问题。本地启动，使用 pnpm dev 即可_
 
 ## 其他
 
@@ -39,5 +39,3 @@
 文章卡片背景色和图标：iconify 图标 api 和 app/style/icon.scss 相结合，觉得麻烦就让 kiro 随机生成吧
 
 部署：使用 Vercel，免费方便，域名自费（腾讯阿里买都可以），使用的 cloudflare 解析
-
-
