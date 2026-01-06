@@ -1,4 +1,4 @@
-import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 import { ConfigProvider } from 'antd'
 import '@ant-design/v5-patch-for-react-19'
 
@@ -7,13 +7,7 @@ import { config } from './config'
 import './app.css'
 import './style/icon.scss'
 
-export const links: Route.LinksFunction = () => [
-  // {
-  //   rel: "preconnect",
-  //   href: "https://fonts.gstatic.com",
-  //   crossOrigin: "anonymous",
-  // }
-]
+export const links: Route.LinksFunction = () => []
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -25,9 +19,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <ConfigProvider theme={config.theme}>
-          {children}
-        </ConfigProvider>
+        <ConfigProvider theme={config.theme}>{children}</ConfigProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
