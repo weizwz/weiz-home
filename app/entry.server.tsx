@@ -2,7 +2,7 @@ import type { AppLoadContext, EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
 import { isbot } from "isbot";
 import { renderToReadableStream } from "react-dom/server.edge";
-import { createCache, extractStyle, StyleProvider } from "@ant-design/cssinjs";
+import { createCache, StyleProvider } from '@ant-design/cssinjs'
 
 export default async function handleRequest(
   request: Request,

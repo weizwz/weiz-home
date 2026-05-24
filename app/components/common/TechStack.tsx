@@ -1,8 +1,6 @@
-import React from 'react';
-
 interface TechStackProps {
-  items: string[];
-  className?: string;
+  items: string[]
+  className?: string
 }
 
 export function TechStack({ items, className = '' }: TechStackProps) {
@@ -14,5 +12,5 @@ export function TechStack({ items, className = '' }: TechStackProps) {
         </span>
       ))}
     </div>
-  );
+  )
 }
