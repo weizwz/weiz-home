@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import type { Article } from '../types/article'
 import { Section } from './common/Section'
 import { Card } from './common/Card'
+import MyIcon from './common/Icon'
 
 interface BlogArticlesProps {
   title?: string
@@ -158,14 +159,17 @@ export function BlogArticles({ title = '最新文章', subtitle = '分享最新�
                         <span className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide ${getTagStyle(article.category)}`}>
                           {article.category}
                         </span>
-                        <div className={`w-12! h-12! icon ${article.styleName}`}></div>
+                        <MyIcon tag={article.styleName} customClass='w-10 h-10' />
                       </div>
 
                       {/* Body: Date, Title, Description */}
                       <div className='flex-grow flex flex-col items-start mb-6'>
-                        <h3 className='w-full text-xl font-bold text-gray-900 mb-3 line-clamp-1 leading-tight group-hover:text-blue-500 transition-colors'>
+                        <a
+                          href={article.link}
+                          target='_blank'
+                          className='w-full text-xl font-bold text-gray-900 mb-3 line-clamp-1 leading-tight group-hover:text-blue-500 transition-colors'>
                           {article.title}
-                        </h3>
+                        </a>
                         <p className='text-gray-500 text-sm leading-relaxed line-clamp-3 w-full'>{article.description}</p>
                       </div>
 

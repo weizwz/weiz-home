@@ -34,7 +34,7 @@ function parseRSS(xml: string): Article[] {
 
   const getArticleStyle = (tags: string[]) => {
     const mainTag = tags[0]?.toLowerCase() || 'default'
-    return 'icon-' + mainTag
+    return mainTag
   }
 
   const formatDate = (dateString: string): string => {
@@ -97,7 +97,7 @@ export async function loader() {
         description: '本文介绍了如何从 VSCode 快速无缝转向 AI 编辑器，如 kiro、cursor、trae 等',
         date: '2025年07月25日',
         link: config.blog.url + '/editor/ai/to-kiro',
-        styleName: 'icon-ai',
+        styleName: 'ai',
         tags: ['AI', 'VSCode']
       },
       {
@@ -107,7 +107,7 @@ export async function loader() {
         description: '本文介绍了 MacOS Sequoia 系统的基础优化设置，包括修改截屏保存位置、修复启动图标错乱、关闭安装来源限制等系统级操作',
         date: '2025年04月26日',
         link: config.blog.url + '/macos/setting/base-init',
-        styleName: 'icon-macos',
+        styleName: 'macos',
         tags: ['MacOS']
       },
       {
@@ -118,7 +118,7 @@ export async function loader() {
           '本文汇总了使用 VitePress 搭建博客的资源与配置方法，包括暗黑模式切换动画、DocSearch 搜索、Fancybox 图片查看器、GitHub Giscus 评论系统、Cloudflare R2 图床配置等内容',
         date: '2025年04月18日',
         link: config.blog.url + '/vitepress/all/resource-all',
-        styleName: 'icon-vitepress',
+        styleName: 'vitepress',
         tags: ['VitePress', '网站']
       }
     ]

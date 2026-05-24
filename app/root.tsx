@@ -5,7 +5,6 @@ import '@ant-design/v5-patch-for-react-19'
 import type { Route } from './+types/root'
 import { config } from './config'
 import './app.css'
-import './style/icon.scss'
 
 export const links: Route.LinksFunction = () => []
 
